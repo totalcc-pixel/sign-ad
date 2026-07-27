@@ -1,0 +1,35 @@
+{
+  "name": "QuoteRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "vehicle_type": {
+      "type": "string"
+    },
+    "service_type": {
+      "type": "string",
+      "enum": [
+        "Full Vehicle Wrap",
+        "Partial Wrap & Decals",
+        "Commercial Fleet",
+        "Other"
+      ],
+      "default": "Full Vehicle Wrap"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "email"
+  ]
+}
