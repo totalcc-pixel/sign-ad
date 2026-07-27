@@ -3,11 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Brush, Phone, Menu, X } from "lucide-react";
 
 const links = [
-  { label: "Home", path: "/" },
-  { label: "Portfolio", path: "/portfolio" },
-  { label: "Services", path: "/#services" },
-  { label: "Order Processing", path: "/quote" },
-];
+{ label: "Home", path: "/" },
+{ label: "Portfolio", path: "/portfolio" },
+{ label: "Services", path: "/#services" },
+{ label: "Order Processing", path: "/quote" }];
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,23 +22,23 @@ export default function Navbar() {
           </span>
           <span className="font-display font-extrabold tracking-tight text-white text-lg leading-none">
             Wrap<span className="text-[#F39C12]">Pro</span>
-            <span className="block text-[10px] font-medium tracking-[0.25em] text-white/50 mt-0.5">VEHICLE GRAPHICS</span>
+            <span className="block text-[10px] font-medium tracking-[0.25em] text-white/50 mt-0.5">냐훔ㅇ</span>
           </span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <li key={l.label}>
+          {links.map((l) =>
+          <li key={l.label}>
               <Link
-                to={l.path}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"
-                }`}
-              >
+              to={l.path}
+              className={`text-sm font-medium transition-colors ${
+              pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"}`
+              }>
+              
                 {l.label}
               </Link>
             </li>
-          ))}
+          )}
         </ul>
 
         <div className="hidden md:flex items-center gap-5">
@@ -47,8 +47,8 @@ export default function Navbar() {
           </a>
           <Link
             to="/quote"
-            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-          >
+            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+            
             Get Quote
           </Link>
         </div>
@@ -58,13 +58,13 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {open && (
-        <div className="md:hidden bg-black border-t border-white/10 px-5 py-4 flex flex-col gap-3">
-          {links.map((l) => (
-            <Link key={l.label} to={l.path} onClick={() => setOpen(false)} className="text-white/80 hover:text-[#F39C12] text-sm font-medium py-1">
+      {open &&
+      <div className="md:hidden bg-black border-t border-white/10 px-5 py-4 flex flex-col gap-3">
+          {links.map((l) =>
+        <Link key={l.label} to={l.path} onClick={() => setOpen(false)} className="text-white/80 hover:text-[#F39C12] text-sm font-medium py-1">
               {l.label}
             </Link>
-          ))}
+        )}
           <a href="tel:0274320180" className="flex items-center gap-2 text-white/90 text-sm py-1">
             <Phone className="w-4 h-4" /> 027-4320-180
           </a>
@@ -72,7 +72,7 @@ export default function Navbar() {
             Get Quote
           </Link>
         </div>
-      )}
-    </header>
-  );
+      }
+    </header>);
+
 }
