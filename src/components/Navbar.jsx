@@ -22,7 +22,7 @@ export default function Navbar() {
           </span>
           <span className="font-display font-extrabold tracking-tight text-white text-lg leading-none">
             Wrap<span className="text-[#F39C12]">Pro</span>
-            <span className="block text-[10px] font-medium tracking-[0.25em] text-white/50 mt-0.5">냐훔ㅇ</span>
+            <span className="block text-[10px] font-medium tracking-[0.25em] text-white/50 mt-0.5">SIGNAD</span>
           </span>
         </Link>
 
