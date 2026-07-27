@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="fixed top-0 inset-x-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#F39C12] text-black">
+          <span className="relative flex items-center justify-center w-9 h-9 rounded-lg border-2 border-[#F39C12] bg-black text-[#F39C12] group-hover:bg-[#F39C12] group-hover:text-black transition-colors">
             <Truck className="w-5 h-5" strokeWidth={2.4} />
           </span>
           <span className="font-display font-extrabold tracking-tight text-white text-lg leading-none">
