@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Truck, Phone, Menu, X } from "lucide-react";
+import { Brush, Phone, Menu, X } from "lucide-react";
 
 const links = [
   { label: "Home", path: "/" },
@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <span className="relative flex items-center justify-center w-9 h-9 rounded-lg border-2 border-[#F39C12] bg-black text-[#F39C12] group-hover:bg-[#F39C12] group-hover:text-black transition-colors">
-            <Truck className="w-5 h-5" strokeWidth={2.4} />
+            <Brush className="w-5 h-5" strokeWidth={2.4} />
           </span>
           <span className="font-display font-extrabold tracking-tight text-white text-lg leading-none">
             Wrap<span className="text-[#F39C12]">Pro</span>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Truck, Phone, Mail, MapPin } from "lucide-react";
+import { Brush, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5 mb-4">
             <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#F39C12] text-black">
-              <Truck className="w-5 h-5" strokeWidth={2.4} />
+              <Brush className="w-5 h-5" strokeWidth={2.4} />
             </span>
             <span className="font-display font-extrabold text-white text-lg">
               Wrap<span className="text-[#F39C12]">Pro</span>
