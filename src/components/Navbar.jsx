@@ -16,12 +16,12 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
-      <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-24 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-48 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <Image
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
             alt="AD Vehicle Graphics logo"
-            className="h-[88px] w-[88px] rounded-md"
+            className="h-[176px] w-[176px] rounded-md"
             fittingType="fit"
           />
         </Link>
