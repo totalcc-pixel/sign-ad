@@ -31,7 +31,7 @@ export default function Navbar() {
           <li key={l.label}>
               <Link
               to={l.path}
-              className={`font-medium transition-colors text-xl ${
+              className={`font-medium transition-colors text-2xl ${
               pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"}`
               }>
               
