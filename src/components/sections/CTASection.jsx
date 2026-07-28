@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -30,6 +30,16 @@ export default function CTASection() {
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-white/10 text-white font-semibold border border-white/20 backdrop-blur hover:bg-white/20 transition-colors"
           >
             <Phone className="w-4 h-4" /> 027-4320-180
+          </a>
+        </div>
+
+        <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/70 text-sm">
+          <span className="text-white/90 font-semibold text-xs tracking-[0.2em] uppercase">Vincent</span>
+          <a href="tel:02102964174" className="flex items-center gap-2 hover:text-[#F39C12] transition-colors">
+            <Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174
+          </a>
+          <a href="mailto:vincentsignad@gmail.com" className="flex items-center gap-2 hover:text-[#F39C12] transition-colors">
+            <Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com
           </a>
         </div>
       </div>

@@ -34,6 +34,9 @@ export default function Footer() {
             <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180</li>
             <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com</li>
             <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#F39C12]" /> Auckland, NZ</li>
+            <li className="pt-3 text-white/90 text-xs font-semibold tracking-[0.15em] uppercase">Vincent</li>
+            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174</li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com</li>
           </ul>
         </div>
       </div>
