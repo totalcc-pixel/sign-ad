@@ -11,7 +11,7 @@ export default function Footer() {
           <Image
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
             alt="AD Vehicle Graphics logo"
-            className="h-14 w-auto rounded-md mb-4 bg-white p-1.5"
+            className="h-14 w-14 rounded-md mb-4 bg-white"
             fittingType="fit"
           />
           <p className="text-sm leading-relaxed max-w-sm">

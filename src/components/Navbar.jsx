@@ -21,7 +21,7 @@ export default function Navbar() {
           <Image
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
             alt="AD Vehicle Graphics logo"
-            className="h-11 w-auto rounded-md"
+            className="h-11 w-11 rounded-md bg-white"
             fittingType="fit"
           />
         </Link>
