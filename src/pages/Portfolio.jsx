@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { Image } from "@/components/ui/image";
 
-const categories = ["All", "Full Wrap", "Partial Wrap", "Decals", "Commercial Fleet"];
+const categories = ["All", "Vehicle Graphic", "Building Sign"];
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);

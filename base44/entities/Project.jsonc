@@ -8,12 +8,10 @@
     "category": {
       "type": "string",
       "enum": [
-        "Full Wrap",
-        "Partial Wrap",
-        "Decals",
-        "Commercial Fleet"
+        "Vehicle Graphic",
+        "Building Sign"
       ],
-      "default": "Partial Wrap"
+      "default": "Vehicle Graphic"
     },
     "image_url": {
       "type": "string"
