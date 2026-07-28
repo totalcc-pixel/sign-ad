@@ -9,10 +9,10 @@ export default function FeaturedWork() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.Project.filter({ featured: true }, "-created_date", 6)
-      .then(setProjects)
-      .catch(() => setProjects([]))
-      .finally(() => setLoading(false));
+    base44.entities.Project.filter({ featured: true }, "-created_date", 6).
+    then(setProjects).
+    catch(() => setProjects([])).
+    finally(() => setLoading(false));
   }, []);
 
   return (
@@ -26,31 +26,31 @@ export default function FeaturedWork() {
             </h2>
             <p className="mt-4 text-zinc-500 text-lg">Our latest vehicle transformation projects.</p>
           </div>
-          <Link to="/portfolio" className="group inline-flex items-center gap-2 text-zinc-900 font-semibold text-sm hover:text-[#F39C12] transition-colors">
-            View All Projects
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <Link to="/portfolio" className="group inline-flex items-center gap-2 text-zinc-900 font-semibold hover:text-[#F39C12] transition-colors text-xl">View All Projects
+
+
           </Link>
         </div>
 
-        {loading ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="aspect-[4/3] rounded-2xl bg-zinc-100 animate-pulse" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p) => (
-              <div key={p.id} className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+        {loading ?
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) =>
+          <div key={i} className="aspect-[4/3] rounded-2xl bg-zinc-100 animate-pulse" />
+          )}
+          </div> :
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.map((p) =>
+          <div key={p.id} className="group relative overflow-hidden rounded-2xl bg-zinc-900">
                 <div className="aspect-[4/3] overflow-hidden">
-                  {p.image_url && (
-                    <Image
-                      src={p.image_url}
-                      alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      fittingType="fill"
-                    />
-                  )}
+                  {p.image_url &&
+              <Image
+                src={p.image_url}
+                alt={p.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fittingType="fill" />
+
+              }
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="absolute bottom-0 inset-x-0 p-6">
@@ -60,10 +60,10 @@ export default function FeaturedWork() {
                   <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
                 </div>
               </div>
-            ))}
+          )}
           </div>
-        )}
+        }
       </div>
-    </section>
-  );
+    </section>);
+
 }
