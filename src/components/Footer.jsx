@@ -9,9 +9,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 lg:px-8 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <Image
-            src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/8a6d211c3_sign.gif"
-            alt="WrapPro Vehicle Graphics logo"
-            className="h-12 w-auto rounded-md mb-4 bg-white p-1"
+            src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
+            alt="AD Vehicle Graphics logo"
+            className="h-14 w-auto rounded-md mb-4 bg-white p-1.5"
             fittingType="fit"
           />
           <p className="text-sm leading-relaxed max-w-sm">

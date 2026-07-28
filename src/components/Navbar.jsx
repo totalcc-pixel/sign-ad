@@ -19,9 +19,9 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <Image
-            src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/8a6d211c3_sign.gif"
-            alt="WrapPro Vehicle Graphics logo"
-            className="h-10 w-auto rounded-md"
+            src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
+            alt="AD Vehicle Graphics logo"
+            className="h-11 w-auto rounded-md"
             fittingType="fit"
           />
         </Link>
