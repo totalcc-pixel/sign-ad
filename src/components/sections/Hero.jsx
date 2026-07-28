@@ -23,7 +23,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-24 pb-16 w-full">
+      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-56 pb-16 w-full">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F39C12]/15 border border-[#F39C12]/30 mb-6">
             <Star className="w-3.5 h-3.5 text-[#F39C12] fill-[#F39C12]" />
