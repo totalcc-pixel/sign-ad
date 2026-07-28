@@ -22,8 +22,8 @@ export default function Navbar() {
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
             alt="AD Vehicle Graphics logo"
             className="h-[176px] w-[176px] rounded-md"
-            fittingType="fit"
-          />
+            fittingType="fit" />
+          
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -31,7 +31,7 @@ export default function Navbar() {
           <li key={l.label}>
               <Link
               to={l.path}
-              className={`text-sm font-medium transition-colors ${
+              className={`font-medium transition-colors text-xl ${
               pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"}`
               }>
               
