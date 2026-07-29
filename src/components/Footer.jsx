@@ -12,8 +12,8 @@ export default function Footer() {
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
             alt="AD Vehicle Graphics logo"
             className="h-14 w-14 rounded-md mb-4 bg-white"
-            fittingType="fit"
-          />
+            fittingType="fit" />
+          
           <p className="text-sm leading-relaxed max-w-sm">
             Premium vehicle wraps, graphics, and signage solutions since 2004. Quality craftsmanship you can trust.
           </p>
@@ -33,7 +33,7 @@ export default function Footer() {
           <ul className="space-y-2.5 text-sm">
             <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180</li>
             <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com</li>
-            <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#F39C12]" /> Auckland, NZ</li>
+            <li className="flex items-center gap-2 hidden"><MapPin className="w-4 h-4 text-[#F39C12]" /> Auckland, NZ</li>
             <li className="pt-3 text-white/90 text-xs font-semibold tracking-[0.15em] uppercase">Vincent</li>
             <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174</li>
             <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com</li>
@@ -45,6 +45,6 @@ export default function Footer() {
         <p>© {new Date().getFullYear()} WrapPro Vehicle Graphics. All rights reserved.</p>
         <p>Premium craftsmanship since 2004.</p>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
