@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -5,12 +6,26 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import ScrollToTop from './components/ScrollToTop';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Portfolio from '@/pages/Portfolio';
 import Quote from '@/pages/Quote';
+import AdminPortfolio from '@/pages/AdminPortfolio';
 // Add page imports here
+
+const LoginRedirect = () => {
+  const { navigateToLogin } = useAuth();
+  useEffect(() => {
+    navigateToLogin();
+  }, []);
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black text-white/70">
+      Redirecting to login…
+    </div>
+  );
+};
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -42,6 +57,9 @@ const AuthenticatedApp = () => {
         <Route path="/" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/quote" element={<Quote />} />
+        <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
+          <Route path="/admin" element={<AdminPortfolio />} />
+        </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
