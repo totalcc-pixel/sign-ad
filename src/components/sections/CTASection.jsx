@@ -33,14 +33,25 @@ export default function CTASection() {
           </a>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/70 text-sm">
-          <span className="text-white/90 font-semibold text-xs tracking-[0.2em] uppercase">Vincent</span>
-          <a href="tel:02102964174" className="flex items-center gap-2 hover:text-[#F39C12] transition-colors">
-            <Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174
-          </a>
-          <a href="mailto:vincentsignad@gmail.com" className="flex items-center gap-2 hover:text-[#F39C12] transition-colors">
-            <Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com
-          </a>
+        <div className="mt-10 pt-8 border-t border-white/10 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto text-sm">
+          <div className="text-left">
+            <p className="text-white font-semibold text-xs tracking-[0.2em] uppercase">Jason <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Building Sign</span></p>
+            <a href="tel:0274320180" className="flex items-center gap-2 mt-2 text-white/70 hover:text-[#F39C12] transition-colors">
+              <Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180
+            </a>
+            <a href="mailto:totalcc@gmail.com" className="flex items-center gap-2 mt-1.5 text-white/70 hover:text-[#F39C12] transition-colors">
+              <Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com
+            </a>
+          </div>
+          <div className="text-left">
+            <p className="text-white font-semibold text-xs tracking-[0.2em] uppercase">Vincent <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Vehicle Graphic</span></p>
+            <a href="tel:02102964174" className="flex items-center gap-2 mt-2 text-white/70 hover:text-[#F39C12] transition-colors">
+              <Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174
+            </a>
+            <a href="mailto:vincentsignad@gmail.com" className="flex items-center gap-2 mt-1.5 text-white/70 hover:text-[#F39C12] transition-colors">
+              <Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com
+            </a>
+          </div>
         </div>
       </div>
     </section>

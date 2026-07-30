@@ -30,14 +30,22 @@ export default function Footer() {
 
         <div>
           <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
-          <ul className="space-y-2.5 text-sm">
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com</li>
-            <li className="flex items-center gap-2 hidden"><MapPin className="w-4 h-4 text-[#F39C12]" /> Auckland, NZ</li>
-            <li className="pt-3 text-white/90 text-xs font-semibold tracking-[0.15em] uppercase">Vincent</li>
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com</li>
-          </ul>
+          <div className="space-y-4 text-sm">
+            <div>
+              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Jason <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Building Sign</span></p>
+              <ul className="space-y-1.5 mt-1.5">
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Vincent <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Vehicle Graphic</span></p>
+              <ul className="space-y-1.5 mt-1.5">
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
