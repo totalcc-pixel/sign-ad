@@ -34,11 +34,10 @@ export default function Hero() {
 
           <div className="flex flex-col items-start">
             <Image
-              src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/771396f0c_fd.png"
-              alt="Vehicle Graphics"
-              className="w-[476px] sm:w-[714px] opacity-30 select-none"
+              src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/499a71044_n.JPG"
+              alt="SIGNAD"
+              className="w-[504px] sm:w-[756px] select-none"
               fittingType="fit"
-              style={{ filter: "blur(3px)" }}
             />
           </div>
 
