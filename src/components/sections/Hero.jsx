@@ -14,7 +14,7 @@ export default function Hero() {
     <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-black">
       <div className="absolute inset-0">
         <Image
-          src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/54f92157f_Signad-Hiace.jpg"
+          src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg"
           alt="SIGNAD vehicle graphics showcase"
           className="w-full h-full object-cover opacity-30"
           fittingType="fill"
