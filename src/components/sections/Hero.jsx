@@ -14,9 +14,9 @@ export default function Hero() {
     <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-black">
       <div className="absolute inset-0">
         <Image
-          src="https://media.base44.com/images/public/69b0df739781437d03ac40ff/45984a5a3_ShowerFixHiaceZL2013d.jpg"
-          alt="Vehicle wrap in progress"
-          className="w-full h-full object-cover opacity-40"
+          src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/54f92157f_Signad-Hiace.jpg"
+          alt="SIGNAD vehicle graphics showcase"
+          className="w-full h-full object-cover opacity-30"
           fittingType="fill"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40" />
@@ -32,11 +32,20 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
-            Transform Your
-            <br />
-            <span className="text-[#F39C12]">Vehicle's Identity</span>
-          </h1>
+          <div className="flex flex-col items-start gap-5">
+            <Image
+              src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
+              alt="SIGNAD"
+              className="w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] rounded-2xl"
+              fittingType="fit"
+            />
+            <Image
+              src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/771396f0c_fd.png"
+              alt="Vehicle Graphics"
+              className="w-[240px] sm:w-[360px]"
+              fittingType="fit"
+            />
+          </div>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
             Expert vehicle wraps, graphics, and signage solutions tailored to your vision. Quality craftsmanship you can trust.
