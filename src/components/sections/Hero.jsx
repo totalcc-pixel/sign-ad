@@ -32,18 +32,13 @@ export default function Hero() {
             </span>
           </div>
 
-          <div className="flex flex-col items-start gap-5">
-            <Image
-              src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
-              alt="SIGNAD"
-              className="w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] rounded-2xl"
-              fittingType="fit"
-            />
+          <div className="flex flex-col items-start">
             <Image
               src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/771396f0c_fd.png"
               alt="Vehicle Graphics"
-              className="w-[240px] sm:w-[360px]"
+              className="w-[280px] sm:w-[420px] opacity-30 select-none"
               fittingType="fit"
+              style={{ filter: "blur(3px)" }}
             />
           </div>
 
