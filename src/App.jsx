@@ -11,6 +11,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Portfolio from '@/pages/Portfolio';
+import CategoryPortfolio from '@/pages/CategoryPortfolio';
 import Quote from '@/pages/Quote';
 import AdminPortfolio from '@/pages/AdminPortfolio';
 // Add page imports here
@@ -56,6 +57,8 @@ const AuthenticatedApp = () => {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio/vehicle-graphics" element={<CategoryPortfolio category="Vehicle Graphic" />} />
+        <Route path="/portfolio/building-signs" element={<CategoryPortfolio category="Building Sign" />} />
         <Route path="/quote" element={<Quote />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/admin" element={<AdminPortfolio />} />
