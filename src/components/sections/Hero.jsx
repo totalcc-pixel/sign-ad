@@ -36,7 +36,7 @@ export default function Hero() {
             <Image
               src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/499a71044_n.JPG"
               alt="SIGNAD"
-              className="w-[504px] sm:w-[756px] select-none"
+              className="w-[1008px] sm:w-[1512px] select-none"
               fittingType="fit"
             />
           </div>
