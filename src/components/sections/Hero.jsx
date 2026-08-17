@@ -36,7 +36,7 @@ export default function Hero() {
             <Image
               src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/771396f0c_fd.png"
               alt="Vehicle Graphics"
-              className="w-[280px] sm:w-[420px] opacity-30 select-none"
+              className="w-[476px] sm:w-[714px] opacity-30 select-none"
               fittingType="fit"
               style={{ filter: "blur(3px)" }}
             />
