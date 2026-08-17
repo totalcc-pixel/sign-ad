@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Facebook, MapPin } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -25,6 +25,24 @@ export default function CTASection() {
             Request a Quote
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
+          <a
+            href="https://www.facebook.com/vehiclegraphicsnz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-white/10 text-white font-semibold border border-white/20 hover:bg-white/20 transition-colors"
+          >
+            <Facebook className="w-4 h-4 text-[#F39C12]" />
+            Facebook
+          </a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-white/10 text-white font-semibold border border-white/20 hover:bg-white/20 transition-colors"
+          >
+            <MapPin className="w-4 h-4 text-[#F39C12]" />
+            Find Us on Maps
+          </a>
         </div>
       </div>
     </section>
