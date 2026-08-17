@@ -7,7 +7,7 @@ const categories = [
   {
     name: "Vehicle Graphic",
     desc: "Full wraps, partial decals, and commercial fleet branding.",
-    image: "https://media.base44.com/images/public/6a67d1169c557b33993d409b/54f92157f_Signad-Hiace.jpg",
+    image: "https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg",
     path: "/portfolio/vehicle-graphics",
   },
   {
