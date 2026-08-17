@@ -4,17 +4,24 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { Image } from "@/components/ui/image";
 
+const PAGE_SIZE = 9;
+
 export default function CategoryPortfolio({ category }) {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
-    base44.entities.Project.list("-created_date", 50)
+    setPage(1);
+    base44.entities.Project.list("-created_date", 200)
       .then((all) => setProjects(all.filter((p) => p.category === category)))
       .catch(() => setProjects([]))
       .finally(() => setLoading(false));
   }, [category]);
+
+  const totalPages = Math.ceil(projects.length / PAGE_SIZE);
+  const currentProjects = projects.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="pt-24">
@@ -45,7 +52,7 @@ export default function CategoryPortfolio({ category }) {
             <p className="text-center text-zinc-500 py-12">No projects in this category yet.</p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((p) => (
+              {currentProjects.map((p) => (
                 <div key={p.id} className="group relative overflow-hidden rounded-2xl bg-zinc-900">
                   <div className="aspect-[4/3] overflow-hidden">
                     {p.image_url && (
@@ -69,6 +76,38 @@ export default function CategoryPortfolio({ category }) {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-100 text-zinc-700 disabled:opacity-30 hover:bg-[#F39C12] hover:text-black transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i + 1)}
+                  className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-semibold transition-colors ${
+                    page === i + 1
+                      ? "bg-[#F39C12] text-black"
+                      : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-100 text-zinc-700 disabled:opacity-30 hover:bg-[#F39C12] hover:text-black transition-colors"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           )}
 
