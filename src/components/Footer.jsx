@@ -51,7 +51,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 pt-6 border-t border-white/10 text-xs text-white/40 flex flex-col sm:flex-row gap-2 justify-between">
-        <p>© {new Date().getFullYear()} WrapPro Vehicle Graphics. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Signad Vehicle Graphics. All rights reserved.</p>
         <p>Premium craftsmanship since 2004.</p>
       </div>
     </footer>);
