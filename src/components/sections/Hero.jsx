@@ -6,7 +6,7 @@ import { Image } from "@/components/ui/image";
 const stats = [
   { value: "22+", label: "Years Experience" },
   { value: "350+", label: "Vehicles Wrapped" },
-  { value: "100%", label: "Satisfaction" },
+  { value: "90%+", label: "Satisfaction" },
 ];
 
 export default function Hero() {
