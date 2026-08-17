@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, MapPin } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 const stats = [
@@ -39,6 +39,11 @@ export default function Hero() {
               className="w-[1008px] sm:w-[1512px] select-none"
               fittingType="fit"
             />
+          </div>
+
+          <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20">
+            <MapPin className="w-4 h-4 text-[#F39C12]" />
+            <span className="text-white/80 text-sm font-semibold tracking-wide">Based in Auckland, New Zealand</span>
           </div>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
