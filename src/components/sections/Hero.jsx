@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 const stats = [
@@ -25,13 +25,6 @@ export default function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-56 pb-16 w-full">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F39C12]/15 border border-[#F39C12]/30 mb-6">
-            <Star className="w-3.5 h-3.5 text-[#F39C12] fill-[#F39C12]" />
-            <span className="text-[#F39C12] text-xs font-semibold tracking-[0.2em] uppercase">
-              Premium Vehicle Graphics Since 2004
-            </span>
-          </div>
-
           <div className="flex flex-col items-start">
             <Image
               src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/499a71044_n.JPG"
@@ -41,9 +34,10 @@ export default function Hero() {
             />
           </div>
 
-          <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20">
+          <div className="mt-6 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)]">
             <MapPin className="w-4 h-4 text-[#F39C12]" />
-            <span className="text-white/80 text-sm font-semibold tracking-wide">Based in Auckland, New Zealand</span>
+            <span className="text-white text-sm font-semibold tracking-[0.05em]">Based in Auckland, New Zealand</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F39C12] animate-pulse" />
           </div>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
