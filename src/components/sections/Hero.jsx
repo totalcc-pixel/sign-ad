@@ -16,7 +16,7 @@ export default function Hero() {
         <Image
           src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg"
           alt="SIGNAD vehicle graphics showcase"
-          className="w-full h-full object-cover opacity-50"
+          className="w-full h-full object-cover opacity-80"
           fittingType="fill"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40" />
