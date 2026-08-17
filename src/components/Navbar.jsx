@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 const links = [
@@ -42,9 +42,6 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center gap-5">
-          <a href="tel:0274320180" className="flex items-center gap-2 text-white/90 text-sm font-medium hover:text-[#F39C12] transition-colors">
-            <Phone className="w-4 h-4" /> 027-4320-180
-          </a>
           <Link
             to="/quote"
             className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
@@ -65,9 +62,6 @@ export default function Navbar() {
               {l.label}
             </Link>
         )}
-          <a href="tel:0274320180" className="flex items-center gap-2 text-white/90 text-sm py-1">
-            <Phone className="w-4 h-4" /> 027-4320-180
-          </a>
           <Link to="/quote" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
             Get Quote
           </Link>
