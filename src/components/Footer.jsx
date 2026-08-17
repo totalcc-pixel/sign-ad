@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, Facebook } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import GoogleIcon from "@/components/GoogleIcon";
 
 export default function Footer() {
   return (
@@ -50,8 +51,28 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 pt-6 border-t border-white/10 text-xs text-white/40 flex flex-col sm:flex-row gap-2 justify-between">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 pt-6 border-t border-white/10 text-xs text-white/40 flex flex-col sm:flex-row gap-4 justify-between items-center">
         <p>© {new Date().getFullYear()} Signad Vehicle Graphics. All rights reserved.</p>
+        <div className="flex items-center gap-3">
+          <a
+            href="https://www.facebook.com/signad04nz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-[#F39C12] hover:text-black transition-colors"
+          >
+            <Facebook className="w-4 h-4" />
+          </a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Google Maps"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-[#F39C12] hover:text-black transition-colors"
+          >
+            <GoogleIcon className="w-4 h-4" />
+          </a>
+        </div>
         <p>Premium craftsmanship since 2004.</p>
       </div>
     </footer>);
