@@ -26,7 +26,7 @@ export default function CTASection() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <a
-            href="https://www.facebook.com/vehiclegraphicsnz"
+            href="https://www.facebook.com/signad04nz/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-white/10 text-white font-semibold border border-white/20 hover:bg-white/20 transition-colors"
