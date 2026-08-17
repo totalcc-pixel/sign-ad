@@ -4,8 +4,8 @@ import { ArrowRight, Star } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 const stats = [
-  { value: "20+", label: "Years Experience" },
-  { value: "1000+", label: "Vehicles Wrapped" },
+  { value: "22+", label: "Years Experience" },
+  { value: "350+", label: "Vehicles Wrapped" },
   { value: "100%", label: "Satisfaction" },
 ];
 
