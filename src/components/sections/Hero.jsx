@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Facebook } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import DateTimeDisplay from "@/components/DateTimeDisplay";
+import GoogleIcon from "@/components/GoogleIcon";
 
 const stats = [
   { value: "22+", label: "Years Experience" },
@@ -60,6 +61,24 @@ export default function Hero() {
             >
               View Our Work
             </Link>
+            <a
+              href="https://www.facebook.com/signad04nz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+            >
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Google Maps"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+            >
+              <GoogleIcon className="w-6 h-6" />
+            </a>
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/10 pt-8">
