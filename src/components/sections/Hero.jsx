@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import DateTimeDisplay from "@/components/DateTimeDisplay";
 
 const stats = [
   { value: "22+", label: "Years Experience" },
@@ -34,10 +35,13 @@ export default function Hero() {
             />
           </div>
 
-          <div className="mt-6 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)]">
-            <MapPin className="w-4 h-4 text-[#F39C12]" />
-            <span className="text-white text-sm font-semibold tracking-[0.05em]">Based in Auckland</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F39C12] animate-pulse" />
+          <div className="mt-6 flex flex-col items-start gap-3">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)]">
+              <MapPin className="w-4 h-4 text-[#F39C12]" />
+              <span className="text-white text-sm font-semibold tracking-[0.05em]">Based in Auckland</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F39C12] animate-pulse" />
+            </div>
+            <DateTimeDisplay />
           </div>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
