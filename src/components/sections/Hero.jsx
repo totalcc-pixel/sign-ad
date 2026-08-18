@@ -66,7 +66,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
             >
               <Facebook className="w-6 h-6" />
             </a>
