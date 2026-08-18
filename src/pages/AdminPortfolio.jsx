@@ -37,11 +37,13 @@ export default function AdminPortfolio() {
     title: "",
     category: "Vehicle Graphic",
     image_url: "",
+    before_image_url: "",
     description: "",
     featured: false,
   });
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadingBefore, setUploadingBefore] = useState(false);
   const { toast } = useToast();
 
   const load = () => {
@@ -78,6 +80,7 @@ export default function AdminPortfolio() {
       title: "",
       category: "Vehicle Graphic",
       image_url: "",
+      before_image_url: "",
       description: "",
       featured: false,
     });
@@ -90,6 +93,7 @@ export default function AdminPortfolio() {
       title: p.title || "",
       category: p.category || "Vehicle Graphic",
       image_url: p.image_url || "",
+      before_image_url: p.before_image_url || "",
       description: p.description || "",
       featured: !!p.featured,
     });
@@ -108,6 +112,21 @@ export default function AdminPortfolio() {
       toast({ title: "Upload failed", variant: "destructive" });
     } finally {
       setUploading(false);
+    }
+  };
+
+  const onUploadBefore = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingBefore(true);
+    try {
+      const res = await base44.integrations.Core.UploadFile({ file });
+      setForm((f) => ({ ...f, before_image_url: res.file_url }));
+      toast({ title: "Before image uploaded" });
+    } catch {
+      toast({ title: "Upload failed", variant: "destructive" });
+    } finally {
+      setUploadingBefore(false);
     }
   };
 
@@ -294,6 +313,37 @@ export default function AdminPortfolio() {
                 value={form.image_url}
                 onChange={(e) => setForm({ ...form, image_url: e.target.value })}
                 placeholder="or paste image URL"
+                className="mt-2"
+              />
+            </div>
+            <div>
+              <Label>Before Image (optional)</Label>
+              <div className="flex items-center gap-3">
+                <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-md bg-zinc-100 hover:bg-zinc-200 text-sm font-medium transition-colors">
+                  <Upload className="w-4 h-4" /> {uploadingBefore ? "Uploading…" : "Upload Before"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={onUploadBefore}
+                    disabled={uploadingBefore}
+                  />
+                </label>
+                {form.before_image_url && (
+                  <div className="w-16 h-12 rounded overflow-hidden bg-zinc-100">
+                    <Image
+                      src={form.before_image_url}
+                      alt="before preview"
+                      className="w-full h-full"
+                      fittingType="fill"
+                    />
+                  </div>
+                )}
+              </div>
+              <Input
+                value={form.before_image_url}
+                onChange={(e) => setForm({ ...form, before_image_url: e.target.value })}
+                placeholder="or paste before image URL"
                 className="mt-2"
               />
             </div>

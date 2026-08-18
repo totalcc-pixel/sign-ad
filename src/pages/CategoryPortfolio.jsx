@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { Image } from "@/components/ui/image";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
 const PAGE_SIZE = 9;
 
@@ -56,17 +57,21 @@ export default function CategoryPortfolio({ category }) {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {currentProjects.map((p) => (
                 <div key={p.id} className="group relative overflow-hidden rounded-2xl bg-zinc-900">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    {p.image_url && (
-                      <Image
-                        src={p.image_url}
-                        alt={p.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        fittingType="fill"
-                      />
-                    )}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  {p.before_image_url && p.image_url ? (
+                    <BeforeAfterSlider beforeSrc={p.before_image_url} afterSrc={p.image_url} alt={p.title} />
+                  ) : (
+                    <div className="aspect-[4/3] overflow-hidden">
+                      {p.image_url && (
+                        <Image
+                          src={p.image_url}
+                          alt={p.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          fittingType="fill"
+                        />
+                      )}
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-6">
                     <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
                     {p.description && (
