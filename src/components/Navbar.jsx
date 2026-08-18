@@ -25,12 +25,12 @@ export default function Navbar() {
           fittingType="fit" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-6">
+        <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">
           {links.map((l) =>
             <li key={l.label}>
               <Link
                 to={l.path}
-                className={`font-medium transition-colors whitespace-nowrap text-sm ${
+                className={`font-medium transition-colors whitespace-nowrap text-xl ${
                   pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"
                 }`}
               >
