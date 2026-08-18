@@ -68,9 +68,6 @@ export default function CategoryPortfolio({ category }) {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-0 inset-x-0 p-6">
-                    <span className="inline-block px-2.5 py-1 rounded-full bg-[#F39C12] text-black text-[11px] font-semibold mb-2">
-                      {p.category}
-                    </span>
                     <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
                     {p.description && (
                       <p className="text-white/60 text-sm mt-1.5 line-clamp-2">{p.description}</p>
