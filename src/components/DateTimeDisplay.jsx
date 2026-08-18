@@ -15,10 +15,9 @@ export default function DateTimeDisplay() {
     day: "numeric",
   });
   const timeStr = now.toLocaleTimeString("en-NZ", {
-    hour: "2-digit",
+    hour: "numeric",
     minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
+    hour12: true,
   });
 
   return (
