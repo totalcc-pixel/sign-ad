@@ -28,15 +28,17 @@ export default function CategoryPortfolio({ category }) {
       <section className="bg-black py-20">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 text-center">
           <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Our Work</span>
-          <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-tight text-white mt-3">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-4 inline-block px-8 py-3 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm">
             {category}
           </h1>
-          <Link
-            to="/portfolio"
-            className="inline-flex items-center gap-2 mt-5 text-white/60 hover:text-[#F39C12] text-sm transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to Portfolio
-          </Link>
+          <div className="mt-5">
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-[#F39C12] text-sm transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Portfolio
+            </Link>
+          </div>
         </div>
       </section>
 
