@@ -4,7 +4,7 @@ import { ArrowRight, Facebook, MapPin } from "lucide-react";
 
 export default function CTASection() {
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
+    <section className="relative py-16 bg-black overflow-hidden">
       <div className="absolute inset-0 opacity-30">
         <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#F39C12]/30 blur-3xl" />
         <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full bg-[#F39C12]/10 blur-3xl" />

@@ -13,7 +13,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-black">
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-black">
       <div className="absolute inset-0">
         <Image
           src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg"
@@ -25,7 +25,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-56 pb-16 w-full">
+      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-44 pb-12 w-full">
         <div className="max-w-3xl">
           <div className="flex flex-col items-start">
             <Image
@@ -81,7 +81,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/10 pt-8">
+          <div className="mt-10 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/10 pt-6">
             {stats.map((s) => (
               <div key={s.label}>
                 <div className="text-4xl sm:text-5xl font-display font-extrabold text-white">{s.value}</div>

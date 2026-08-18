@@ -20,9 +20,9 @@ const categories = [
 
 export default function PortfolioCategories() {
   return (
-    <section className="py-24 bg-zinc-50">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Our Work</span>
           <h2 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 mt-3">
             Portfolio
