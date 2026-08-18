@@ -28,6 +28,19 @@ export default function Quote() {
     setError("");
     try {
       await base44.entities.QuoteRequest.create(form);
+      try {
+        await base44.integrations.Core.SendEmail({
+          to: "totalcc@gmail.com",
+          subject: `New Quote Request from ${form.name}`,
+          body: `A new quote request has been submitted.<br><br>
+            <strong>Name:</strong> ${form.name}<br>
+            <strong>Email:</strong> ${form.email}<br>
+            <strong>Phone:</strong> ${form.phone || "—"}<br>
+            <strong>Vehicle Type:</strong> ${form.vehicle_type || "—"}<br>
+            <strong>Service Type:</strong> ${form.service_type}<br>
+            <strong>Message:</strong> ${form.message || "—"}`,
+        });
+      } catch (_) {}
       setDone(true);
     } catch (err) {
       setError("Something went wrong. Please call us on 027-4320-180.");
