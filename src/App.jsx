@@ -14,6 +14,7 @@ import Portfolio from '@/pages/Portfolio';
 import CategoryPortfolio from '@/pages/CategoryPortfolio';
 import Quote from '@/pages/Quote';
 import AdminPortfolio from '@/pages/AdminPortfolio';
+import Register from '@/pages/Register';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -64,6 +65,7 @@ const AuthenticatedApp = () => {
           <Route path="/admin" element={<AdminPortfolio />} />
         </Route>
       </Route>
+      <Route path="/register" element={<Register />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

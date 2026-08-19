@@ -42,6 +42,12 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-5">
           <Link
+            to="/register"
+            className="text-white/80 hover:text-white text-sm font-medium transition-colors"
+          >
+            Sign Up
+          </Link>
+          <Link
             to="/quote"
             className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
             Get Quote
