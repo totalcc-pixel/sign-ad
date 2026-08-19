@@ -24,6 +24,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Image } from "@/components/ui/image";
+import UsersList from "@/components/UsersList";
 
 const CATEGORIES = ["Vehicle Graphic", "Building Sign"];
 
@@ -379,6 +380,8 @@ export default function AdminPortfolio() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <UsersList />
     </div>
   );
 }
