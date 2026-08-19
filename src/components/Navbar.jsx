@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import { useAuth } from "@/lib/AuthContext";
 
 const links = [
   { label: "Home", path: "/" },
@@ -14,6 +15,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
@@ -40,13 +42,28 @@ export default function Navbar() {
           )}
         </ul>
 
-        <div className="hidden md:flex items-center gap-5">
-          <Link
-            to="/register"
-            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-          >
-            Sign Up
-          </Link>
+        <div className="hidden md:flex items-center gap-3">
+          {isAuthenticated && user ? (
+            <>
+              <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
+                {user.email}
+              </span>
+              <button
+                onClick={() => logout()}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/register"
+              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
+            >
+              Sign Up
+            </Link>
+          )}
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-white p-2" aria-label="Menu">
@@ -61,9 +78,18 @@ export default function Navbar() {
               {l.label}
             </Link>
           )}
-          <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
-            Sign Up
-          </Link>
+          {isAuthenticated && user ? (
+            <div className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm flex items-center justify-center gap-1.5">
+              <span className="truncate max-w-[140px]">{user.email}</span>
+              <button onClick={() => { logout(); setOpen(false); }} aria-label="Logout">
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
+              Sign Up
+            </Link>
+          )}
         </div>
       }
     </header>);
