@@ -43,14 +43,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-5">
           <Link
             to="/register"
-            className="text-white/80 hover:text-white text-sm font-medium transition-colors"
+            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
           >
             Sign Up
-          </Link>
-          <Link
-            to="/quote"
-            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
-            Get Quote
           </Link>
         </div>
 
@@ -66,8 +61,8 @@ export default function Navbar() {
               {l.label}
             </Link>
           )}
-          <Link to="/quote" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
-            Get Quote
+          <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
+            Sign Up
           </Link>
         </div>
       }
