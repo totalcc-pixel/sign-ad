@@ -28,7 +28,7 @@ export default function Navbar() {
           fittingType="fit" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-6 flex-1 justify-center px-6 py-2.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-sm">
+        <ul className="hidden md:flex items-center gap-6 flex-1 justify-center px-6 py-3 rounded-full bg-white/10 border-2 border-[#F39C12]/40 backdrop-blur-md shadow-[0_0_20px_rgba(243,156,18,0.15)]">
           {links.map((l) =>
             <li key={l.label}>
               <Link
