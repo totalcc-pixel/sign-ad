@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Facebook } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import DateTimeDisplay from "@/components/DateTimeDisplay";
-import GoogleIcon from "@/components/GoogleIcon";
+
 
 const stats = [
   { value: "22+", label: "Years Experience" },
@@ -47,39 +47,7 @@ export default function Hero() {
             Expert vehicle wraps, graphics, and signage solutions tailored to your vision. Quality craftsmanship you can trust.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link
-              to="/quote"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] transition-all hover:shadow-[0_8px_30px_rgba(243,156,18,0.35)]"
-            >
-              Get Free Quote
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-white/10 text-white font-semibold border border-white/20 backdrop-blur hover:bg-white/20 transition-colors"
-            >
-              View Our Work
-            </Link>
-            <a
-              href="https://www.facebook.com/signad04nz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-            >
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Google Maps"
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-            >
-              <GoogleIcon className="w-6 h-6" />
-            </a>
-          </div>
+
 
           <div className="mt-10 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/10 pt-6">
             {stats.map((s) => (

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X, LogOut, Facebook } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import GoogleIcon from "@/components/GoogleIcon";
 import { useAuth } from "@/lib/AuthContext";
 
 const links = [
@@ -43,6 +44,24 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://www.facebook.com/signad04nz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+          >
+            <Facebook className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Google Maps"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+          >
+            <GoogleIcon className="w-5 h-5" />
+          </a>
           {isAuthenticated && user ? (
             <>
               <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
