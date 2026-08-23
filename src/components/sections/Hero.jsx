@@ -37,8 +37,8 @@ export default function Hero() {
             />
           </div>
 
-          <div className="mt-6 inline-flex flex-wrap items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)]">
-            <SkyTowerIcon className="w-6 h-10" />
+          <div className="mt-6 inline-flex flex-wrap items-center gap-2.5 pl-2 pr-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)] relative">
+            <SkyTowerIcon className="w-10 h-20 -my-10" />
             <span className="text-white text-sm font-semibold tracking-[0.05em]">Based in Auckland</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#F39C12] animate-pulse" />
             <DateTimeDisplay />
