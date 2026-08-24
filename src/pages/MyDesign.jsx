@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
+import GoogleIcon from "@/components/GoogleIcon";
 
 export default function MyDesign() {
   const { user, isAuthenticated } = useAuth();
@@ -137,9 +138,12 @@ export default function MyDesign() {
     <div className="min-h-screen bg-black pt-48 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F39C12]/10 border border-[#F39C12]/30 mb-4">
-            <Car className="w-4 h-4 text-[#F39C12]" />
-            <span className="text-[#F39C12] text-sm font-semibold">회원 혜택</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border-2 border-[#F39C12]/50 shadow-[0_0_30px_rgba(243,156,18,0.2)] mb-5">
+            <Palette className="w-7 h-7 text-[#F39C12]" />
+            <span className="text-2xl font-display font-extrabold tracking-wide">
+              <span className="text-white">My</span>
+              <span className="text-[#F39C12]">Design</span>
+            </span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white mb-3">
             나만의 차량 랩 시안
@@ -147,6 +151,27 @@ export default function MyDesign() {
           <p className="text-white/60 max-w-2xl mx-auto">
             회사 정보를 입력하면 AI가 맞춤형 차량 랩 목업을 생성해드립니다.
           </p>
+          <div className="mt-6 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+            <span className="text-white/50 text-sm font-medium">Connect:</span>
+            <a
+              href="https://www.facebook.com/signad04nz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Signad+Vehicle+Graphics+New+Zealand"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Google Maps"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
+            >
+              <GoogleIcon className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
