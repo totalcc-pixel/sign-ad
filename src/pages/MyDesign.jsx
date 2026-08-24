@@ -21,7 +21,10 @@ export default function MyDesign() {
     phone: "",
     address: "",
     logo_url: "",
-    mockup_url: ""
+    mockup_url: "",
+    vehicle_type: "",
+    vehicle_color: "",
+    vehicle_year: ""
   });
 
   useEffect(() => {
@@ -40,7 +43,10 @@ export default function MyDesign() {
           phone: p.phone || "",
           address: p.address || "",
           logo_url: p.logo_url || "",
-          mockup_url: p.mockup_url || ""
+          mockup_url: p.mockup_url || "",
+          vehicle_type: p.vehicle_type || "",
+          vehicle_color: p.vehicle_color || "",
+          vehicle_year: p.vehicle_year || ""
         });
       }
     } catch (e) {
@@ -74,7 +80,10 @@ export default function MyDesign() {
     setGenerating(true);
     try {
       // Generate vehicle wrap mockup using AI
-      const prompt = `Professional vehicle wrap design mockup for a commercial van. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a white delivery van parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      const vehicleType = form.vehicle_type || "commercial van";
+      const vehicleColor = form.vehicle_color || "white";
+      const vehicleYear = form.vehicle_year || "";
+      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
 
       const result = await base44.integrations.Core.GenerateImage({
         prompt,
@@ -167,6 +176,36 @@ export default function MyDesign() {
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
                 placeholder="예: Auckland, New Zealand"
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
+              />
+            </div>
+            <div className="border-t border-white/10 pt-5">
+              <h3 className="text-white font-semibold mb-3 text-sm">차량 정보</h3>
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">차량 종류</Label>
+              <Input
+                value={form.vehicle_type}
+                onChange={(e) => setForm({ ...form, vehicle_type: e.target.value })}
+                placeholder="예: 밴, 세단, 트럭, SUV"
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
+              />
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">차량 색상</Label>
+              <Input
+                value={form.vehicle_color}
+                onChange={(e) => setForm({ ...form, vehicle_color: e.target.value })}
+                placeholder="예: 흰색, 검정색, 은색"
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
+              />
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">연식</Label>
+              <Input
+                value={form.vehicle_year}
+                onChange={(e) => setForm({ ...form, vehicle_year: e.target.value })}
+                placeholder="예: 2023"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
               />
             </div>

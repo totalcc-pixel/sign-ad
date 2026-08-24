@@ -16,6 +16,15 @@
     },
     "mockup_url": {
       "type": "string"
+    },
+    "vehicle_type": {
+      "type": "string"
+    },
+    "vehicle_color": {
+      "type": "string"
+    },
+    "vehicle_year": {
+      "type": "string"
     }
   },
   "required": [
