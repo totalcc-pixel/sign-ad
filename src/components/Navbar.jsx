@@ -28,13 +28,15 @@ export default function Navbar() {
           fittingType="fit" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-6 flex-1 justify-center px-6 py-3 rounded-full bg-white/10 border-2 border-[#F39C12]/40 backdrop-blur-md shadow-[0_0_20px_rgba(243,156,18,0.15)]">
+        <ul className="hidden md:flex items-center gap-2 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           {links.map((l) =>
             <li key={l.label}>
               <Link
                 to={l.path}
-                className={`font-medium transition-colors whitespace-nowrap text-lg ${
-                  pathname === l.path ? "text-[#F39C12]" : "text-white/80 hover:text-white"
+                className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all ${
+                  pathname === l.path
+                    ? "text-[#F39C12] border border-[#F39C12]/60 shadow-[0_0_12px_rgba(243,156,18,0.3)]"
+                    : "text-white border border-transparent hover:text-white/90"
                 }`}
               >
                 {l.label}
