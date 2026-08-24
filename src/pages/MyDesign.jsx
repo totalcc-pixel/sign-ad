@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LogOut } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
 
 export default function MyDesign() {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const { toast } = useToast();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -137,21 +137,49 @@ export default function MyDesign() {
   return (
     <div className="min-h-screen bg-black pt-48 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border-2 border-[#F39C12]/50 shadow-[0_0_30px_rgba(243,156,18,0.2)] mb-5">
+        {/* Login / User area */}
+        <div className="flex items-center justify-end gap-3 mb-8">
+          {isAuthenticated && user ? (
+            <>
+              <span className="text-white/80 text-sm font-medium max-w-[200px] truncate">
+                {user.email}
+              </span>
+              <Button
+                onClick={() => logout()}
+                className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d]"
+              >
+                <LogOut className="w-4 h-4 mr-1.5" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <a
+                href="/login"
+                className="px-5 py-2 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
+              >
+                Login
+              </a>
+              <a
+                href="/register"
+                className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
+              >
+                Sign Up
+              </a>
+            </>
+          )}
+        </div>
+
+        {/* My Design symbol + Social links */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border-2 border-[#F39C12]/50 shadow-[0_0_30px_rgba(243,156,18,0.2)]">
             <Palette className="w-7 h-7 text-[#F39C12]" />
             <span className="text-2xl font-display font-extrabold tracking-wide">
               <span className="text-white">My</span>
               <span className="text-[#F39C12]">Design</span>
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white mb-3">
-            나만의 차량 랩 시안
-          </h1>
-          <p className="text-white/60 max-w-2xl mx-auto">
-            회사 정보를 입력하면 AI가 맞춤형 차량 랩 목업을 생성해드립니다.
-          </p>
-          <div className="mt-6 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
             <span className="text-white/50 text-sm font-medium">Connect:</span>
             <a
               href="https://www.facebook.com/signad04nz/"
@@ -172,6 +200,15 @@ export default function MyDesign() {
               <GoogleIcon className="w-4 h-4" />
             </a>
           </div>
+        </div>
+
+        <div className="text-center mb-10">
+          <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white mb-3">
+            나만의 차량 랩 시안
+          </h1>
+          <p className="text-white/60 max-w-2xl mx-auto">
+            회사 정보를 입력하면 AI가 맞춤형 차량 랩 목업을 생성해드립니다.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
