@@ -151,18 +151,13 @@ export default function MyDesign() {
         {/* Login / User area */}
         <div className="flex items-center justify-end gap-3 mb-8">
           {isAuthenticated && user ? (
-            <>
-              <span className="text-white/80 text-sm font-medium max-w-[200px] truncate">
-                {user.email}
-              </span>
-              <Button
-                onClick={() => logout()}
-                className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d]"
-              >
-                <LogOut className="w-4 h-4 mr-1.5" />
-                Logout
-              </Button>
-            </>
+            <Button
+              onClick={() => logout()}
+              className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d]"
+            >
+              <LogOut className="w-4 h-4 mr-1.5" />
+              Logout
+            </Button>
           ) : (
             <>
               <a
