@@ -20,23 +20,31 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
+      {/* Top decorative gradient line */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#F39C12] to-transparent opacity-70" />
+      <div className="absolute top-0 inset-x-0 h-[40px] bg-gradient-to-b from-[#F39C12]/8 to-transparent pointer-events-none" />
+
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-48 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
+          <div className="relative">
+            <div className="absolute inset-0 rounded-md bg-[#F39C12]/15 blur-lg group-hover:bg-[#F39C12]/25 transition-all" />
+            <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
           alt="AD Vehicle Graphics logo"
-          className="h-[176px] w-[176px] rounded-md"
+          className="relative h-[176px] w-[176px] rounded-md"
           fittingType="fit" />
+          </div>
         </Link>
 
-        <ul className="hidden md:flex items-center gap-2 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] opacity-100">
+        <ul className="hidden md:flex items-center gap-1 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-[#F39C12]/20 backdrop-blur-md shadow-[0_0_24px_rgba(243,156,18,0.1),0_8px_32px_rgba(0,0,0,0.4)] opacity-100">
+          <div className="absolute pointer-events-none inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#F39C12]/40 to-transparent rounded-full" />
           {links.map((l) =>
           <li key={l.label}>
               <Link
               to={l.path}
               className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all ${
               pathname === l.path ?
-              "text-[#F39C12] border border-[#F39C12]/60 shadow-[0_0_12px_rgba(243,156,18,0.3)]" :
-              "text-white border border-transparent hover:text-white/90"}`
+              "text-[#F39C12] border border-[#F39C12]/60 bg-[#F39C12]/10 shadow-[0_0_12px_rgba(243,156,18,0.3)]" :
+              "text-white border border-transparent hover:text-[#F39C12] hover:bg-white/5 hover:shadow-[0_0_8px_rgba(243,156,18,0.15)]"}`
               }>
               
                 {l.label}
@@ -51,7 +59,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-[#F39C12]/30 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.4)] transition-all">
             
             <Facebook className="w-5 h-5" />
           </a>
@@ -60,7 +68,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Google Maps"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-[#F39C12]/30 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.4)] transition-all">
             
             <GoogleIcon className="w-5 h-5" />
           </a>
@@ -73,7 +81,7 @@ export default function Navbar() {
                 </span>
                 <button
                 onClick={() => logout()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
                 
                   <LogOut className="w-4 h-4" />
                   Logout
@@ -83,17 +91,17 @@ export default function Navbar() {
 
             <Link
               to="/register"
-              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
             
                 Sign Up
               </Link>
             }
             <Link
               to="/my-design"
-              className={`mt-2 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-colors ${
+              className={`mt-2 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-all ${
                 pathname === "/my-design"
-                  ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_12px_rgba(243,156,18,0.4)]"
-                  : "bg-white/10 border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12]"
+                  ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_16px_rgba(243,156,18,0.5)]"
+                  : "bg-white/10 border-[#F39C12]/30 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.3)]"
               }`}
             >
               <Palette className="w-5 h-5" />
