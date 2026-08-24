@@ -6,12 +6,12 @@ import GoogleIcon from "@/components/GoogleIcon";
 import { useAuth } from "@/lib/AuthContext";
 
 const links = [
-  { label: "Home", path: "/" },
-  { label: "Vehicle Graphic", path: "/portfolio/vehicle-graphics" },
-  { label: "Building Sign", path: "/portfolio/building-signs" },
-  { label: "Services", path: "/#services" },
-  { label: "Order Processing", path: "/quote" },
-];
+{ label: "Home", path: "/" },
+{ label: "Vehicle Graphic", path: "/portfolio/vehicle-graphics" },
+{ label: "Building Sign", path: "/portfolio/building-signs" },
+{ label: "Services", path: "/#services" },
+{ label: "Order Processing", path: "/quote" }];
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -28,17 +28,17 @@ export default function Navbar() {
           fittingType="fit" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-2 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <ul className="hidden md:flex items-center gap-2 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] opacity-100">
           {links.map((l) =>
-            <li key={l.label}>
+          <li key={l.label}>
               <Link
-                to={l.path}
-                className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all ${
-                  pathname === l.path
-                    ? "text-[#F39C12] border border-[#F39C12]/60 shadow-[0_0_12px_rgba(243,156,18,0.3)]"
-                    : "text-white border border-transparent hover:text-white/90"
-                }`}
-              >
+              to={l.path}
+              className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all ${
+              pathname === l.path ?
+              "text-[#F39C12] border border-[#F39C12]/60 shadow-[0_0_12px_rgba(243,156,18,0.3)]" :
+              "text-white border border-transparent hover:text-white/90"}`
+              }>
+              
                 {l.label}
               </Link>
             </li>
@@ -51,8 +51,8 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-          >
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+            
             <Facebook className="w-5 h-5" />
           </a>
           <a
@@ -60,31 +60,31 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Google Maps"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-          >
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+            
             <GoogleIcon className="w-5 h-5" />
           </a>
-          {isAuthenticated && user ? (
-            <>
+          {isAuthenticated && user ?
+          <>
               <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
                 {user.email}
               </span>
               <button
-                onClick={() => logout()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-              >
+              onClick={() => logout()}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+              
                 <LogOut className="w-4 h-4" />
                 Logout
               </button>
-            </>
-          ) : (
-            <Link
-              to="/register"
-              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-            >
+            </> :
+
+          <Link
+            to="/register"
+            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+            
               Sign Up
             </Link>
-          )}
+          }
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-white p-2" aria-label="Menu">
@@ -95,22 +95,22 @@ export default function Navbar() {
       {open &&
       <div className="md:hidden bg-black border-t border-white/10 px-5 py-4 flex flex-col gap-3">
           {links.map((l) =>
-            <Link key={l.label} to={l.path} onClick={() => setOpen(false)} className="text-white/80 hover:text-[#F39C12] text-sm font-medium py-1">
+        <Link key={l.label} to={l.path} onClick={() => setOpen(false)} className="text-white/80 hover:text-[#F39C12] text-sm font-medium py-1">
               {l.label}
             </Link>
-          )}
-          {isAuthenticated && user ? (
-            <div className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm flex items-center justify-center gap-1.5">
+        )}
+          {isAuthenticated && user ?
+        <div className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm flex items-center justify-center gap-1.5">
               <span className="truncate max-w-[140px]">{user.email}</span>
-              <button onClick={() => { logout(); setOpen(false); }} aria-label="Logout">
+              <button onClick={() => {logout();setOpen(false);}} aria-label="Logout">
                 <LogOut className="w-4 h-4" />
               </button>
-            </div>
-          ) : (
-            <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
+            </div> :
+
+        <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
               Sign Up
             </Link>
-          )}
+        }
         </div>
       }
     </header>);
