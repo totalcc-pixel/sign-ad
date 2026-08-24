@@ -64,47 +64,48 @@ export default function Navbar() {
             
             <GoogleIcon className="w-5 h-5" />
           </a>
-          {isAuthenticated && user ?
-          <>
-              <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
-                {user.email}
-              </span>
-              <button
-              onClick={() => logout()}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
-              
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
+          <div className="flex flex-col items-end">
+            {isAuthenticated && user ?
+            <>
+              <div className="flex items-center gap-3">
+                <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
+                  {user.email}
+                </span>
+                <button
+                onClick={() => logout()}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+                
+                  <LogOut className="w-4 h-4" />
+                  Logout
+                </button>
+              </div>
             </> :
 
-          <Link
-            to="/register"
-            className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+            <Link
+              to="/register"
+              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
             
-              Sign Up
+                Sign Up
+              </Link>
+            }
+            <Link
+              to="/my-design"
+              className={`mt-0 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-colors ${
+                pathname === "/my-design"
+                  ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_12px_rgba(243,156,18,0.4)]"
+                  : "bg-white/10 border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12]"
+              }`}
+            >
+              <Palette className="w-5 h-5" />
+              <span className="font-semibold text-sm">My Design</span>
             </Link>
-          }
+          </div>
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-white p-2" aria-label="Menu">
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
-
-      <div className="hidden md:flex justify-center pb-2">
-        <Link
-          to="/my-design"
-          className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-colors ${
-            pathname === "/my-design"
-              ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_12px_rgba(243,156,18,0.4)]"
-              : "bg-white/10 border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12]"
-          }`}
-        >
-          <Palette className="w-5 h-5" />
-          <span className="font-semibold text-sm">My Design</span>
-        </Link>
-      </div>
 
       {open &&
       <div className="md:hidden bg-black border-t border-white/10 px-5 py-4 flex flex-col gap-3">
