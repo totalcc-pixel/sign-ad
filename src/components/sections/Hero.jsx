@@ -8,8 +8,8 @@ import SkyTowerIcon from "@/components/SkyTowerIcon";
 
 const stats = [
   { value: "22+", label: "Years Experience" },
-  { value: "350+", label: "Vehicles Wrapped" },
-  { value: "90%+", label: "Satisfaction" },
+  { value: "1,000+", label: "Vehicles Wrapped" },
+  { value: "95%+", label: "Satisfaction" },
 ];
 
 export default function Hero() {
@@ -37,9 +37,9 @@ export default function Hero() {
             />
           </div>
 
-          <div className="mt-6 inline-flex flex-wrap items-center gap-2.5 pl-2 pr-4 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border border-[#F39C12]/40 backdrop-blur-sm shadow-[0_4px_24px_rgba(243,156,18,0.15)] relative">
-            <SkyTowerIcon className="w-10 h-20 -my-10" />
-            <span className="text-white text-sm font-semibold tracking-[0.05em]">Based in Auckland</span>
+          <div className="mt-6 inline-flex flex-wrap items-center gap-2.5 pl-2 pr-5 py-2 rounded-full bg-gradient-to-r from-[#F39C12]/25 via-[#F39C12]/12 to-transparent border-2 border-[#F39C12]/50 backdrop-blur-md shadow-[0_4px_30px_rgba(243,156,18,0.25)] relative">
+            <SkyTowerIcon className="w-16 h-32 -my-16 drop-shadow-[0_0_8px_rgba(243,156,18,0.5)]" />
+            <span className="text-white text-base font-bold tracking-[0.05em]">Based in Auckland</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#F39C12] animate-pulse" />
             <DateTimeDisplay />
           </div>
