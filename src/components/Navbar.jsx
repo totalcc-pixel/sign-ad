@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogOut, Facebook, Car } from "lucide-react";
+import { Menu, X, LogOut, Facebook, Car, Palette } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
 import { useAuth } from "@/lib/AuthContext";
@@ -10,8 +10,7 @@ const links = [
 { label: "Vehicle Graphic", path: "/portfolio/vehicle-graphics" },
 { label: "Building Sign", path: "/portfolio/building-signs" },
 { label: "Services", path: "/#services" },
-{ label: "Order Processing", path: "/quote" },
-{ label: "My Design", path: "/my-design" }];
+{ label: "Order Processing", path: "/quote" }];
 
 
 export default function Navbar() {
@@ -47,6 +46,17 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
+          <Link
+            to="/my-design"
+            aria-label="My Design"
+            className={`flex items-center justify-center w-10 h-10 rounded-full border transition-colors ${
+              pathname === "/my-design"
+                ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_12px_rgba(243,156,18,0.4)]"
+                : "bg-white/10 border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12]"
+            }`}
+          >
+            <Palette className="w-5 h-5" />
+          </Link>
           <a
             href="https://www.facebook.com/signad04nz/"
             target="_blank"
