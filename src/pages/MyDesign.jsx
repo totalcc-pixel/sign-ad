@@ -117,10 +117,21 @@ export default function MyDesign() {
         <div className="text-center">
           <Car className="w-16 h-16 text-[#F39C12] mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-white mb-2">회원 전용 서비스</h2>
-          <p className="text-white/60 mb-6">시안 생성 서비스는 회원가입 후 이용할 수 있습니다.</p>
-          <Button asChild>
-            <a href="/register">회원가입하기</a>
-          </Button>
+          <p className="text-white/60 mb-6">시안 생성 서비스는 로그인 후 이용할 수 있습니다.</p>
+          <div className="flex items-center justify-center gap-3">
+            <a
+              href="/login"
+              className="px-6 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
+            >
+              로그인
+            </a>
+            <a
+              href="/register"
+              className="px-6 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
+            >
+              회원가입
+            </a>
+          </div>
         </div>
       </div>
     );
