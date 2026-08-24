@@ -90,7 +90,7 @@ export default function Navbar() {
             }
             <Link
               to="/my-design"
-              className={`mt-0 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-colors ${
+              className={`mt-2 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-colors ${
                 pathname === "/my-design"
                   ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_12px_rgba(243,156,18,0.4)]"
                   : "bg-white/10 border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12]"
