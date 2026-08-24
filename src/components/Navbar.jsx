@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogOut, Facebook } from "lucide-react";
+import { Menu, X, LogOut, Facebook, Car } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
 import { useAuth } from "@/lib/AuthContext";
@@ -10,7 +10,8 @@ const links = [
 { label: "Vehicle Graphic", path: "/portfolio/vehicle-graphics" },
 { label: "Building Sign", path: "/portfolio/building-signs" },
 { label: "Services", path: "/#services" },
-{ label: "Order Processing", path: "/quote" }];
+{ label: "Order Processing", path: "/quote" },
+{ label: "My Design", path: "/my-design" }];
 
 
 export default function Navbar() {
@@ -107,9 +108,14 @@ export default function Navbar() {
               </button>
             </div> :
 
-        <Link to="/register" onClick={() => setOpen(false)} className="mt-1 px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
-              Sign Up
-            </Link>
+        <div className="mt-1 space-y-2">
+          <Link to="/register" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
+            Sign Up
+          </Link>
+          <Link to="/my-design" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
+            My Design
+          </Link>
+        </div>
         }
         </div>
       }

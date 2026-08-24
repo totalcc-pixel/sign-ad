@@ -15,6 +15,7 @@ import CategoryPortfolio from '@/pages/CategoryPortfolio';
 import Quote from '@/pages/Quote';
 import AdminPortfolio from '@/pages/AdminPortfolio';
 import Register from '@/pages/Register';
+import MyDesign from '@/pages/MyDesign';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -61,6 +62,7 @@ const AuthenticatedApp = () => {
         <Route path="/portfolio/vehicle-graphics" element={<CategoryPortfolio category="Vehicle Graphic" />} />
         <Route path="/portfolio/building-signs" element={<CategoryPortfolio category="Building Sign" />} />
         <Route path="/quote" element={<Quote />} />
+        <Route path="/my-design" element={<MyDesign />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/admin" element={<AdminPortfolio />} />
         </Route>
