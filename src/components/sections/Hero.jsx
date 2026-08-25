@@ -50,7 +50,7 @@ export default function Hero() {
 
 
 
-          <div className="mt-10 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/10 pt-6">
+          <div className="mt-10 grid grid-cols-3 gap-4 max-w-md border-t border-white/10 pt-6">
             {stats.map((s) => (
               <div key={s.label}>
                 <div className="text-4xl sm:text-5xl font-display font-extrabold text-white">{s.value}</div>
