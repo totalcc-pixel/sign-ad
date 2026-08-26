@@ -91,7 +91,7 @@ export default function Hero() {
             </p>
             <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <span className="inline-flex items-center gap-2 text-white/80 text-sm font-medium">
-                <span className="text-[#F39C12]">✓</span> 20+ Years Experience
+                <span className="text-[#F39C12]">✓</span> 22+ Years Experience
               </span>
               <span className="inline-flex items-center gap-2 text-white/80 text-sm font-medium">
                 <span className="text-[#F39C12]">✓</span> Professional Design & Installation
