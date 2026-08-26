@@ -5,6 +5,7 @@ import { Image } from "@/components/ui/image";
 import SkyTowerIcon from "@/components/SkyTowerIcon";
 import VanSlideshow from "@/components/sections/VanSlideshow";
 import PricingGuideModal from "@/components/sections/PricingGuideModal";
+import { useAuth } from "@/lib/AuthContext";
 
 const steps = [
 { icon: Camera, title: "Upload Your Vehicle", desc: "Upload a photo of your car, van, ute or truck." },
@@ -15,6 +16,7 @@ const steps = [
 export default function Hero() {
   const quoteRef = useRef(null);
   const [pricingOpen, setPricingOpen] = useState(false);
+  const { isAuthenticated, navigateToLogin } = useAuth();
 
   const scrollToQuote = () => {
     quoteRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -61,13 +63,23 @@ export default function Hero() {
 
               {/* CTA Buttons */}
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                {isAuthenticated ?
                 <Link
                   to="/my-design"
                   className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto whitespace-nowrap">
                   
                   START FREE DESIGN
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </Link> :
+
+                <button
+                  onClick={() => navigateToLogin()}
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto whitespace-nowrap">
+                  
+                  START FREE DESIGN
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                }
                 <button
                   onClick={() => setPricingOpen(true)}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto text-lg whitespace-nowrap">
