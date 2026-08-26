@@ -1,6 +1,5 @@
 import React from "react";
 import { X } from "lucide-react";
-import { Image } from "@/components/ui/image";
 
 const PRICING_IMAGE_URL =
   "https://media.base44.com/images/public/6a67d1169c557b33993d409b/3877bfbcd_price.jpg";
@@ -25,11 +24,10 @@ export default function PricingGuideModal({ open, onClose }) {
           <X className="w-5 h-5" />
         </button>
 
-        <Image
+        <img
           src={PRICING_IMAGE_URL}
           alt="Mobile Billboard Package Deal pricing guide"
-          className="w-full h-auto rounded-lg"
-          fittingType="fit"
+          className="block w-full h-auto rounded-lg"
         />
       </div>
     </div>
