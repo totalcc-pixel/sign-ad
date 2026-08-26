@@ -122,22 +122,6 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ===== QUICK QUOTE SECTION ===== */}
-      <section ref={quoteRef} id="quick-quote" className="scroll-mt-28 bg-zinc-50 py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="text-center mb-10">
-            <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Quick Quote</span>
-            <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-zinc-900 mt-3">
-              Get a Quick Quote
-            </h2>
-            <p className="mt-4 text-zinc-500 text-lg max-w-xl mx-auto">
-              Tell us about your vehicle. We'll get back to you fast with a tailored quote.
-            </p>
-          </div>
-          <QuickQuote />
-        </div>
-      </section>
-
       {/* ===== FINAL CTA ===== */}
       <section className="bg-black py-16 lg:py-20 text-center">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
