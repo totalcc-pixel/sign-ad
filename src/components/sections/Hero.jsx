@@ -68,7 +68,7 @@ export default function Hero() {
                 </Link>
                 <button
                   onClick={scrollToQuote}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold text-lg hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto">
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto text-lg">
                   
                   INDICATIVE PRICING GUIDE
                 </button>
