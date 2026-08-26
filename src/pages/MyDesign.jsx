@@ -16,6 +16,7 @@ export default function MyDesign() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [generatedMockup, setGeneratedMockup] = useState(null);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [form, setForm] = useState({
     company_name: "",
@@ -49,6 +50,7 @@ export default function MyDesign() {
           vehicle_color: p.vehicle_color || "",
           vehicle_year: p.vehicle_year || ""
         });
+        setGeneratedMockup(p.mockup_url || null);
       }
     } catch (e) {
       console.error(e);
@@ -84,7 +86,10 @@ export default function MyDesign() {
       const vehicleType = form.vehicle_type || "commercial van";
       const vehicleColor = form.vehicle_color || "white";
       const vehicleYear = form.vehicle_year || "";
-      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      const logoInstruction = form.logo_url
+        ? ` IMPORTANT: You must incorporate the uploaded company logo as the central branding element on the vehicle side. Use the logo's exact design, colors, and text. Place the logo prominently and scale it to be clearly visible. The logo is the primary graphic on the wrap.`
+        : "";
+      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.${logoInstruction}`;
 
       const result = await base44.integrations.Core.GenerateImage({
         prompt,
@@ -102,6 +107,7 @@ export default function MyDesign() {
         setProfile(created);
       }
       setForm((f) => ({ ...f, mockup_url: mockupUrl }));
+      setGeneratedMockup(mockupUrl);
       toast({ title: "시안 생성 완료", description: "차량 랩 목업이 생성되었습니다." });
     } catch (e) {
       console.error(e);
@@ -328,13 +334,13 @@ export default function MyDesign() {
                 <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
                 <p className="text-white/60 text-sm">AI가 차량 랩 시안을 생성하고 있습니다...</p>
               </div>
-            ) : form.mockup_url ? (
+            ) : generatedMockup ? (
               <div className="flex-1">
                 <div className="rounded-xl overflow-hidden border border-white/10">
-                  <Image src={form.mockup_url} alt="차량 랩 목업" className="w-full" fittingType="fit" />
+                  <Image src={generatedMockup} alt="차량 랩 목업" className="w-full" fittingType="fit" />
                 </div>
                 <a
-                  href={form.mockup_url}
+                  href={generatedMockup}
                   download
                   className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline"
                 >
