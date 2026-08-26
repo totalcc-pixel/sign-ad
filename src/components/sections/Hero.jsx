@@ -47,7 +47,7 @@ export default function Hero() {
 
               <h1 className="font-display font-extrabold text-white leading-[1.05] text-5xl sm:text-6xl lg:text-7xl">
                 <span className="block">DESIGN YOUR VEHICLE  </span>
-                <span className="block text-[#F39C12]">VEHICLE —FREE</span>
+                <span className="block text-[#F39C12]">FREE</span>
               </h1>
 
               <p className="mt-5 text-lg text-white/75 max-w-xl leading-relaxed">
