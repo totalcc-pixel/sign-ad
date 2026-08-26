@@ -52,18 +52,6 @@ export default function Quote() {
 
   return (
     <div className="pt-24">
-      <section className="bg-black py-20">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 text-center">
-          <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Free Quote</span>
-          <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-tight text-white mt-3">
-            Get a Quote
-          </h1>
-          <p className="mt-4 text-white/60 text-lg max-w-xl mx-auto">
-            Tell us about your vehicle and what you're after. We'll get back to you with a tailored quote.
-          </p>
-        </div>
-      </section>
-
       <VehicleGraphicsInfo />
 
       <section className="py-20 bg-zinc-50">
