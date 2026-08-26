@@ -88,13 +88,13 @@ export default function MyDesign() {
       const vehicleType = form.vehicle_type || "commercial van";
       const vehicleColor = form.vehicle_color || "white";
       const vehicleYear = form.vehicle_year || "";
-      const logoInstruction = form.logo_url
-        ? ` IMPORTANT: You must incorporate the uploaded company logo as the central branding element on the vehicle side. Use the logo's exact design, colors, and text. Place the logo prominently and scale it to be clearly visible. The logo is the primary graphic on the wrap.`
-        : "";
+      const logoInstruction = form.logo_url ?
+      ` IMPORTANT: You must incorporate the uploaded company logo as the central branding element on the vehicle side. Use the logo's exact design, colors, and text. Place the logo prominently and scale it to be clearly visible. The logo is the primary graphic on the wrap.` :
+      "";
       const designStyle = form.design_style?.trim();
-      const styleInstruction = designStyle
-        ? ` The client requests the following design style: ${designStyle}. Incorporate this style direction into the wrap design, colors, layout, and overall aesthetic.`
-        : "";
+      const styleInstruction = designStyle ?
+      ` The client requests the following design style: ${designStyle}. Incorporate this style direction into the wrap design, colors, layout, and overall aesthetic.` :
+      "";
       const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.${logoInstruction}${styleInstruction}`;
 
       const result = await base44.integrations.Core.GenerateImage({
@@ -127,7 +127,7 @@ export default function MyDesign() {
             <strong>차량 색상:</strong> ${form.vehicle_color || "—"}<br>
             <strong>연식:</strong> ${form.vehicle_year || "—"}<br>
             <strong>원하는 디자인:</strong> ${form.design_style || "—"}<br><br>
-            <a href="${mockupUrl}" target="_blank">생성된 시안 보기</a>`,
+            <a href="${mockupUrl}" target="_blank">생성된 시안 보기</a>`
         });
       } catch (_) {}
       toast({ title: "시안 생성 완료", description: "차량 랩 목업이 생성되었습니다." });
@@ -149,28 +149,28 @@ export default function MyDesign() {
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => navigateToLogin()}
-              className="px-6 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-            >
+              className="px-6 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
+              
               로그인
             </button>
             <a
               href="/register"
-              className="px-6 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-            >
+              className="px-6 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+              
               회원가입
             </a>
           </div>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
         <Loader2 className="w-8 h-8 text-[#F39C12] animate-spin" />
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -178,30 +178,30 @@ export default function MyDesign() {
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         {/* Login / User area */}
         <div className="flex items-center justify-end gap-3 mb-8">
-          {isAuthenticated && user ? (
-            <Button
-              onClick={() => logout()}
-              className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d]"
-            >
+          {isAuthenticated && user ?
+          <Button
+            onClick={() => logout()}
+            className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] hidden">
+            
               <LogOut className="w-4 h-4 mr-1.5" />
               Logout
-            </Button>
-          ) : (
-            <>
+            </Button> :
+
+          <>
               <button
-                onClick={() => navigateToLogin()}
-                className="px-5 py-2 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-              >
+              onClick={() => navigateToLogin()}
+              className="px-5 py-2 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
+              
                 Login
               </button>
               <a
-                href="/register"
-                className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors"
-              >
+              href="/register"
+              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
+              
                 Sign Up
               </a>
             </>
-          )}
+          }
         </div>
 
         {/* My Design symbol + Social links */}
@@ -220,8 +220,8 @@ export default function MyDesign() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-            >
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+              
               <Facebook className="w-4 h-4" />
             </a>
             <a
@@ -229,8 +229,8 @@ export default function MyDesign() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Google Maps"
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors"
-            >
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
+              
               <GoogleIcon className="w-4 h-4" />
             </a>
           </div>
@@ -254,8 +254,8 @@ export default function MyDesign() {
                 value={form.company_name}
                 onChange={(e) => setForm({ ...form, company_name: e.target.value })}
                 placeholder="예: ABC 무역"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">전화번호</Label>
@@ -263,8 +263,8 @@ export default function MyDesign() {
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder="예: 09-123-4567"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">주소</Label>
@@ -272,8 +272,8 @@ export default function MyDesign() {
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
                 placeholder="예: Auckland, New Zealand"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div className="border-t border-white/10 pt-5">
               <h3 className="text-white font-semibold mb-3 text-sm">차량 정보</h3>
@@ -284,8 +284,8 @@ export default function MyDesign() {
                 value={form.vehicle_type}
                 onChange={(e) => setForm({ ...form, vehicle_type: e.target.value })}
                 placeholder="예: 밴, 세단, 트럭, SUV"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">차량 색상</Label>
@@ -293,8 +293,8 @@ export default function MyDesign() {
                 value={form.vehicle_color}
                 onChange={(e) => setForm({ ...form, vehicle_color: e.target.value })}
                 placeholder="예: 흰색, 검정색, 은색"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">연식</Label>
@@ -302,21 +302,21 @@ export default function MyDesign() {
                 value={form.vehicle_year}
                 onChange={(e) => setForm({ ...form, vehicle_year: e.target.value })}
                 placeholder="예: 2023"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">회사 로고</Label>
               <div className="flex items-center gap-3">
-                {form.logo_url ? (
-                  <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
+                {form.logo_url ?
+                <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
                     <Image src={form.logo_url} alt="Logo" className="w-full h-full object-contain" fittingType="fit" />
-                  </div>
-                ) : (
-                  <div className="w-20 h-20 rounded-lg border border-dashed border-white/20 flex items-center justify-center">
+                  </div> :
+
+                <div className="w-20 h-20 rounded-lg border border-dashed border-white/20 flex items-center justify-center">
                     <ImageIcon className="w-6 h-6 text-white/30" />
                   </div>
-                )}
+                }
                 <label className="cursor-pointer">
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors">
                     {uploadingLogo ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
@@ -332,25 +332,25 @@ export default function MyDesign() {
                 value={form.design_style}
                 onChange={(e) => setForm({ ...form, design_style: e.target.value })}
                 placeholder="예: 심플하고 모던한 스타일, 블랙 앤 오렌지 컬러, 기하학적 패턴, 레트로 감성, 미니멀 텍스트 중심 등"
-                className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]"
-              />
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]" />
+              
             </div>
             <Button
               type="submit"
               disabled={generating}
-              className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50"
-            >
-              {generating ? (
-                <>
+              className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50">
+              
+              {generating ?
+              <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   시안 생성 중...
-                </>
-              ) : (
-                <>
+                </> :
+
+              <>
                   <Car className="w-4 h-4 mr-2" />
                   차량 랩 시안 생성
                 </>
-              )}
+              }
             </Button>
           </form>
 
@@ -360,35 +360,35 @@ export default function MyDesign() {
               <CheckCircle className="w-5 h-5 text-[#F39C12]" />
               생성된 시안
             </h3>
-            {generating ? (
-              <div className="flex-1 flex flex-col items-center justify-center min-h-[300px]">
+            {generating ?
+            <div className="flex-1 flex flex-col items-center justify-center min-h-[300px]">
                 <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
                 <p className="text-white/60 text-sm">AI가 차량 랩 시안을 생성하고 있습니다...</p>
-              </div>
-            ) : generatedMockup ? (
-              <div className="flex-1">
+              </div> :
+            generatedMockup ?
+            <div className="flex-1">
                 <div className="rounded-xl overflow-hidden border border-white/10">
                   <Image src={generatedMockup} alt="차량 랩 목업" className="w-full" fittingType="fit" />
                 </div>
                 <a
-                  href={generatedMockup}
-                  download
-                  className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline"
-                >
+                href={generatedMockup}
+                download
+                className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline">
+                
                   <Upload className="w-4 h-4" />
                   이미지 다운로드
                 </a>
-              </div>
-            ) : (
-              <div className="flex-1 flex flex-col items-center justify-center min-h-[300px] text-center">
+              </div> :
+
+            <div className="flex-1 flex flex-col items-center justify-center min-h-[300px] text-center">
                 <Car className="w-16 h-16 text-white/20 mb-3" />
                 <p className="text-white/40">회사 정보를 입력하고 시안 생성 버튼을 누르면</p>
                 <p className="text-white/40">맞춤형 차량 랩 목업이 여기에 표시됩니다.</p>
               </div>
-            )}
+            }
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
