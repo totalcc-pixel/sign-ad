@@ -25,6 +25,9 @@
     },
     "vehicle_year": {
       "type": "string"
+    },
+    "design_style": {
+      "type": "string"
     }
   },
   "required": [

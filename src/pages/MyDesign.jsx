@@ -26,7 +26,8 @@ export default function MyDesign() {
     mockup_url: "",
     vehicle_type: "",
     vehicle_color: "",
-    vehicle_year: ""
+    vehicle_year: "",
+    design_style: ""
   });
 
   useEffect(() => {
@@ -48,7 +49,8 @@ export default function MyDesign() {
           mockup_url: p.mockup_url || "",
           vehicle_type: p.vehicle_type || "",
           vehicle_color: p.vehicle_color || "",
-          vehicle_year: p.vehicle_year || ""
+          vehicle_year: p.vehicle_year || "",
+          design_style: p.design_style || ""
         });
         setGeneratedMockup(p.mockup_url || null);
       }
@@ -89,7 +91,11 @@ export default function MyDesign() {
       const logoInstruction = form.logo_url
         ? ` IMPORTANT: You must incorporate the uploaded company logo as the central branding element on the vehicle side. Use the logo's exact design, colors, and text. Place the logo prominently and scale it to be clearly visible. The logo is the primary graphic on the wrap.`
         : "";
-      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.${logoInstruction}`;
+      const designStyle = form.design_style?.trim();
+      const styleInstruction = designStyle
+        ? ` The client requests the following design style: ${designStyle}. Incorporate this style direction into the wrap design, colors, layout, and overall aesthetic.`
+        : "";
+      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.${logoInstruction}${styleInstruction}`;
 
       const result = await base44.integrations.Core.GenerateImage({
         prompt,
@@ -303,6 +309,15 @@ export default function MyDesign() {
                   <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
                 </label>
               </div>
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">원하는 디자인 형식</Label>
+              <Textarea
+                value={form.design_style}
+                onChange={(e) => setForm({ ...form, design_style: e.target.value })}
+                placeholder="예: 심플하고 모던한 스타일, 블랙 앤 오렌지 컬러, 기하학적 패턴, 레트로 감성, 미니멀 텍스트 중심 등"
+                className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]"
+              />
             </div>
             <Button
               type="submit"
