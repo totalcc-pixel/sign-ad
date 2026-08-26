@@ -15,6 +15,7 @@ import CategoryPortfolio from '@/pages/CategoryPortfolio';
 import Quote from '@/pages/Quote';
 import AdminPortfolio from '@/pages/AdminPortfolio';
 import Register from '@/pages/Register';
+import Login from '@/pages/Login';
 import MyDesign from '@/pages/MyDesign';
 // Add page imports here
 
@@ -68,6 +69,7 @@ const AuthenticatedApp = () => {
         </Route>
       </Route>
       <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
