@@ -21,6 +21,7 @@ const categories = [
 
 export default function PortfolioCategories() {
   const [vehicleImage, setVehicleImage] = useState(categories[0].image);
+  const [buildingImage, setBuildingImage] = useState(categories[1].image);
 
   useEffect(() => {
     base44.entities.Project.filter({ category: "Vehicle Graphic" }, "-created_date", 50)
@@ -31,10 +32,22 @@ export default function PortfolioCategories() {
         }
       })
       .catch(() => {});
+    base44.entities.Project.filter({ category: "Building Sign" }, "-created_date", 50)
+      .then((projects) => {
+        if (projects && projects.length > 0) {
+          const random = projects[Math.floor(Math.random() * projects.length)];
+          if (random.image_url) setBuildingImage(random.image_url);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const displayCategories = categories.map((c) =>
-    c.name === "Vehicle Graphic" ? { ...c, image: vehicleImage } : c
+    c.name === "Vehicle Graphic"
+      ? { ...c, image: vehicleImage }
+      : c.name === "Building Sign"
+      ? { ...c, image: buildingImage }
+      : c
   );
 
   return (
