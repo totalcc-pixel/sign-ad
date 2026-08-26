@@ -62,8 +62,8 @@ const AuthenticatedApp = () => {
         <Route path="/portfolio/vehicle-graphics" element={<CategoryPortfolio category="Vehicle Graphic" />} />
         <Route path="/portfolio/building-signs" element={<CategoryPortfolio category="Building Sign" />} />
         <Route path="/quote" element={<Quote />} />
-        <Route path="/my-design" element={<MyDesign />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
+          <Route path="/my-design" element={<MyDesign />} />
           <Route path="/admin" element={<AdminPortfolio />} />
         </Route>
       </Route>
