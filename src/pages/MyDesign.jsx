@@ -125,7 +125,7 @@ export default function MyDesign() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-48">
+      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
         <div className="text-center">
           <Car className="w-16 h-16 text-[#F39C12] mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-white mb-2">회원 전용 서비스</h2>
@@ -151,14 +151,14 @@ export default function MyDesign() {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-48">
+      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
         <Loader2 className="w-8 h-8 text-[#F39C12] animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black pt-48 pb-16">
+    <div className="min-h-screen bg-black pt-24 lg:pt-48 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         {/* Login / User area */}
         <div className="flex items-center justify-end gap-3 mb-8">

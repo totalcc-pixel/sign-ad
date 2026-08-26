@@ -16,7 +16,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, navigateToLogin } = useAuth();
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
@@ -24,13 +24,13 @@ export default function Navbar() {
       <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#F39C12] to-transparent opacity-70" />
       <div className="absolute top-0 inset-x-0 h-[40px] bg-gradient-to-b from-[#F39C12]/8 to-transparent pointer-events-none" />
 
-      <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-48 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-8 h-24 lg:h-48 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="relative">
             <div className="absolute inset-0 rounded-md bg-[#F39C12]/15 blur-lg group-hover:bg-[#F39C12]/25 transition-all" />
             <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
           alt="AD Vehicle Graphics logo"
-          className="relative h-[176px] w-[176px] rounded-md"
+          className="relative h-[64px] w-[64px] lg:h-[176px] lg:w-[176px] rounded-md"
           fittingType="fit" />
           </div>
         </Link>
@@ -131,6 +131,9 @@ export default function Navbar() {
             </div> :
 
         <div className="mt-1 space-y-2">
+          <button onClick={() => { setOpen(false); navigateToLogin(); }} className="block w-full px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
+            Login
+          </button>
           <Link to="/register" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
             Sign Up
           </Link>
