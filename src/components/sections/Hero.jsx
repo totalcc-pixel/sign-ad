@@ -9,7 +9,7 @@ import SkyTowerIcon from "@/components/SkyTowerIcon";
 const stats = [
   { value: "22+", label: "Years Experience" },
   { value: "1,000+", label: "Vehicles Wrapped" },
-  { value: "95%+", label: "Satisfaction" },
+  { value: " 95%+", label: "Satisfaction" },
 ];
 
 export default function Hero() {
