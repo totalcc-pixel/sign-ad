@@ -176,34 +176,6 @@ export default function MyDesign() {
   return (
     <div className="min-h-screen bg-black pt-24 lg:pt-48 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
-        {/* Login / User area */}
-        <div className="flex items-center justify-end gap-3 mb-8">
-          {isAuthenticated && user ?
-          <Button
-            onClick={() => logout()}
-            className="bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] hidden">
-            
-              <LogOut className="w-4 h-4 mr-1.5" />
-              Logout
-            </Button> :
-
-          <>
-              <button
-              onClick={() => navigateToLogin()}
-              className="px-5 py-2 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
-              
-                Login
-              </button>
-              <a
-              href="/register"
-              className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
-              
-                Sign Up
-              </a>
-            </>
-          }
-        </div>
-
         {/* My Design symbol + Social links */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#F39C12]/20 via-[#F39C12]/10 to-transparent border-2 border-[#F39C12]/50 shadow-[0_0_30px_rgba(243,156,18,0.2)]">
