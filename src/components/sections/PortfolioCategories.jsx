@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import { base44 } from "@/api/base44Client";
 
 const categories = [
   {
@@ -19,6 +20,23 @@ const categories = [
 ];
 
 export default function PortfolioCategories() {
+  const [vehicleImage, setVehicleImage] = useState(categories[0].image);
+
+  useEffect(() => {
+    base44.entities.Project.filter({ category: "Vehicle Graphic" }, "-created_date", 50)
+      .then((projects) => {
+        if (projects && projects.length > 0) {
+          const random = projects[Math.floor(Math.random() * projects.length)];
+          if (random.image_url) setVehicleImage(random.image_url);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const displayCategories = categories.map((c) =>
+    c.name === "Vehicle Graphic" ? { ...c, image: vehicleImage } : c
+  );
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
@@ -33,7 +51,7 @@ export default function PortfolioCategories() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {categories.map((c) => (
+          {displayCategories.map((c) => (
             <Link
               key={c.name}
               to={c.path}
