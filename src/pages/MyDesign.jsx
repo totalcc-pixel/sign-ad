@@ -114,6 +114,22 @@ export default function MyDesign() {
       }
       setForm((f) => ({ ...f, mockup_url: mockupUrl }));
       setGeneratedMockup(mockupUrl);
+      try {
+        await base44.integrations.Core.SendEmail({
+          to: "totalcc@gmail.com",
+          subject: `새 디자인 시안 요청 - ${form.company_name}`,
+          body: `회원이 새로운 차량 랩 시안을 생성했습니다.<br><br>
+            <strong>회사명:</strong> ${form.company_name}<br>
+            <strong>회원 이메일:</strong> ${user?.email || "—"}<br>
+            <strong>전화번호:</strong> ${form.phone || "—"}<br>
+            <strong>주소:</strong> ${form.address || "—"}<br>
+            <strong>차량 종류:</strong> ${form.vehicle_type || "—"}<br>
+            <strong>차량 색상:</strong> ${form.vehicle_color || "—"}<br>
+            <strong>연식:</strong> ${form.vehicle_year || "—"}<br>
+            <strong>원하는 디자인:</strong> ${form.design_style || "—"}<br><br>
+            <a href="${mockupUrl}" target="_blank">생성된 시안 보기</a>`,
+        });
+      } catch (_) {}
       toast({ title: "시안 생성 완료", description: "차량 랩 목업이 생성되었습니다." });
     } catch (e) {
       console.error(e);
