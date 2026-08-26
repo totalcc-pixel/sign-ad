@@ -6,10 +6,10 @@ import SkyTowerIcon from "@/components/SkyTowerIcon";
 import QuickQuote from "@/components/sections/QuickQuote";
 
 const steps = [
-  { icon: Camera, title: "Upload Your Vehicle", desc: "Upload a photo of your car, van, ute or truck." },
-  { icon: Pencil, title: "Design It Free", desc: "Try your logo, colours and business details on your vehicle." },
-  { icon: DollarSign, title: "Get Your Quote", desc: "Send your design to SIGN AD and receive a professional quote." },
-];
+{ icon: Camera, title: "Upload Your Vehicle", desc: "Upload a photo of your car, van, ute or truck." },
+{ icon: Pencil, title: "Design It Free", desc: "Try your logo, colours and business details on your vehicle." },
+{ icon: DollarSign, title: "Get Your Quote", desc: "Send your design to SIGN AD and receive a professional quote." }];
+
 
 export default function Hero() {
   const quoteRef = useRef(null);
@@ -28,8 +28,8 @@ export default function Hero() {
             src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg"
             alt="SIGNAD vehicle graphics showcase"
             className="w-full h-full object-cover opacity-30"
-            fittingType="fill"
-          />
+            fittingType="fill" />
+          
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
         </div>
@@ -47,7 +47,7 @@ export default function Hero() {
 
               <h1 className="font-display font-extrabold text-white leading-[1.05] text-5xl sm:text-6xl lg:text-7xl">
                 <span className="block">DESIGN YOUR</span>
-                <span className="block text-[#F39C12]">VEHICLE — FREE</span>
+                <span className="block text-[#F39C12]">VEHICLE —FREE</span>
               </h1>
 
               <p className="mt-5 text-lg text-white/75 max-w-xl leading-relaxed">
@@ -61,15 +61,15 @@ export default function Hero() {
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/my-design"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto"
-                >
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto">
+                  
                   START FREE DESIGN
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button
                   onClick={scrollToQuote}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold text-lg hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto"
-                >
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold text-lg hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto">
+                  
                   GET A QUICK QUOTE
                 </button>
               </div>
@@ -82,8 +82,8 @@ export default function Hero() {
                   src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/992b48a31_cv.jpg"
                   alt="Professional vehicle graphics on a white trade van"
                   className="w-full h-[280px] sm:h-[400px] lg:h-[460px]"
-                  fittingType="fill"
-                />
+                  fittingType="fill" />
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 {/* Before/After label */}
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
@@ -102,12 +102,12 @@ export default function Hero() {
           {/* ===== 3-STEP PROCESS ===== */}
           <div className="mt-14 lg:mt-20">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
-              {steps.map((step, i) => (
-                <div key={i} className="relative flex flex-col items-center text-center">
+              {steps.map((step, i) =>
+              <div key={i} className="relative flex flex-col items-center text-center">
                   {/* Arrow between steps (desktop) */}
-                  {i < steps.length - 1 && (
-                    <ArrowRight className="hidden sm:block absolute top-7 -right-4 lg:-right-6 w-6 h-6 text-[#F39C12]/60 z-10" />
-                  )}
+                  {i < steps.length - 1 &&
+                <ArrowRight className="hidden sm:block absolute top-7 -right-4 lg:-right-6 w-6 h-6 text-[#F39C12]/60 z-10" />
+                }
                   <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#F39C12]/15 border-2 border-[#F39C12]/40 mb-4">
                     <step.icon className="w-6 h-6 text-[#F39C12]" />
                   </div>
@@ -115,7 +115,7 @@ export default function Hero() {
                   <h3 className="text-white font-bold text-base mb-1">{step.title}</h3>
                   <p className="text-white/55 text-sm leading-relaxed max-w-[220px]">{step.desc}</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -169,13 +169,13 @@ export default function Hero() {
           </p>
           <Link
             to="/my-design"
-            className="mt-8 inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all"
-          >
+            className="mt-8 inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all">
+            
             START MY FREE DESIGN
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>
-    </>
-  );
+    </>);
+
 }
