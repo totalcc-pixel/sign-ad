@@ -96,17 +96,6 @@ export default function Navbar() {
                 Sign Up
               </Link>
             }
-            <Link
-              to="/my-design"
-              className={`mt-2 inline-flex items-center gap-2 px-5 py-2 rounded-full border transition-all ${
-                pathname === "/my-design"
-                  ? "bg-[#F39C12] text-black border-[#F39C12] shadow-[0_0_16px_rgba(243,156,18,0.5)]"
-                  : "bg-white/10 border-[#F39C12]/30 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.3)]"
-              }`}
-            >
-              <Palette className="w-5 h-5" />
-              <span className="font-semibold text-sm">My Design</span>
-            </Link>
           </div>
         </div>
 
