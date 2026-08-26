@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 const PRICING_IMAGE_URL =
-  "https://media.base44.com/images/public/6a67d1169c557b33993d409b/f68c405ff_price.jpg";
+  "https://media.base44.com/images/public/6a67d1169c557b33993d409b/3877bfbcd_price.jpg";
 
 export default function PricingGuideModal({ open, onClose }) {
   if (!open) return null;
