@@ -61,7 +61,7 @@ export default function Hero() {
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/my-design"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto">
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all w-full sm:w-auto whitespace-nowrap">
                   
                   START FREE DESIGN
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
