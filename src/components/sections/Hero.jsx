@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Camera, Pencil, DollarSign, ArrowRight, ArrowDown, Phone } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import SkyTowerIcon from "@/components/SkyTowerIcon";
 import VanSlideshow from "@/components/sections/VanSlideshow";
+import PricingGuideModal from "@/components/sections/PricingGuideModal";
 
 const steps = [
 { icon: Camera, title: "Upload Your Vehicle", desc: "Upload a photo of your car, van, ute or truck." },
@@ -13,6 +14,7 @@ const steps = [
 
 export default function Hero() {
   const quoteRef = useRef(null);
+  const [pricingOpen, setPricingOpen] = useState(false);
 
   const scrollToQuote = () => {
     quoteRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -67,7 +69,7 @@ export default function Hero() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button
-                  onClick={scrollToQuote}
+                  onClick={() => setPricingOpen(true)}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border-2 border-[#F39C12]/40 text-white font-bold hover:bg-white/15 hover:border-[#F39C12] transition-all w-full sm:w-auto text-lg whitespace-nowrap">
                   
                   INDICATIVE PRICING GUIDE
@@ -104,6 +106,7 @@ export default function Hero() {
         </div>
       </section>
 
+      <PricingGuideModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
     </>);
 
 }
