@@ -9,11 +9,11 @@ export default function Footer() {
     <footer className="bg-black text-white/70 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
-          <Image
-            src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/6f8bdcae0_sign.gif"
-            alt="AD Vehicle Graphics logo"
-            className="h-14 w-14 rounded-md mb-4 bg-white"
-            fittingType="fit" />
+          <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/3e0af2045_Untitled-5.gif"
+
+          alt="AD Vehicle Graphics logo"
+          className="h-14 w-14 rounded-md mb-4 bg-white"
+          fittingType="fit" />
           
           <p className="text-sm leading-relaxed max-w-sm">
             Premium vehicle wraps, graphics, and signage solutions since 2004. Quality craftsmanship you can trust.
