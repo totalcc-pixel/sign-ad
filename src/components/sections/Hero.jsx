@@ -122,24 +122,6 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
-      <section className="bg-black py-16 lg:py-20 text-center">
-        <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <h2 className="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-tight">
-            READY TO SEE YOUR BUSINESS<br className="hidden sm:block" /> ON YOUR VEHICLE?
-          </h2>
-          <p className="mt-4 text-white/60 text-lg">
-            Try it free before you decide.
-          </p>
-          <Link
-            to="/my-design"
-            className="mt-8 inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-[#F39C12] text-black font-bold text-lg shadow-[0_8px_30px_rgba(243,156,18,0.4)] hover:shadow-[0_12px_40px_rgba(243,156,18,0.6)] hover:scale-[1.02] transition-all">
-            
-            START MY FREE DESIGN
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
     </>);
 
 }
