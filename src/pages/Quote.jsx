@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import VehicleGraphicsInfo from "@/components/sections/VehicleGraphicsInfo";
 
 export default function Quote() {
   const [form, setForm] = useState({
@@ -62,6 +63,8 @@ export default function Quote() {
           </p>
         </div>
       </section>
+
+      <VehicleGraphicsInfo />
 
       <section className="py-20 bg-zinc-50">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
