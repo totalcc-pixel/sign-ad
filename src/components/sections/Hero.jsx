@@ -99,26 +99,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ===== 3-STEP PROCESS ===== */}
-          <div className="mt-14 lg:mt-20">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
-              {steps.map((step, i) =>
-              <div key={i} className="relative flex flex-col items-center text-center">
-                  {/* Arrow between steps (desktop) */}
-                  {i < steps.length - 1 &&
-                <ArrowRight className="hidden sm:block absolute top-7 -right-4 lg:-right-6 w-6 h-6 text-[#F39C12]/60 z-10" />
-                }
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#F39C12]/15 border-2 border-[#F39C12]/40 mb-4">
-                    <step.icon className="w-6 h-6 text-[#F39C12]" />
-                  </div>
-                  <div className="text-xs font-bold tracking-widest text-[#F39C12] mb-1">STEP {i + 1}</div>
-                  <h3 className="text-white font-bold text-base mb-1">{step.title}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed max-w-[220px]">{step.desc}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
           {/* ===== TRUST SECTION ===== */}
           <div className="mt-14 lg:mt-20 border-t border-white/10 pt-10 text-center">
             <h3 className="font-display font-extrabold text-white text-2xl lg:text-3xl tracking-wide">
