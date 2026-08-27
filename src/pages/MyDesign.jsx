@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud, Paperclip, X } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
@@ -89,6 +89,7 @@ export default function MyDesign() {
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [uploadingReference, setUploadingReference] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [zoomImage, setZoomImage] = useState(null);
   const [form, setForm] = useState({
@@ -96,6 +97,7 @@ export default function MyDesign() {
     phone: "",
     address: "",
     logo_url: "",
+    reference_file_url: "",
     mockup_url: "",
     right_mockup_url: "",
     front_mockup_url: "",
@@ -134,6 +136,7 @@ export default function MyDesign() {
           phone: p.phone || "",
           address: p.address || "",
           logo_url: p.logo_url || "",
+          reference_file_url: p.reference_file_url || "",
           mockup_url: p.mockup_url || "",
           right_mockup_url: p.right_mockup_url || "",
           front_mockup_url: p.front_mockup_url || "",
@@ -178,6 +181,25 @@ export default function MyDesign() {
     }
   };
 
+  const handleReferenceUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingReference(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm((f) => ({ ...f, reference_file_url: file_url }));
+      toast({ title: "Reference File Uploaded", description: "Your reference file has been uploaded." });
+    } catch (e) {
+      toast({ title: "Upload Failed", description: "An error occurred while uploading the reference file.", variant: "destructive" });
+    } finally {
+      setUploadingReference(false);
+    }
+  };
+
+  const handleRemoveReference = () => {
+    setForm((f) => ({ ...f, reference_file_url: "" }));
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.company_name.trim()) {
@@ -191,9 +213,10 @@ export default function MyDesign() {
 
       await Promise.all(VIEWS.map(async (view) => {
         const prompt = buildPrompt(view, form, rear);
+        const refImages = [form.logo_url, form.reference_file_url].filter(Boolean);
         const result = await base44.integrations.Core.GenerateImage({
           prompt,
-          ...(form.logo_url ? { existing_image_urls: [form.logo_url] } : {})
+          ...(refImages.length > 0 ? { existing_image_urls: refImages } : {})
         });
         newMockups[view] = result.url;
         setProgress((p) => p + 1);
@@ -435,6 +458,43 @@ export default function MyDesign() {
                   <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
                 </label>
               </div>
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">Reference File <span className="text-white/40 text-xs font-normal">(optional)</span></Label>
+              <p className="text-white/40 text-xs mb-2">Upload a design reference, sketch, or inspiration image for the AI to consider.</p>
+              {form.reference_file_url ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5 relative group">
+                    <Image src={form.reference_file_url} alt="Reference" className="w-full h-full object-contain" fittingType="fit" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={form.reference_file_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors"
+                    >
+                      <Paperclip className="w-4 h-4" /> View
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleRemoveReference}
+                      className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors"
+                      aria-label="Remove reference file"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <label className="cursor-pointer">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+                    {uploadingReference ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
+                    {uploadingReference ? "Uploading..." : "Upload Reference File"}
+                  </span>
+                  <input type="file" accept="image/*" className="hidden" onChange={handleReferenceUpload} />
+                </label>
+              )}
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Design Style</Label>
