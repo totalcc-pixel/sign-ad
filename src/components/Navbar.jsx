@@ -12,7 +12,8 @@ const links = [
 { label: "Services", path: "/#services" },
 { label: "About", path: "/about" },
 { label: "Contact", path: "/contact" },
-{ label: "About Car Wrap", path: "/quote" }];
+{ label: "About Car Wrap", path: "/quote" },
+{ label: "Design Director", path: "/design-director" }];
 
 
 export default function Navbar() {

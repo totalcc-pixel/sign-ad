@@ -20,6 +20,7 @@ import MyDesign from '@/pages/MyDesign';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import SeoDashboard from '@/pages/SeoDashboard';
+import DesignDirector from '@/pages/DesignDirector';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -70,6 +71,7 @@ const AuthenticatedApp = () => {
         <Route path="/contact" element={<Contact />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/my-design" element={<MyDesign />} />
+          <Route path="/design-director" element={<DesignDirector />} />
           <Route path="/admin" element={<AdminPortfolio />} />
           <Route path="/admin/seo" element={<SeoDashboard />} />
         </Route>
