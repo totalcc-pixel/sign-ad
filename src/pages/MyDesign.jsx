@@ -417,15 +417,15 @@ export default function MyDesign() {
               <Label className="text-white mb-1.5 block">Wrap Coverage / Package</Label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {[
-                  { value: "Full Wrap", title: "Full Wrap", desc: "100% full coverage — complete color change & full branding across all panels" },
-                  { value: "Half Wrap", title: "Half / Partial Wrap", desc: "50-60% coverage — rear half + tailgate/rear window branding, front stays factory paint" },
-                  { value: "Simple", title: "Simple Signage", desc: "Spot decals — logo on front doors, bonnet logo, phone/website text on rear only" },
+                  { value: "Full Wrap", title: "Full Wrap" },
+                  { value: "Half Wrap", title: "Half / Partial Wrap" },
+                  { value: "Simple", title: "Simple Signage" },
                 ].map((opt) => (
                   <button
                     key={opt.value}
                     type="button"
                     onClick={() => setForm({ ...form, wrap_type: opt.value })}
-                    className={`text-left px-3 py-2.5 rounded-lg border transition-colors ${
+                    className={`text-center px-3 py-2.5 rounded-lg border transition-colors ${
                       (form.wrap_type || "Full Wrap") === opt.value
                         ? "bg-[#F39C12]/15 border-[#F39C12]"
                         : "bg-black/40 border-white/10 hover:bg-white/10"
@@ -434,7 +434,6 @@ export default function MyDesign() {
                     <div className={`text-sm font-bold ${(form.wrap_type || "Full Wrap") === opt.value ? "text-[#F39C12]" : "text-white"}`}>
                       {opt.title}
                     </div>
-                    <div className="text-white/50 text-xs mt-1 leading-snug">{opt.desc}</div>
                   </button>
                 ))}
               </div>
