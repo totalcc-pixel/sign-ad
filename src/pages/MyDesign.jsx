@@ -78,7 +78,9 @@ function buildPrompt(view, form, rear) {
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
-  return `${baseInfo}${consistencyRule}${logoInstruction}${styleInstruction}${wrapCoverageInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
+  const viewNegative = (view === "front" || view === "rear") ? ` CRITICAL ANGLE CONSTRAINT: This image must show ONLY the ${view.toUpperCase()} of the vehicle from a straight head-on ${view} camera angle. Absolutely NO side panels, NO side doors, NO quarter panels, NO profile/3-quarter views. The vehicle must be directly facing the camera — a flat, symmetrical, straight-on ${view} perspective filling the entire frame. Do NOT rotate or angle the vehicle. Negative prompt: no side view, no side panels, no 3/4 angle, no profile, no multiple views, no collage, single straight ${view} view only.` : "";
+
+  return `${viewPrompt}${viewNegative}${baseInfo}${consistencyRule}${logoInstruction}${styleInstruction}${wrapCoverageInstruction}${symmetryRule}${exclusionRules}`;
 }
 
 export default function MyDesign() {
