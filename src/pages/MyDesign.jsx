@@ -38,7 +38,7 @@ function buildPrompt(view, form, rear) {
   const logoInstruction = form.logo_url ? ` IMPORTANT: Incorporate the uploaded company logo as the central branding element on the vehicle. Use the logo's exact design, colors, and text.` : "";
   const styleInstruction = form.design_style?.trim() ? ` Design style: ${form.design_style}.` : "";
 
-  const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Do NOT add any road sign, traffic sign, warning sign, directional sign, or signboard-style graphics on or near the rear bumper. Negative prompt constraint: no graphics on bumpers, no decals on license plates, no road signs on rear bumper, no traffic signs, no signboard graphics on bumper, clean factory bumpers, standard untouched number plates.`;
+  const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Do NOT add any road sign, traffic sign, warning sign, directional sign, or signboard-style graphics on or near the rear bumper. NEVER add any red and white chevron hazard tape, safety striped tape, or diagonal striped band across the tailgate or rear bumper area. Do NOT add any reflective safety stripes or hazard warning bands. Negative prompt constraint: no graphics on bumpers, no decals on license plates, no road signs on rear bumper, no traffic signs, no signboard graphics on bumper, no red and white chevron tape, no safety stripes, no hazard warning bands, clean factory bumpers, standard untouched number plates.`;
 
   const symmetryRule = (view === "left" || view === "right") ? ` SYMMETRY & BRANDING CONSISTENCY: This side view must share the exact same branding layout, color palette, graphic proportions, and design structure as the opposite side view. Logos, contact details, typography, and wrap patterns must match in relative position, scale, and visual balance on both driver and passenger sides. All text, phone numbers, website URLs, and company logos must be properly oriented and horizontally legible — do NOT mirror or invert readable text.` : "";
 
@@ -58,6 +58,7 @@ function buildPrompt(view, form, rear) {
       if (rear.rear_chevron) {
         viewPrompt += ` Add red and white rear chevron safety reflective stripes on the lower rear for commercial fleet visibility.`;
       }
+      viewPrompt += ` Do NOT add any red and white chevron hazard tape or safety striped band across the tailgate or rear bumper.`;
       viewPrompt += ` High quality, sharp details, professional commercial vehicle graphics.`;
       break;
     default:

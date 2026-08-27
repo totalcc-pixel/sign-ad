@@ -2,7 +2,7 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { ShieldCheck, Eye, Triangle } from "lucide-react";
+import { Eye, Triangle } from "lucide-react";
 
 export default function RearDesignControls({ rear, setRear }) {
   const update = (key, val) => setRear((r) => ({ ...r, [key]: val }));
@@ -39,20 +39,6 @@ export default function RearDesignControls({ rear, setRear }) {
           />
         </div>
       )}
-
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-start gap-2">
-          <ShieldCheck className="w-4 h-4 text-[#F39C12] mt-0.5" />
-          <div>
-            <Label className="text-white">Rear Chevron / Safety Stripes</Label>
-            <p className="text-white/40 text-xs mt-0.5">Reflective stripes for commercial fleets</p>
-          </div>
-        </div>
-        <Switch
-          checked={rear.rear_chevron}
-          onCheckedChange={(v) => update("rear_chevron", v)}
-        />
-      </div>
 
       <p className="text-white/40 text-xs">
         Company logo, phone number, and social icons from your details above will be displayed on the tailgate.
