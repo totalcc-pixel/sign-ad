@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
@@ -430,13 +430,23 @@ export default function MyDesign() {
                 All 4 Views
               </h3>
               {hasAnyMockup && !generating && (
-                <button
-                  type="button"
-                  onClick={() => setSummaryOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-medium hover:bg-white/20 transition-colors">
-                  <LayoutGrid className="w-3.5 h-3.5" />
-                  Summary &amp; Export
-                </button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={Object.values(mockups).filter(Boolean)[0]}
+                    download
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F39C12] text-black text-xs font-bold hover:bg-[#ffb84d] transition-colors"
+                  >
+                    <DownloadCloud className="w-3.5 h-3.5" />
+                    Download All
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setSummaryOpen(true)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-medium hover:bg-white/20 transition-colors">
+                    <LayoutGrid className="w-3.5 h-3.5" />
+                    Summary &amp; Export
+                  </button>
+                </div>
               )}
             </div>
 
@@ -464,6 +474,15 @@ export default function MyDesign() {
                     >
                       <Image src={mockups[v]} alt={viewLabels[v]} className="w-full aspect-[4/3] object-cover" fittingType="fill" />
                       <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">{viewLabels[v]}</div>
+                      <a
+                        href={mockups[v]}
+                        download
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-lg bg-black/70 text-white hover:bg-[#F39C12] hover:text-black transition-colors"
+                        aria-label={`Download ${viewLabels[v]}`}
+                      >
+                        <Download className="w-4 h-4" />
+                      </a>
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <ZoomIn className="w-6 h-6 text-white" />
                       </div>
