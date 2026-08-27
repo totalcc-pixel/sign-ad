@@ -62,10 +62,10 @@ function buildPrompt(view, form, rear) {
       viewPrompt = ` Photorealistic 3D render, RIGHT SIDE VIEW showing the full right side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
       break;
     case "front":
-      viewPrompt = ` Photorealistic 3D render, FRONT VIEW showing the front grille, headlights, and hood wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      viewPrompt = ` Photorealistic 3D render, STRICTLY FRONT VIEW ONLY — camera positioned directly in front of the vehicle, head-on straight angle. Show ONLY the front fascia: front grille, headlights, front bumper, hood/bonnet, and front windscreen. Do NOT show any side panels, side doors, rear, or any other angle. The entire image must be the front of the vehicle filling the frame, centered and symmetrical. High quality, sharp details, professional commercial vehicle graphics.`;
       break;
     case "rear":
-      viewPrompt = ` Photorealistic 3D render, REAR VIEW showing the rear window, tailgate/boot door, and rear bumper area. Display company name "${form.company_name}" and phone number on the tailgate.`;
+      viewPrompt = ` Photorealistic 3D render, STRICTLY REAR VIEW ONLY — camera positioned directly behind the vehicle, head-on straight rear angle. Show ONLY the exact rear end: rear window, tailgate/boot door, rear bumper, taillights, and rear license plate area. Do NOT show any side panels, side doors, front, or any other angle. The entire image must be the complete rear of the vehicle filling the frame, centered and symmetrical. Display company name "${form.company_name}" and phone number on the tailgate.`;
       if (rear.rear_window_perforated) {
         viewPrompt += ` Apply one-way vision perforated vinyl film on the rear window${rear.rear_window_graphics ? ` with text: "${rear.rear_window_graphics}"` : ""}.`;
       }
