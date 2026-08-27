@@ -29,7 +29,7 @@ export default function Navbar() {
           <div className="relative">
             <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
           alt="AD Vehicle Graphics logo"
-          className="relative h-[64px] w-[64px] lg:h-[176px] lg:w-[176px] rounded-md"
+          className="relative h-[96px] w-[96px] lg:h-[264px] lg:w-[264px] rounded-md"
           fittingType="fit" />
           </div>
         </Link>
