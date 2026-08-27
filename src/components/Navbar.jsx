@@ -24,7 +24,7 @@ export default function Navbar() {
       <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#F39C12] to-transparent opacity-70" />
       <div className="absolute top-0 inset-x-0 h-[40px] bg-gradient-to-b from-[#F39C12]/8 to-transparent pointer-events-none" />
 
-      <nav className="max-w-7xl mx-auto px-4 lg:px-8 pt-3 pb-4 flex flex-col gap-3">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-8 pt-1 pb-3 flex flex-col gap-2">
        <div className="flex items-center justify-between h-20 lg:h-40">
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="relative">
