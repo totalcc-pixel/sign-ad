@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Image as ImageIcon, FileText } from "lucide-react";
+import { Image as ImageIcon, FileText, Download } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import jsPDF from "jspdf";
 
@@ -102,7 +102,17 @@ export default function DesignSummary({ open, onClose, form, rear, mockups }) {
             )}
             {generatedViews.map(([view, url]) => (
               <div key={view} className="rounded-xl overflow-hidden border border-white/10">
-                <div className="bg-black/40 px-3 py-2 text-white/70 text-xs font-medium">{viewLabels[view]}</div>
+                <div className="bg-black/40 px-3 py-2 text-white/70 text-xs font-medium flex items-center justify-between">
+                  <span>{viewLabels[view]}</span>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[#F39C12] hover:underline"
+                  >
+                    <Download className="w-3.5 h-3.5" /> Open
+                  </a>
+                </div>
                 <Image src={url} alt={viewLabels[view]} className="w-full" fittingType="fit" />
               </div>
             ))}
