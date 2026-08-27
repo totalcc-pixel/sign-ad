@@ -34,6 +34,7 @@ export default function DesignSummary({ open, onClose, form, rear, mockups }) {
       doc.text(`Vehicle: ${form.vehicle_type || "—"}`, 20, y); y += 7;
       doc.text(`Color: ${form.vehicle_color || "—"}`, 20, y); y += 7;
       doc.text(`Year: ${form.vehicle_year || "—"}`, 20, y); y += 7;
+      doc.text(`Wrap Coverage: ${form.wrap_type || "Full Wrap"}`, 20, y); y += 7;
       if (form.design_style) { doc.text(`Style: ${form.design_style}`, 20, y); y += 7; }
 
       y += 4;
@@ -78,6 +79,11 @@ export default function DesignSummary({ open, onClose, form, rear, mockups }) {
             <div><span className="text-white/50">Phone:</span> <span className="text-white">{form.phone || "—"}</span></div>
             <div><span className="text-white/50">Vehicle:</span> <span className="text-white">{form.vehicle_type || "—"}</span></div>
             <div><span className="text-white/50">Color:</span> <span className="text-white">{form.vehicle_color || "—"}</span></div>
+          </div>
+
+          <div className="bg-black/30 rounded-xl p-4 space-y-2 text-sm">
+            <h4 className="text-white font-semibold">Wrap Coverage</h4>
+            <div className="flex justify-between"><span className="text-white/50">Package:</span><span className="text-[#F39C12] font-medium">{form.wrap_type || "Full Wrap"}</span></div>
           </div>
 
           <div className="bg-black/30 rounded-xl p-4 space-y-2 text-sm">

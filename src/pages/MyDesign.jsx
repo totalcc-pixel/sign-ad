@@ -41,11 +41,11 @@ function buildPrompt(view, form, rear) {
   const wrapType = form.wrap_type || "Full Wrap";
   let wrapCoverageInstruction = "";
   if (wrapType === "Full Wrap") {
-    wrapCoverageInstruction = ` WRAP COVERAGE: Full vehicle wrap — apply vinyl wrap graphics covering the ENTIRE vehicle body including all side panels, doors, hood, roof, tailgate, and rear quarter panels. Complete full-body coverage with the company branding, colors, and design extending across every exterior panel except the bumpers and license plates.`;
+    wrapCoverageInstruction = ` WRAP COVERAGE: Full vehicle wrap — 100% full coverage, complete color change and full branding across the ENTIRE vehicle body including all side panels, doors, hood/bonnet, roof, tailgate, and rear quarter panels. Vibrant full-coverage graphics with the company branding, colors, and design extending across every exterior panel except the bumpers and license plates.`;
   } else if (wrapType === "Half Wrap") {
-    wrapCoverageInstruction = ` WRAP COVERAGE: Half vehicle wrap — apply vinyl wrap graphics covering only the LOWER HALF of the vehicle body (from the door line downward) and partial coverage on the rear quarter panel. The upper half (roof, upper doors, windows area) remains the original factory paint color. Branding and graphics are concentrated on the lower body panels and doors only.`;
+    wrapCoverageInstruction = ` WRAP COVERAGE: Half / partial wrap — 50-60% coverage. Keep the FRONT HALF of the vehicle (hood/bonnet, front doors, front fenders) in its original factory paint color. Apply design graphics and branding ONLY to the REAR HALF of the vehicle: rear doors, rear quarter panels, tailgate/boot door, and rear window area. The transition between factory paint and wrapped section should be clean and professional.`;
   } else {
-    wrapCoverageInstruction = ` WRAP COVERAGE: Simple / minimal wrap — apply only small logo decals and brief contact text on the front doors and rear tailgate. Keep most of the vehicle body in its original factory paint color. Minimal graphics: just the company logo on each front door and basic contact information on the tailgate. Do NOT wrap the entire body or apply full-panel graphics.`;
+    wrapCoverageInstruction = ` WRAP COVERAGE: Simple signage / spot decals — keep the vehicle body completely clean in its original factory paint color. Apply ONLY clean cut-vinyl logos and text: company logo on each front door, a small logo on the bonnet/hood, and phone number / website text on the rear tailgate only. Do NOT wrap any panels or apply full-panel graphics. Minimal, professional spot decals only.`;
   }
 
   const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Do NOT add any road sign, traffic sign, warning sign, directional sign, or signboard-style graphics on or near the rear bumper. NEVER add any red and white chevron hazard tape, safety striped tape, or diagonal striped band across the tailgate or rear bumper area. Do NOT add any reflective safety stripes or hazard warning bands. Negative prompt constraint: no graphics on bumpers, no decals on license plates, no road signs on rear bumper, no traffic signs, no signboard graphics on bumper, no red and white chevron tape, no safety stripes, no hazard warning bands, clean factory bumpers, standard untouched number plates.`;
@@ -387,28 +387,30 @@ export default function MyDesign() {
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">Wrap Type</Label>
-              <div className="grid grid-cols-3 gap-2">
-                {["Full Wrap", "Half Wrap", "Simple"].map((type) => (
+              <Label className="text-white mb-1.5 block">Wrap Coverage / Package</Label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {[
+                  { value: "Full Wrap", title: "Full Wrap", desc: "100% full coverage — complete color change & full branding across all panels" },
+                  { value: "Half Wrap", title: "Half / Partial Wrap", desc: "50-60% coverage — rear half + tailgate/rear window branding, front stays factory paint" },
+                  { value: "Simple", title: "Simple Signage", desc: "Spot decals — logo on front doors, bonnet logo, phone/website text on rear only" },
+                ].map((opt) => (
                   <button
-                    key={type}
+                    key={opt.value}
                     type="button"
-                    onClick={() => setForm({ ...form, wrap_type: type })}
-                    className={`px-3 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
-                      (form.wrap_type || "Full Wrap") === type
-                        ? "bg-[#F39C12] text-black border-[#F39C12]"
-                        : "bg-black/40 text-white/70 border-white/10 hover:bg-white/10"
+                    onClick={() => setForm({ ...form, wrap_type: opt.value })}
+                    className={`text-left px-3 py-2.5 rounded-lg border transition-colors ${
+                      (form.wrap_type || "Full Wrap") === opt.value
+                        ? "bg-[#F39C12]/15 border-[#F39C12]"
+                        : "bg-black/40 border-white/10 hover:bg-white/10"
                     }`}
                   >
-                    {type}
+                    <div className={`text-sm font-bold ${(form.wrap_type || "Full Wrap") === opt.value ? "text-[#F39C12]" : "text-white"}`}>
+                      {opt.title}
+                    </div>
+                    <div className="text-white/50 text-xs mt-1 leading-snug">{opt.desc}</div>
                   </button>
                 ))}
               </div>
-              <p className="text-white/40 text-xs mt-1.5">
-                {(form.wrap_type === "Half Wrap") && "Graphics cover the lower half of the vehicle body."}
-                {(form.wrap_type === "Simple") && "Minimal logos and contact info on doors and tailgate only."}
-                {(!form.wrap_type || form.wrap_type === "Full Wrap") && "Full-body coverage across all exterior panels."}
-              </p>
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Company Logo</Label>

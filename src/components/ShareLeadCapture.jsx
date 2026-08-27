@@ -34,7 +34,7 @@ export default function ShareLeadCapture({ mockups, form }) {
         phone: lead.phone,
         email: lead.email,
         service_type: "Full Vehicle Wrap",
-        message: `Quote request from My Design page.\nLocation/Suburb: ${lead.location}\nCompany: ${form.company_name || "—"}\nVehicle: ${form.vehicle_type || "—"} (${form.vehicle_year || "—"})\n\nDesign Mockup Links:\n${mockupLinks}`,
+        message: `Quote request from My Design page.\nLocation/Suburb: ${lead.location}\nCompany: ${form.company_name || "—"}\nVehicle: ${form.vehicle_type || "—"} (${form.vehicle_year || "—"})\nWrap Coverage: ${form.wrap_type || "Full Wrap"}\n\nDesign Mockup Links:\n${mockupLinks}`,
       });
       try {
         await base44.integrations.Core.SendEmail({
@@ -46,7 +46,8 @@ export default function ShareLeadCapture({ mockups, form }) {
             <strong>Email:</strong> ${lead.email}<br>
             <strong>Suburb/Location:</strong> ${lead.location || "—"}<br>
             <strong>Company:</strong> ${form.company_name || "—"}<br>
-            <strong>Vehicle:</strong> ${form.vehicle_type || "—"} (${form.vehicle_year || "—"})<br><br>
+            <strong>Vehicle:</strong> ${form.vehicle_type || "—"} (${form.vehicle_year || "—"})<br>
+            <strong>Wrap Coverage:</strong> ${form.wrap_type || "Full Wrap"}<br><br>
             <strong>Design Mockup Links:</strong><br>
             ${mockupUrls.map(([v, url]) => `<a href="${url}" target="_blank">${v}</a>`).join("<br>")}`,
         });
