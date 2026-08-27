@@ -8,7 +8,7 @@
     "phone": {
       "type": "string"
     },
-    "address": {
+    "website": {
       "type": "string"
     },
     "logo_url": {

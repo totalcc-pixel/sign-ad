@@ -34,7 +34,7 @@ function buildPrompt(view, form, rear) {
   const vehicleType = form.vehicle_type || "commercial van";
   const vehicleColor = form.vehicle_color || "white";
   const vehicleYear = form.vehicle_year || "";
-  const baseInfo = `Professional vehicle wrap design for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. Company name: "${form.company_name}". ${form.phone ? `Phone: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""}`;
+  const baseInfo = `Professional vehicle wrap design for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. Company name: "${form.company_name}". ${form.phone ? `Phone: ${form.phone}.` : ""} ${form.website ? `Website/Facebook: ${form.website}.` : ""}`;
   const logoInstruction = form.logo_url ? ` IMPORTANT: Incorporate the uploaded company logo as the central branding element on the vehicle. Use the logo's exact design, colors, and text.` : "";
   const styleInstruction = form.design_style?.trim() ? ` Design style: ${form.design_style}.` : "";
 
@@ -95,7 +95,7 @@ export default function MyDesign() {
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
-    address: "",
+    website: "",
     logo_url: "",
     reference_file_url: "",
     mockup_url: "",
@@ -134,7 +134,7 @@ export default function MyDesign() {
         setForm({
           company_name: p.company_name || "",
           phone: p.phone || "",
-          address: p.address || "",
+          website: p.website || "",
           logo_url: p.logo_url || "",
           reference_file_url: p.reference_file_url || "",
           mockup_url: p.mockup_url || "",
@@ -263,7 +263,7 @@ export default function MyDesign() {
             <strong>Company Name:</strong> ${form.company_name}<br>
             <strong>Member Email:</strong> ${user?.email || "—"}<br>
             <strong>Phone:</strong> ${form.phone || "—"}<br>
-            <strong>Address:</strong> ${form.address || "—"}<br>
+            <strong>Website/Facebook:</strong> ${form.website || "—"}<br>
             <strong>Vehicle Type:</strong> ${form.vehicle_type || "—"}<br>
             <strong>Vehicle Color:</strong> ${form.vehicle_color || "—"}<br>
             <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
@@ -379,11 +379,11 @@ export default function MyDesign() {
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">Address</Label>
-              <Textarea
-                value={form.address}
-                onChange={(e) => setForm({ ...form, address: e.target.value })}
-                placeholder="e.g. Auckland, New Zealand"
+              <Label className="text-white mb-1.5 block">Website / Facebook Page</Label>
+              <Input
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                placeholder="e.g. www.yourcompany.co.nz or facebook.com/yourpage"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
             </div>
             <div className="border-t border-white/10 pt-5">
