@@ -16,7 +16,7 @@ export default function SeoDashboard() {
       const end = new Date();
       const start = new Date(Date.now() - rangeDays * 24 * 60 * 60 * 1000);
       const res = await base44.functions.invoke("seoDashboard", {
-        siteUrl: "sc-domain:wrap-pro-vision.base44.app",
+        siteUrl: "sc-domain:signad.co.nz",
         startDate: start.toISOString().slice(0, 10),
         endDate: end.toISOString().slice(0, 10)
       });

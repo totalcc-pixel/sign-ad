@@ -8,7 +8,7 @@ export default async function(req) {
     if (user.role !== 'admin') return Response.json({ error: 'Forbidden' }, { status: 403 });
 
     const body = await req.json().catch(() => ({}));
-    const siteUrl = body.siteUrl || 'sc-domain:wrap-pro-vision.base44.app';
+    const siteUrl = body.siteUrl || 'sc-domain:signad.co.nz';
     const startDate = body.startDate || new Date(Date.now() - 28 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const endDate = body.endDate || new Date().toISOString().slice(0, 10);
 
