@@ -1,0 +1,44 @@
+{
+  "name": "Wrap Material Research Daily",
+  "description": "\ub9e4\uc77c \uc624\uc804 9\uc2dc(NZT) \ucc28\ub7c9 \ub7a9\ud551 \ube44\ub2d0 \uc2e0\uc81c\ud488\uc744 \uc628\ub77c\uc778\uc5d0\uc11c \uac80\uc0c9\ud574 \uad00\ub9ac\uc790 \uc774\uba54\uc77c\ub85c \uc694\uc57d \ub9ac\ud3ec\ud2b8\ub97c \ubc1c\uc1a1\ud569\ub2c8\ub2e4.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 9 * * *",
+      "one_time_date": null,
+      "timezone": "Pacific/Auckland",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "wrap_material_research_daily",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "research": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "wrapMaterialResearch"
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "\ub7a9\ud551 \uc7ac\ub8cc \ub9ac\uc11c\uce58",
+            "description": "\uc2e0\uc81c\ud488 \uac80\uc0c9 \ud6c4 \uc774\uba54\uc77c \ubc1c\uc1a1"
+          }
+        }
+      }
+    ]
+  }
+}
