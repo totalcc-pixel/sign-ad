@@ -27,7 +27,6 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 lg:px-8 h-24 lg:h-48 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="relative">
-            <div className="absolute inset-0 rounded-md bg-[#F39C12]/15 blur-lg group-hover:bg-[#F39C12]/25 transition-all" />
             <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
           alt="AD Vehicle Graphics logo"
           className="relative h-[64px] w-[64px] lg:h-[176px] lg:w-[176px] rounded-md"
