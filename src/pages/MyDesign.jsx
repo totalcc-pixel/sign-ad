@@ -39,6 +39,8 @@ function buildPrompt(view, form, rear) {
 
   const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Negative prompt constraint: no graphics on bumpers, no decals on license plates, clean factory bumpers, standard untouched number plates.`;
 
+  const symmetryRule = (view === "left" || view === "right") ? ` SYMMETRY & BRANDING CONSISTENCY: This side view must share the exact same branding layout, color palette, graphic proportions, and design structure as the opposite side view. Logos, contact details, typography, and wrap patterns must match in relative position, scale, and visual balance on both driver and passenger sides. All text, phone numbers, website URLs, and company logos must be properly oriented and horizontally legible — do NOT mirror or invert readable text.` : "";
+
   let viewPrompt = "";
   switch (view) {
     case "right":
@@ -60,7 +62,7 @@ function buildPrompt(view, form, rear) {
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
-  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}${exclusionRules}`;
+  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
 }
 
 export default function MyDesign() {
