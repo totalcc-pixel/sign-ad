@@ -68,9 +68,9 @@ export default function MyDesign() {
     try {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setForm((f) => ({ ...f, logo_url: file_url }));
-      toast({ title: "로고 업로드 완료", description: "회사 로고가 업로드되었습니다." });
+      toast({ title: "Logo Uploaded", description: "Your company logo has been uploaded." });
     } catch (e) {
-      toast({ title: "업로드 실패", description: "로고 업로드 중 오류가 발생했습니다.", variant: "destructive" });
+      toast({ title: "Upload Failed", description: "An error occurred while uploading the logo.", variant: "destructive" });
     } finally {
       setUploadingLogo(false);
     }
@@ -79,7 +79,7 @@ export default function MyDesign() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.company_name.trim()) {
-      toast({ title: "회사명 필요", description: "회사명을 입력해주세요.", variant: "destructive" });
+      toast({ title: "Company Name Required", description: "Please enter your company name.", variant: "destructive" });
       return;
     }
     setGenerating(true);
@@ -117,23 +117,23 @@ export default function MyDesign() {
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
-          subject: `새 디자인 시안 요청 - ${form.company_name}`,
-          body: `회원이 새로운 차량 랩 시안을 생성했습니다.<br><br>
-            <strong>회사명:</strong> ${form.company_name}<br>
-            <strong>회원 이메일:</strong> ${user?.email || "—"}<br>
-            <strong>전화번호:</strong> ${form.phone || "—"}<br>
-            <strong>주소:</strong> ${form.address || "—"}<br>
-            <strong>차량 종류:</strong> ${form.vehicle_type || "—"}<br>
-            <strong>차량 색상:</strong> ${form.vehicle_color || "—"}<br>
-            <strong>연식:</strong> ${form.vehicle_year || "—"}<br>
-            <strong>원하는 디자인:</strong> ${form.design_style || "—"}<br><br>
-            <a href="${mockupUrl}" target="_blank">생성된 시안 보기</a>`
+          subject: `New Design Mockup Request - ${form.company_name}`,
+          body: `A member has generated a new vehicle wrap mockup.<br><br>
+            <strong>Company Name:</strong> ${form.company_name}<br>
+            <strong>Member Email:</strong> ${user?.email || "—"}<br>
+            <strong>Phone:</strong> ${form.phone || "—"}<br>
+            <strong>Address:</strong> ${form.address || "—"}<br>
+            <strong>Vehicle Type:</strong> ${form.vehicle_type || "—"}<br>
+            <strong>Vehicle Color:</strong> ${form.vehicle_color || "—"}<br>
+            <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
+            <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
+            <a href="${mockupUrl}" target="_blank">View Generated Mockup</a>`
         });
       } catch (_) {}
-      toast({ title: "시안 생성 완료", description: "차량 랩 목업이 생성되었습니다." });
+      toast({ title: "Mockup Generated", description: "Your vehicle wrap mockup has been created." });
     } catch (e) {
       console.error(e);
-      toast({ title: "생성 실패", description: "시안 생성 중 오류가 발생했습니다.", variant: "destructive" });
+      toast({ title: "Generation Failed", description: "An error occurred while generating the mockup.", variant: "destructive" });
     } finally {
       setGenerating(false);
     }
@@ -144,20 +144,20 @@ export default function MyDesign() {
       <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
         <div className="text-center">
           <Car className="w-16 h-16 text-[#F39C12] mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-white mb-2">회원 전용 서비스</h2>
-          <p className="text-white/60 mb-6">시안 생성 서비스는 로그인 후 이용할 수 있습니다.</p>
+          <h2 className="text-2xl font-bold text-white mb-2">Members Only</h2>
+          <p className="text-white/60 mb-6">Please log in to use the design mockup tool.</p>
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => navigateToLogin()}
               className="px-6 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
               
-              로그인
+              Login
             </button>
             <a
               href="/register"
               className="px-6 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
               
-              회원가입
+              Sign Up
             </a>
           </div>
         </div>
@@ -210,75 +210,75 @@ export default function MyDesign() {
 
         <div className="text-center mb-10">
           <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white mb-3">
-            나만의 차량 랩 시안
-          </h1>
-          <p className="text-white/60 max-w-2xl mx-auto">
-            회사 정보를 입력하면 AI가 맞춤형 차량 랩 목업을 생성해드립니다.
-          </p>
+            Create Your Vehicle Wrap Mockup
+            </h1>
+            <p className="text-white/60 max-w-2xl mx-auto">
+             Enter your company details and our AI will generate a custom vehicle wrap mockup for you.
+            </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Form */}
           <form onSubmit={handleSave} className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-5">
             <div>
-              <Label className="text-white mb-1.5 block">회사명 *</Label>
+              <Label className="text-white mb-1.5 block">Company Name *</Label>
               <Input
                 value={form.company_name}
                 onChange={(e) => setForm({ ...form, company_name: e.target.value })}
-                placeholder="예: ABC 무역"
+                placeholder="e.g. ABC Trading"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">전화번호</Label>
+              <Label className="text-white mb-1.5 block">Phone Number</Label>
               <Input
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                placeholder="예: 09-123-4567"
+                placeholder="e.g. 09-123-4567"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">주소</Label>
+              <Label className="text-white mb-1.5 block">Address</Label>
               <Textarea
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
-                placeholder="예: Auckland, New Zealand"
+                placeholder="e.g. Auckland, New Zealand"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div className="border-t border-white/10 pt-5">
-              <h3 className="text-white font-semibold mb-3 text-sm">차량 정보</h3>
+              <h3 className="text-white font-semibold mb-3 text-sm">Vehicle Details</h3>
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">차량 종류</Label>
+              <Label className="text-white mb-1.5 block">Vehicle Type</Label>
               <Input
                 value={form.vehicle_type}
                 onChange={(e) => setForm({ ...form, vehicle_type: e.target.value })}
-                placeholder="예: 밴, 세단, 트럭, SUV"
+                placeholder="e.g. Van, Sedan, Truck, SUV"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">차량 색상</Label>
+              <Label className="text-white mb-1.5 block">Vehicle Color</Label>
               <Input
                 value={form.vehicle_color}
                 onChange={(e) => setForm({ ...form, vehicle_color: e.target.value })}
-                placeholder="예: 흰색, 검정색, 은색"
+                placeholder="e.g. White, Black, Silver"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">연식</Label>
+              <Label className="text-white mb-1.5 block">Vehicle Year</Label>
               <Input
                 value={form.vehicle_year}
                 onChange={(e) => setForm({ ...form, vehicle_year: e.target.value })}
-                placeholder="예: 2023"
+                placeholder="e.g. 2023"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
               
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">회사 로고</Label>
+              <Label className="text-white mb-1.5 block">Company Logo</Label>
               <div className="flex items-center gap-3">
                 {form.logo_url ?
                 <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
@@ -292,18 +292,18 @@ export default function MyDesign() {
                 <label className="cursor-pointer">
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors">
                     {uploadingLogo ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-                    {uploadingLogo ? "업로드 중..." : "로고 업로드"}
+                    {uploadingLogo ? "Uploading..." : "Upload Logo"}
                   </span>
                   <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
                 </label>
               </div>
             </div>
             <div>
-              <Label className="text-white mb-1.5 block">원하는 디자인 형식</Label>
+              <Label className="text-white mb-1.5 block">Design Style</Label>
               <Textarea
                 value={form.design_style}
                 onChange={(e) => setForm({ ...form, design_style: e.target.value })}
-                placeholder="예: 심플하고 모던한 스타일, 블랙 앤 오렌지 컬러, 기하학적 패턴, 레트로 감성, 미니멀 텍스트 중심 등"
+                placeholder="e.g. Clean and modern style, black and orange colour, geometric patterns, retro vibe, minimal text-focused, etc."
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]" />
               
             </div>
@@ -315,12 +315,12 @@ export default function MyDesign() {
               {generating ?
               <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  시안 생성 중...
-                </> :
+                  Generating...
+                  </> :
 
-              <>
+                  <>
                   <Car className="w-4 h-4 mr-2" />
-                  차량 랩 시안 생성
+                  Generate Mockup
                 </>
               }
             </Button>
@@ -330,17 +330,17 @@ export default function MyDesign() {
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-[#F39C12]" />
-              생성된 시안
+               Generated Mockup
             </h3>
             {generating ?
             <div className="flex-1 flex flex-col items-center justify-center min-h-[300px]">
                 <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
-                <p className="text-white/60 text-sm">AI가 차량 랩 시안을 생성하고 있습니다...</p>
+                <p className="text-white/60 text-sm">AI is generating your vehicle wrap mockup...</p>
               </div> :
             generatedMockup ?
             <div className="flex-1">
                 <div className="rounded-xl overflow-hidden border border-white/10">
-                  <Image src={generatedMockup} alt="차량 랩 목업" className="w-full" fittingType="fit" />
+                  <Image src={generatedMockup} alt="Vehicle wrap mockup" className="w-full" fittingType="fit" />
                 </div>
                 <a
                 href={generatedMockup}
@@ -348,14 +348,14 @@ export default function MyDesign() {
                 className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline">
                 
                   <Upload className="w-4 h-4" />
-                  이미지 다운로드
+                  Download Image
                 </a>
               </div> :
 
             <div className="flex-1 flex flex-col items-center justify-center min-h-[300px] text-center">
                 <Car className="w-16 h-16 text-white/20 mb-3" />
-                <p className="text-white/40">회사 정보를 입력하고 시안 생성 버튼을 누르면</p>
-                <p className="text-white/40">맞춤형 차량 랩 목업이 여기에 표시됩니다.</p>
+                <p className="text-white/40">Enter your company details and click "Generate Mockup"</p>
+                <p className="text-white/40">to see your custom vehicle wrap mockup here.</p>
               </div>
             }
           </div>
