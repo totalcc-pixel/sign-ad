@@ -10,8 +10,85 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>Signad | Premium Vehicle Graphics Since 2004</title>
+
+    <!-- ===== LocalBusiness Schema (Local SEO) ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Signad Vehicle Graphics & Signage",
+      "image": "https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif",
+      "description": "Premium vehicle wraps, fleet graphics, building signs, and digital large format printing. Auckland-based since 2004.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Auckland",
+        "addressCountry": "NZ"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Auckland"
+      },
+      "telephone": ["027-4320-180", "021-0296-4174"],
+      "knowsAbout": [
+        "Vehicle Wraps",
+        "Fleet Graphics",
+        "Building Signs",
+        "Digital Large Format Printing"
+      ],
+      "openingHours": "Mo-Fr 08:00-17:00",
+      "url": "https://wrap-pro-vision.base44.app"
+    }
+    </script>
+
+    <!-- ===== Google Tag Manager (replace GTM-XXXXXX with your ID) ===== -->
+    <!--
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
+    -->
+
+    <!-- ===== Google Ads Conversion Tracking (replace AW-XXXXXXXXX with your ID) ===== -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-XXXXXXXXX');
+    </script>
+    -->
+
+    <!-- ===== Meta (Facebook) Pixel (replace YOUR_PIXEL_ID with your ID) ===== -->
+    <!--
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    -->
   </head>
   <body>
+    <!-- GTM noscript (uncomment with your GTM ID) -->
+    <!--
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    -->
+
+    <!-- Meta Pixel noscript (uncomment with your Pixel ID) -->
+    <!--
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+    -->
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

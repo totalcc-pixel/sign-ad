@@ -12,6 +12,7 @@ import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
 import RearDesignControls from "@/components/design/RearDesignControls";
 import DesignSummary from "@/components/design/DesignSummary";
+import ShareLeadCapture from "@/components/ShareLeadCapture";
 
 const VIEWS = ["left", "right", "front", "rear"];
 
@@ -495,6 +496,13 @@ export default function MyDesign() {
             )}
           </div>
         </div>
+
+        {/* Share & Lead Capture — shown after mockups are generated */}
+        {hasAnyMockup && !generating && (
+          <div className="lg:col-span-2">
+            <ShareLeadCapture mockups={mockups} form={form} />
+          </div>
+        )}
       </div>
 
       {/* Zoom Modal */}
