@@ -34,14 +34,14 @@ export default function Footer() {
           <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
           <div className="space-y-4 text-sm">
             <div>
-              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Jason <span className="text-[#F39C12] font-normal normal-case tracking-normal">. Shop </span></p>
+              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Jason <span className="text-[#F39C12] font-normal normal-case tracking-normal">. Shop Signage </span></p>
               <ul className="space-y-1.5 mt-1.5">
                 <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 027-4320-180</li>
                 <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> totalcc@gmail.com</li>
               </ul>
             </div>
             <div>
-              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Vincent <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Vehicle Graphic</span></p>
+              <p className="text-white text-xs font-semibold tracking-[0.15em] uppercase">Vincent <span className="text-[#F39C12] font-normal normal-case tracking-normal">· Vehicle Graphics</span></p>
               <ul className="space-y-1.5 mt-1.5">
                 <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#F39C12]" /> 021 0296 4174</li>
                 <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#F39C12]" /> vincentsignad@gmail.com</li>
