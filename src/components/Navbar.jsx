@@ -34,16 +34,18 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <ul className="hidden md:flex items-center gap-1 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-[#F39C12]/20 backdrop-blur-md shadow-[0_0_24px_rgba(243,156,18,0.1),0_8px_32px_rgba(0,0,0,0.4)] opacity-100">
-          <div className="absolute pointer-events-none inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#F39C12]/40 to-transparent rounded-full" />
+        <ul className="group hidden md:flex items-center gap-1 flex-1 justify-center px-3 py-1.5 rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] border border-[#F39C12]/30 backdrop-blur-md shadow-[0_0_24px_rgba(243,156,18,0.15),0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(243,156,18,0.15)] opacity-100 relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_36px_rgba(243,156,18,0.25),0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(243,156,18,0.2)]">
+          <div className="absolute pointer-events-none inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#F39C12]/60 to-transparent rounded-full" />
+          <div className="absolute pointer-events-none inset-0 rounded-full bg-gradient-to-r from-[#F39C12]/0 via-[#F39C12]/5 to-[#F39C12]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute pointer-events-none -left-1/4 -top-2 w-1/2 h-full bg-[#F39C12]/10 blur-xl rounded-full group-hover:translate-x-[300%] transition-transform duration-[1200ms] ease-in-out" />
           {links.map((l) =>
           <li key={l.label}>
               <Link
               to={l.path}
-              className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all ${
+              className={`block px-4 py-1.5 rounded-full font-medium whitespace-nowrap text-base transition-all duration-300 ${
               pathname === l.path ?
-              "text-[#F39C12] border border-[#F39C12]/60 bg-[#F39C12]/10 shadow-[0_0_12px_rgba(243,156,18,0.3)]" :
-              "text-white border border-transparent hover:text-[#F39C12] hover:bg-white/5 hover:shadow-[0_0_8px_rgba(243,156,18,0.15)]"}`
+              "text-[#F39C12] border border-[#F39C12]/60 bg-[#F39C12]/10 shadow-[0_0_16px_rgba(243,156,18,0.35)]" :
+              "text-white border border-transparent hover:text-[#F39C12] hover:bg-gradient-to-b hover:from-[#F39C12]/15 hover:to-transparent hover:border-[#F39C12]/30 hover:shadow-[0_0_12px_rgba(243,156,18,0.25)]"}`
               }>
               
                 {l.label}
