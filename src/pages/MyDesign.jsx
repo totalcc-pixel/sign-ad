@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud, Paperclip, X } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
 import RearDesignControls from "@/components/design/RearDesignControls";
@@ -83,7 +83,7 @@ function buildPrompt(view, form, rear) {
 
 export default function MyDesign() {
   const { user, isAuthenticated, logout, navigateToLogin } = useAuth();
-  const { toast } = useToast();
+
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
@@ -173,9 +173,8 @@ export default function MyDesign() {
     try {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setForm((f) => ({ ...f, logo_url: file_url }));
-      toast({ title: "Logo Uploaded", description: "Your company logo has been uploaded." });
     } catch (e) {
-      toast({ title: "Upload Failed", description: "An error occurred while uploading the logo.", variant: "destructive" });
+      console.error(e);
     } finally {
       setUploadingLogo(false);
     }
@@ -188,9 +187,8 @@ export default function MyDesign() {
     try {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setForm((f) => ({ ...f, reference_file_url: file_url }));
-      toast({ title: "Reference File Uploaded", description: "Your reference file has been uploaded." });
     } catch (e) {
-      toast({ title: "Upload Failed", description: "An error occurred while uploading the reference file.", variant: "destructive" });
+      console.error(e);
     } finally {
       setUploadingReference(false);
     }
@@ -203,7 +201,6 @@ export default function MyDesign() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.company_name.trim()) {
-      toast({ title: "Company Name Required", description: "Please enter your company name.", variant: "destructive" });
       return;
     }
     setGenerating(true);
@@ -275,10 +272,8 @@ export default function MyDesign() {
             ${mockupLinks}`
         });
       } catch (_) {}
-      toast({ title: "All Views Generated", description: "4 vehicle wrap mockups have been created." });
     } catch (e) {
       console.error(e);
-      toast({ title: "Generation Failed", description: "An error occurred while generating the mockups.", variant: "destructive" });
     } finally {
       setGenerating(false);
       setProgress(0);
