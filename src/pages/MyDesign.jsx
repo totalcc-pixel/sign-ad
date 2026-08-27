@@ -440,7 +440,7 @@ export default function MyDesign() {
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Company Logo</Label>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 {form.logo_url ?
                 <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
                     <Image src={form.logo_url} alt="Logo" className="w-full h-full object-contain" fittingType="fit" />
@@ -456,17 +456,11 @@ export default function MyDesign() {
                   </span>
                   <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
                 </label>
-              </div>
-            </div>
-            <div>
-              <Label className="text-white mb-1.5 block">Reference File <span className="text-white/40 text-xs font-normal">(optional)</span></Label>
-              <p className="text-white/40 text-xs mb-2">Upload a design reference, sketch, or inspiration image for the AI to consider.</p>
-              {form.reference_file_url ? (
-                <div className="flex items-center gap-3">
-                  <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5 relative group">
-                    <Image src={form.reference_file_url} alt="Reference" className="w-full h-full object-contain" fittingType="fit" />
-                  </div>
+                {form.reference_file_url ? (
                   <div className="flex items-center gap-2">
+                    <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
+                      <Image src={form.reference_file_url} alt="Reference" className="w-full h-full object-contain" fittingType="fit" />
+                    </div>
                     <a
                       href={form.reference_file_url}
                       target="_blank"
@@ -484,16 +478,16 @@ export default function MyDesign() {
                       <X className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
-              ) : (
-                <label className="cursor-pointer">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors">
-                    {uploadingReference ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
-                    {uploadingReference ? "Uploading..." : "Upload Reference File"}
-                  </span>
-                  <input type="file" accept="image/*" className="hidden" onChange={handleReferenceUpload} />
-                </label>
-              )}
+                ) : (
+                  <label className="cursor-pointer">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+                      {uploadingReference ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
+                      {uploadingReference ? "Uploading..." : "Upload Reference File"}
+                    </span>
+                    <input type="file" accept="image/*" className="hidden" onChange={handleReferenceUpload} />
+                  </label>
+                )}
+              </div>
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Design Style</Label>
