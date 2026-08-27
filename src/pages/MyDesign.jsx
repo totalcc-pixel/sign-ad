@@ -5,26 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
-import ViewSelector from "@/components/design/ViewSelector";
 import RearDesignControls from "@/components/design/RearDesignControls";
 import DesignSummary from "@/components/design/DesignSummary";
 
+const VIEWS = ["left", "right", "front", "rear"];
+
 const viewLabels = {
-  side: "Side View",
+  left: "Left Side",
+  right: "Right Side",
   front: "Front View",
   rear: "Rear View",
-  "3d": "3D View",
 };
 
 const mockupFieldMap = {
-  side: "mockup_url",
+  left: "mockup_url",
+  right: "right_mockup_url",
   front: "front_mockup_url",
   rear: "rear_mockup_url",
-  "3d": "three_d_mockup_url",
 };
 
 function buildPrompt(view, form, rear) {
@@ -37,6 +39,9 @@ function buildPrompt(view, form, rear) {
 
   let viewPrompt = "";
   switch (view) {
+    case "right":
+      viewPrompt = ` Photorealistic 3D render, RIGHT SIDE VIEW showing the full right side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      break;
     case "front":
       viewPrompt = ` Photorealistic 3D render, FRONT VIEW showing the front grille, headlights, and hood wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
       break;
@@ -50,11 +55,8 @@ function buildPrompt(view, form, rear) {
       }
       viewPrompt += ` High quality, sharp details, professional commercial vehicle graphics.`;
       break;
-    case "3d":
-      viewPrompt = ` Photorealistic 3D render, 3/4 FRONT PERSPECTIVE VIEW showing the complete wrap design from an angled view. High quality, sharp details, professional commercial vehicle graphics.`;
-      break;
     default:
-      viewPrompt = ` Photorealistic 3D render, SIDE VIEW showing the full side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
   return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}`;
 }
@@ -65,18 +67,19 @@ export default function MyDesign() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [uploadingLogo, setUploadingLogo] = useState(false);
-  const [activeView, setActiveView] = useState("side");
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [zoomImage, setZoomImage] = useState(null);
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
     address: "",
     logo_url: "",
     mockup_url: "",
+    right_mockup_url: "",
     front_mockup_url: "",
     rear_mockup_url: "",
-    three_d_mockup_url: "",
     vehicle_type: "",
     vehicle_color: "",
     vehicle_year: "",
@@ -88,10 +91,10 @@ export default function MyDesign() {
     rear_chevron: false,
   });
   const [mockups, setMockups] = useState({
-    side: null,
+    left: null,
+    right: null,
     front: null,
     rear: null,
-    "3d": null,
   });
 
   useEffect(() => {
@@ -111,9 +114,9 @@ export default function MyDesign() {
           address: p.address || "",
           logo_url: p.logo_url || "",
           mockup_url: p.mockup_url || "",
+          right_mockup_url: p.right_mockup_url || "",
           front_mockup_url: p.front_mockup_url || "",
           rear_mockup_url: p.rear_mockup_url || "",
-          three_d_mockup_url: p.three_d_mockup_url || "",
           vehicle_type: p.vehicle_type || "",
           vehicle_color: p.vehicle_color || "",
           vehicle_year: p.vehicle_year || "",
@@ -125,10 +128,10 @@ export default function MyDesign() {
           rear_chevron: p.rear_chevron || false,
         });
         setMockups({
-          side: p.mockup_url || null,
+          left: p.mockup_url || null,
+          right: p.right_mockup_url || null,
           front: p.front_mockup_url || null,
           rear: p.rear_mockup_url || null,
-          "3d": p.three_d_mockup_url || null,
         });
       }
     } catch (e) {
@@ -159,18 +162,29 @@ export default function MyDesign() {
       toast({ title: "Company Name Required", description: "Please enter your company name.", variant: "destructive" });
       return;
     }
-    const view = activeView;
     setGenerating(true);
+    setProgress(0);
     try {
-      const prompt = buildPrompt(view, form, rear);
-      const result = await base44.integrations.Core.GenerateImage({
-        prompt,
-        ...(form.logo_url ? { existing_image_urls: [form.logo_url] } : {})
-      });
+      const newMockups = { ...mockups };
 
-      const mockupUrl = result.url;
-      const mockupField = mockupFieldMap[view];
-      const data = { ...form, ...rear, [mockupField]: mockupUrl };
+      await Promise.all(VIEWS.map(async (view) => {
+        const prompt = buildPrompt(view, form, rear);
+        const result = await base44.integrations.Core.GenerateImage({
+          prompt,
+          ...(form.logo_url ? { existing_image_urls: [form.logo_url] } : {})
+        });
+        newMockups[view] = result.url;
+        setProgress((p) => p + 1);
+      }));
+
+      const data = {
+        ...form,
+        ...rear,
+        mockup_url: newMockups.left,
+        right_mockup_url: newMockups.right,
+        front_mockup_url: newMockups.front,
+        rear_mockup_url: newMockups.rear,
+      };
 
       if (profile) {
         const updated = await base44.entities.CompanyProfile.update(profile.id, data);
@@ -179,11 +193,16 @@ export default function MyDesign() {
         const created = await base44.entities.CompanyProfile.create(data);
         setProfile(created);
       }
-      setForm((f) => ({ ...f, [mockupField]: mockupUrl }));
-      const updatedMockups = { ...mockups, [view]: mockupUrl };
-      setMockups(updatedMockups);
+      setForm((f) => ({
+        ...f,
+        mockup_url: newMockups.left,
+        right_mockup_url: newMockups.right,
+        front_mockup_url: newMockups.front,
+        rear_mockup_url: newMockups.rear,
+      }));
+      setMockups(newMockups);
 
-      const generatedViews = Object.entries(updatedMockups).filter(([, url]) => url);
+      const generatedViews = Object.entries(newMockups).filter(([, url]) => url);
       const mockupLinks = generatedViews.map(([v, url]) => `<a href="${url}" target="_blank">${viewLabels[v]}</a>`).join("<br>");
       const rearConfig = [
         `<strong>One-Way Vision Film:</strong> ${rear.rear_window_perforated ? "Yes" : "No"}`,
@@ -194,8 +213,8 @@ export default function MyDesign() {
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
-          subject: `New Design Mockup - ${viewLabels[view]} - ${form.company_name}`,
-          body: `A member has generated a vehicle wrap mockup.<br><br>
+          subject: `New Design Mockup - All 4 Views - ${form.company_name}`,
+          body: `A member has generated all 4 vehicle wrap mockup views.<br><br>
             <strong>Company Name:</strong> ${form.company_name}<br>
             <strong>Member Email:</strong> ${user?.email || "—"}<br>
             <strong>Phone:</strong> ${form.phone || "—"}<br>
@@ -210,12 +229,13 @@ export default function MyDesign() {
             ${mockupLinks}`
         });
       } catch (_) {}
-      toast({ title: "Mockup Generated", description: `${viewLabels[view]} mockup has been created.` });
+      toast({ title: "All Views Generated", description: "4 vehicle wrap mockups have been created." });
     } catch (e) {
       console.error(e);
-      toast({ title: "Generation Failed", description: "An error occurred while generating the mockup.", variant: "destructive" });
+      toast({ title: "Generation Failed", description: "An error occurred while generating the mockups.", variant: "destructive" });
     } finally {
       setGenerating(false);
+      setProgress(0);
     }
   };
 
@@ -249,7 +269,6 @@ export default function MyDesign() {
       </div>);
   }
 
-  const activeMockup = mockups[activeView];
   const hasAnyMockup = Object.values(mockups).some(Boolean);
 
   return (
@@ -290,7 +309,7 @@ export default function MyDesign() {
             Create Your Vehicle Wrap Mockup
           </h1>
           <p className="text-white/60 max-w-2xl mx-auto">
-            Enter your company details and our AI will generate a custom vehicle wrap mockup for you.
+            Enter your company details and our AI will generate all 4 vehicle wrap views at once.
           </p>
         </div>
 
@@ -377,10 +396,8 @@ export default function MyDesign() {
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]" />
             </div>
 
-            {/* Rear View Design Controls (shown when rear view is active) */}
-            {activeView === "rear" && (
-              <RearDesignControls rear={rear} setRear={setRear} />
-            )}
+            {/* Rear View Design Controls */}
+            <RearDesignControls rear={rear} setRear={setRear} />
 
             <Button
               type="submit"
@@ -389,66 +406,112 @@ export default function MyDesign() {
               {generating ?
               <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating...
+                  Generating... ({progress}/4)
                 </> :
               <>
                   <Car className="w-4 h-4 mr-2" />
-                  Generate {viewLabels[activeView]}
+                  🚗 Generate All 4 Views (Front, Rear, Left &amp; Right)
                 </>
               }
             </Button>
           </form>
 
-          {/* Mockup Preview */}
+          {/* Mockup Preview — 2x2 Grid */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-white font-semibold flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-[#F39C12]" />
-                {viewLabels[activeView]}
+                All 4 Views
               </h3>
-              {hasAnyMockup && (
+              {hasAnyMockup && !generating && (
                 <button
                   type="button"
                   onClick={() => setSummaryOpen(true)}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-medium hover:bg-white/20 transition-colors">
                   <LayoutGrid className="w-3.5 h-3.5" />
-                  Summary
+                  Summary &amp; Export
                 </button>
               )}
             </div>
 
-            {/* View Selector */}
-            <ViewSelector activeView={activeView} onChange={setActiveView} />
-
-            <div className="mt-4 flex-1">
-              {generating ?
-              <div className="flex flex-col items-center justify-center min-h-[300px]">
-                  <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
-                  <p className="text-white/60 text-sm">AI is generating your {viewLabels[activeView].toLowerCase()}...</p>
-                </div> :
-              activeMockup ?
-              <div>
-                  <div className="rounded-xl overflow-hidden border border-white/10">
-                    <Image src={activeMockup} alt={`${viewLabels[activeView]} mockup`} className="w-full" fittingType="fit" />
+            {generating ? (
+              <div className="grid grid-cols-2 gap-3">
+                {VIEWS.map((v, i) => (
+                  <div key={v} className="aspect-[4/3] rounded-lg bg-black/40 border border-white/10 flex flex-col items-center justify-center">
+                    {progress > i ? (
+                      <Check className="w-8 h-8 text-green-500 mb-2" />
+                    ) : (
+                      <Loader2 className="w-8 h-8 text-[#F39C12] animate-spin mb-2" />
+                    )}
+                    <p className="text-white/50 text-xs">{viewLabels[v]}</p>
                   </div>
-                  <a
-                  href={activeMockup}
-                  download
-                  className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline">
-                    <Upload className="w-4 h-4" />
-                    Download Image
-                  </a>
-                </div> :
+                ))}
+              </div>
+            ) : hasAnyMockup ? (
+              <div className="grid grid-cols-2 gap-3">
+                {VIEWS.map((v) => (
+                  mockups[v] ? (
+                    <div
+                      key={v}
+                      className="relative group cursor-pointer rounded-lg overflow-hidden border border-white/10"
+                      onClick={() => setZoomImage({ url: mockups[v], title: viewLabels[v] })}
+                    >
+                      <Image src={mockups[v]} alt={viewLabels[v]} className="w-full aspect-[4/3] object-cover" fittingType="fill" />
+                      <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">{viewLabels[v]}</div>
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <ZoomIn className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={v} className="aspect-[4/3] rounded-lg bg-black/40 border border-white/10 flex items-center justify-center">
+                      <ImageIcon className="w-8 h-8 text-white/10" />
+                    </div>
+                  )
+                ))}
+              </div>
+            ) : (
               <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
-                  <Car className="w-16 h-16 text-white/20 mb-3" />
-                  <p className="text-white/40">Select a view and click "Generate {viewLabels[activeView]}"</p>
-                  <p className="text-white/40">to see your custom vehicle wrap mockup here.</p>
+                <Car className="w-16 h-16 text-white/20 mb-3" />
+                <p className="text-white/40">Enter your details and click</p>
+                <p className="text-white/40">"Generate All 4 Views" to see your mockups here.</p>
+              </div>
+            )}
+
+            {/* Progress bar during generation */}
+            {generating && (
+              <div className="mt-4">
+                <div className="w-full bg-black/40 rounded-full h-2 overflow-hidden">
+                  <div
+                    className="bg-[#F39C12] h-full rounded-full transition-all duration-500"
+                    style={{ width: `${(progress / 4) * 100}%` }}
+                  />
                 </div>
-              }
-            </div>
+                <p className="text-white/50 text-xs text-center mt-2">Generating {progress} of 4 views...</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Zoom Modal */}
+      <Dialog open={!!zoomImage} onOpenChange={(v) => !v && setZoomImage(null)}>
+        <DialogContent className="max-w-5xl bg-[#121623] border-white/10">
+          <DialogTitle className="text-white">{zoomImage?.title}</DialogTitle>
+          {zoomImage && (
+            <div className="space-y-3">
+              <Image src={zoomImage.url} alt={zoomImage.title} className="w-full rounded-lg" fittingType="fit" />
+              <a
+                href={zoomImage.url}
+                download
+                className="inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline"
+              >
+                <Download className="w-4 h-4" />
+                Download Image
+              </a>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <DesignSummary
         open={summaryOpen}

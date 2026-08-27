@@ -6,10 +6,10 @@ import { Image } from "@/components/ui/image";
 import jsPDF from "jspdf";
 
 const viewLabels = {
-  side: "Side View",
+  left: "Left Side",
+  right: "Right Side",
   front: "Front View",
   rear: "Rear View",
-  "3d": "3D View",
 };
 
 export default function DesignSummary({ open, onClose, form, rear, mockups }) {

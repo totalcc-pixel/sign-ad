@@ -17,13 +17,13 @@
     "mockup_url": {
       "type": "string"
     },
+    "right_mockup_url": {
+      "type": "string"
+    },
     "front_mockup_url": {
       "type": "string"
     },
     "rear_mockup_url": {
-      "type": "string"
-    },
-    "three_d_mockup_url": {
       "type": "string"
     },
     "vehicle_type": {
