@@ -73,7 +73,7 @@ export default function CategoryPortfolio({ category }) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-6">
-                    <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
+                    <a href="https://www.azisglobal.com/" target="_blank" rel="noopener noreferrer" className="font-display text-lg font-bold text-white hover:text-[#F39C12] transition-colors block">{p.title}</a>
                     {p.description && (
                       <p className="text-white/60 text-sm mt-1.5 line-clamp-2">{p.description}</p>
                     )}
