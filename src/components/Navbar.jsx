@@ -88,6 +88,13 @@ export default function Navbar() {
                 <span className="text-white/80 text-sm font-medium max-w-[180px] truncate">
                   {user.email}
                 </span>
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin/seo"
+                    className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-white/10 border border-[#F39C12]/30 text-white font-medium text-xs hover:bg-[#F39C12]/20 transition-all">
+                    SEO
+                  </Link>
+                )}
                 <button
                 onClick={() => logout()}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">

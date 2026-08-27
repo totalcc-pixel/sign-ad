@@ -19,6 +19,7 @@ import Login from '@/pages/Login';
 import MyDesign from '@/pages/MyDesign';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import SeoDashboard from '@/pages/SeoDashboard';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -70,6 +71,7 @@ const AuthenticatedApp = () => {
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/my-design" element={<MyDesign />} />
           <Route path="/admin" element={<AdminPortfolio />} />
+          <Route path="/admin/seo" element={<SeoDashboard />} />
         </Route>
       </Route>
       <Route path="/register" element={<Register />} />
