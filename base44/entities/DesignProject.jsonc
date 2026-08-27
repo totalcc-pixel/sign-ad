@@ -1,0 +1,119 @@
+{
+  "name": "DesignProject",
+  "type": "object",
+  "properties": {
+    "business_name": {
+      "type": "string"
+    },
+    "business_type": {
+      "type": "string"
+    },
+    "vehicle_make": {
+      "type": "string"
+    },
+    "vehicle_model": {
+      "type": "string"
+    },
+    "vehicle_year": {
+      "type": "string"
+    },
+    "vehicle_color": {
+      "type": "string"
+    },
+    "logo_url": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "main_services": {
+      "type": "string"
+    },
+    "preferred_colors": {
+      "type": "string"
+    },
+    "coverage_level": {
+      "type": "string",
+      "enum": [
+        "Simple",
+        "Partial",
+        "Full Wrap"
+      ],
+      "default": "Full Wrap"
+    },
+    "driver_photo_url": {
+      "type": "string"
+    },
+    "passenger_photo_url": {
+      "type": "string"
+    },
+    "rear_photo_url": {
+      "type": "string"
+    },
+    "design_rule_sheet": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_review",
+        "approved",
+        "revision_requested"
+      ],
+      "default": "pending_review"
+    },
+    "approved_direction": {
+      "type": "string",
+      "enum": [
+        "Simple",
+        "Partial",
+        "Full Wrap"
+      ]
+    }
+  },
+  "required": [
+    "business_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        }
+      ]
+    }
+  }
+}

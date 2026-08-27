@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import ReactMarkdown from "react-markdown";
-import { Send, Loader2, ImagePlus } from "lucide-react";
+import { Send, Loader2, ImagePlus, FolderOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/lib/AuthContext";
 
 const AGENT_NAME = "Vehicle Graphics Design Director";
@@ -119,11 +120,20 @@ export default function DesignDirector() {
     <div className="min-h-[calc(100vh-80px)] flex flex-col bg-black text-white">
       {/* Header */}
       <div className="border-b border-white/10 px-4 py-4 bg-gradient-to-r from-[#1a1a1a] to-black">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-xl font-bold text-[#F39C12]">Vehicle Graphics Design Director</h1>
-          <p className="text-sm text-white/60 mt-0.5">
-            Prepare professional design rules before your vehicle wrap mockup.
-          </p>
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-[#F39C12]">Vehicle Graphics Design Director</h1>
+            <p className="text-sm text-white/60 mt-0.5">
+              Prepare professional design rules before your vehicle wrap mockup.
+            </p>
+          </div>
+          <Link
+            to="/design-projects"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-[#F39C12]/20 hover:border-[#F39C12]/40 transition-all flex-shrink-0"
+          >
+            <FolderOpen className="w-4 h-4" />
+            <span className="hidden sm:inline">My Projects</span>
+          </Link>
         </div>
       </div>
 
