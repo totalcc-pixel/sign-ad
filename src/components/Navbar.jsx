@@ -24,7 +24,8 @@ export default function Navbar() {
       <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#F39C12] to-transparent opacity-70" />
       <div className="absolute top-0 inset-x-0 h-[40px] bg-gradient-to-b from-[#F39C12]/8 to-transparent pointer-events-none" />
 
-      <nav className="max-w-7xl mx-auto px-4 lg:px-8 h-24 lg:h-48 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-8 pt-3 pb-4 flex flex-col gap-3">
+       <div className="flex items-center justify-between h-20 lg:h-40">
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="relative">
             <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
@@ -47,21 +48,26 @@ export default function Navbar() {
               "text-[#F39C12] border border-[#F39C12]/60 bg-[#F39C12]/10 shadow-[0_0_16px_rgba(243,156,18,0.35)]" :
               "text-white border border-transparent hover:text-[#F39C12] hover:bg-gradient-to-b hover:from-[#F39C12]/15 hover:to-transparent hover:border-[#F39C12]/30 hover:shadow-[0_0_12px_rgba(243,156,18,0.25)]"}`
               }>
-              
+
                 {l.label}
               </Link>
             </li>
           )}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
+        <button onClick={() => setOpen(!open)} className="md:hidden text-white p-2" aria-label="Menu">
+          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+       </div>
+
+        <div className="hidden md:flex items-center justify-end gap-3">
           <a
             href="https://www.facebook.com/signad04nz/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
             className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-[#F39C12]/30 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.4)] transition-all">
-            
+
             <Facebook className="w-5 h-5" />
           </a>
           <a
@@ -70,7 +76,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             aria-label="Google Maps"
             className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-[#F39C12]/30 hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] hover:shadow-[0_0_12px_rgba(243,156,18,0.4)] transition-all">
-            
+
             <GoogleIcon className="w-5 h-5" />
           </a>
           <div className="flex flex-col items-end">
@@ -81,9 +87,9 @@ export default function Navbar() {
                   {user.email}
                 </span>
                 <button
-                  onClick={() => logout()}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
-                
+                onClick={() => logout()}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
+
                   <LogOut className="w-4 h-4" />
                   Logout
                 </button>
@@ -93,16 +99,12 @@ export default function Navbar() {
             <Link
               to="/register"
               className="px-5 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
-            
+
                 Sign Up
               </Link>
             }
           </div>
         </div>
-
-        <button onClick={() => setOpen(!open)} className="md:hidden text-white p-2" aria-label="Menu">
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </nav>
 
       {open &&
