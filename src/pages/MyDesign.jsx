@@ -38,6 +38,16 @@ function buildPrompt(view, form, rear) {
   const logoInstruction = form.logo_url ? ` IMPORTANT: Incorporate the uploaded company logo as the central branding element on the vehicle. Use the logo's exact design, colors, and text.` : "";
   const styleInstruction = form.design_style?.trim() ? ` Design style: ${form.design_style}.` : "";
 
+  const wrapType = form.wrap_type || "Full Wrap";
+  let wrapCoverageInstruction = "";
+  if (wrapType === "Full Wrap") {
+    wrapCoverageInstruction = ` WRAP COVERAGE: Full vehicle wrap — apply vinyl wrap graphics covering the ENTIRE vehicle body including all side panels, doors, hood, roof, tailgate, and rear quarter panels. Complete full-body coverage with the company branding, colors, and design extending across every exterior panel except the bumpers and license plates.`;
+  } else if (wrapType === "Half Wrap") {
+    wrapCoverageInstruction = ` WRAP COVERAGE: Half vehicle wrap — apply vinyl wrap graphics covering only the LOWER HALF of the vehicle body (from the door line downward) and partial coverage on the rear quarter panel. The upper half (roof, upper doors, windows area) remains the original factory paint color. Branding and graphics are concentrated on the lower body panels and doors only.`;
+  } else {
+    wrapCoverageInstruction = ` WRAP COVERAGE: Simple / minimal wrap — apply only small logo decals and brief contact text on the front doors and rear tailgate. Keep most of the vehicle body in its original factory paint color. Minimal graphics: just the company logo on each front door and basic contact information on the tailgate. Do NOT wrap the entire body or apply full-panel graphics.`;
+  }
+
   const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Do NOT add any road sign, traffic sign, warning sign, directional sign, or signboard-style graphics on or near the rear bumper. NEVER add any red and white chevron hazard tape, safety striped tape, or diagonal striped band across the tailgate or rear bumper area. Do NOT add any reflective safety stripes or hazard warning bands. Negative prompt constraint: no graphics on bumpers, no decals on license plates, no road signs on rear bumper, no traffic signs, no signboard graphics on bumper, no red and white chevron tape, no safety stripes, no hazard warning bands, clean factory bumpers, standard untouched number plates.`;
 
   const symmetryRule = (view === "left" || view === "right") ? ` SYMMETRY & BRANDING CONSISTENCY: This side view must share the exact same branding layout, color palette, graphic proportions, and design structure as the opposite side view. Logos, contact details, typography, and wrap patterns must match in relative position, scale, and visual balance on both driver and passenger sides. All text, phone numbers, website URLs, and company logos must be properly oriented and horizontally legible — do NOT mirror or invert readable text.` : "";
@@ -64,7 +74,7 @@ function buildPrompt(view, form, rear) {
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
-  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
+  return `${baseInfo}${logoInstruction}${styleInstruction}${wrapCoverageInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
 }
 
 export default function MyDesign() {
@@ -89,7 +99,8 @@ export default function MyDesign() {
     vehicle_type: "",
     vehicle_color: "",
     vehicle_year: "",
-    design_style: ""
+    design_style: "",
+    wrap_type: "Full Wrap"
   });
   const [rear, setRear] = useState({
     rear_window_graphics: "",
@@ -126,7 +137,8 @@ export default function MyDesign() {
           vehicle_type: p.vehicle_type || "",
           vehicle_color: p.vehicle_color || "",
           vehicle_year: p.vehicle_year || "",
-          design_style: p.design_style || ""
+          design_style: p.design_style || "",
+          wrap_type: p.wrap_type || "Full Wrap"
         });
         setRear({
           rear_window_graphics: p.rear_window_graphics || "",
@@ -228,6 +240,7 @@ export default function MyDesign() {
             <strong>Vehicle Type:</strong> ${form.vehicle_type || "—"}<br>
             <strong>Vehicle Color:</strong> ${form.vehicle_color || "—"}<br>
             <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
+            <strong>Wrap Type:</strong> ${form.wrap_type || "Full Wrap"}<br>
             <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
             <strong>Rear View Configuration:</strong><br>
             ${rearConfig}<br><br>
@@ -372,6 +385,30 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, vehicle_year: e.target.value })}
                 placeholder="e.g. 2023"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
+            </div>
+            <div>
+              <Label className="text-white mb-1.5 block">Wrap Type</Label>
+              <div className="grid grid-cols-3 gap-2">
+                {["Full Wrap", "Half Wrap", "Simple"].map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setForm({ ...form, wrap_type: type })}
+                    className={`px-3 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
+                      (form.wrap_type || "Full Wrap") === type
+                        ? "bg-[#F39C12] text-black border-[#F39C12]"
+                        : "bg-black/40 text-white/70 border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+              <p className="text-white/40 text-xs mt-1.5">
+                {(form.wrap_type === "Half Wrap") && "Graphics cover the lower half of the vehicle body."}
+                {(form.wrap_type === "Simple") && "Minimal logos and contact info on doors and tailgate only."}
+                {(!form.wrap_type || form.wrap_type === "Full Wrap") && "Full-body coverage across all exterior panels."}
+              </p>
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Company Logo</Label>

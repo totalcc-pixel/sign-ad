@@ -38,6 +38,15 @@
     "design_style": {
       "type": "string"
     },
+    "wrap_type": {
+      "type": "string",
+      "enum": [
+        "Full Wrap",
+        "Half Wrap",
+        "Simple"
+      ],
+      "default": "Full Wrap"
+    },
     "rear_window_graphics": {
       "type": "string"
     },
