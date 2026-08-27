@@ -476,7 +476,8 @@ export default function MyDesign() {
                 <div className="flex items-center gap-2">
                   <a
                     href={Object.values(mockups).filter(Boolean)[0]}
-                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F39C12] text-black text-xs font-bold hover:bg-[#ffb84d] transition-colors"
                   >
                     <DownloadCloud className="w-3.5 h-3.5" />
@@ -519,7 +520,8 @@ export default function MyDesign() {
                       <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">{viewLabels[v]}</div>
                       <a
                         href={mockups[v]}
-                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-lg bg-black/70 text-white hover:bg-[#F39C12] hover:text-black transition-colors"
                         aria-label={`Download ${viewLabels[v]}`}
