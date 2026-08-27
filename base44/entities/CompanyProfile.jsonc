@@ -17,6 +17,15 @@
     "mockup_url": {
       "type": "string"
     },
+    "front_mockup_url": {
+      "type": "string"
+    },
+    "rear_mockup_url": {
+      "type": "string"
+    },
+    "three_d_mockup_url": {
+      "type": "string"
+    },
     "vehicle_type": {
       "type": "string"
     },
@@ -28,6 +37,17 @@
     },
     "design_style": {
       "type": "string"
+    },
+    "rear_window_graphics": {
+      "type": "string"
+    },
+    "rear_window_perforated": {
+      "type": "boolean",
+      "default": false
+    },
+    "rear_chevron": {
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [

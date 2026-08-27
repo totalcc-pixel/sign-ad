@@ -5,10 +5,59 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LogOut } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
+import ViewSelector from "@/components/design/ViewSelector";
+import RearDesignControls from "@/components/design/RearDesignControls";
+import DesignSummary from "@/components/design/DesignSummary";
+
+const viewLabels = {
+  side: "Side View",
+  front: "Front View",
+  rear: "Rear View",
+  "3d": "3D View",
+};
+
+const mockupFieldMap = {
+  side: "mockup_url",
+  front: "front_mockup_url",
+  rear: "rear_mockup_url",
+  "3d": "three_d_mockup_url",
+};
+
+function buildPrompt(view, form, rear) {
+  const vehicleType = form.vehicle_type || "commercial van";
+  const vehicleColor = form.vehicle_color || "white";
+  const vehicleYear = form.vehicle_year || "";
+  const baseInfo = `Professional vehicle wrap design for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. Company name: "${form.company_name}". ${form.phone ? `Phone: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""}`;
+  const logoInstruction = form.logo_url ? ` IMPORTANT: Incorporate the uploaded company logo as the central branding element on the vehicle. Use the logo's exact design, colors, and text.` : "";
+  const styleInstruction = form.design_style?.trim() ? ` Design style: ${form.design_style}.` : "";
+
+  let viewPrompt = "";
+  switch (view) {
+    case "front":
+      viewPrompt = ` Photorealistic 3D render, FRONT VIEW showing the front grille, headlights, and hood wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+      break;
+    case "rear":
+      viewPrompt = ` Photorealistic 3D render, REAR VIEW showing the rear window, tailgate/boot door, and rear bumper area. Display company name "${form.company_name}" and phone number on the tailgate.`;
+      if (rear.rear_window_perforated) {
+        viewPrompt += ` Apply one-way vision perforated vinyl film on the rear window${rear.rear_window_graphics ? ` with text: "${rear.rear_window_graphics}"` : ""}.`;
+      }
+      if (rear.rear_chevron) {
+        viewPrompt += ` Add red and white rear chevron safety reflective stripes on the lower rear for commercial fleet visibility.`;
+      }
+      viewPrompt += ` High quality, sharp details, professional commercial vehicle graphics.`;
+      break;
+    case "3d":
+      viewPrompt = ` Photorealistic 3D render, 3/4 FRONT PERSPECTIVE VIEW showing the complete wrap design from an angled view. High quality, sharp details, professional commercial vehicle graphics.`;
+      break;
+    default:
+      viewPrompt = ` Photorealistic 3D render, SIDE VIEW showing the full side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
+  }
+  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}`;
+}
 
 export default function MyDesign() {
   const { user, isAuthenticated, logout, navigateToLogin } = useAuth();
@@ -16,18 +65,33 @@ export default function MyDesign() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
-  const [generatedMockup, setGeneratedMockup] = useState(null);
   const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [activeView, setActiveView] = useState("side");
+  const [summaryOpen, setSummaryOpen] = useState(false);
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
     address: "",
     logo_url: "",
     mockup_url: "",
+    front_mockup_url: "",
+    rear_mockup_url: "",
+    three_d_mockup_url: "",
     vehicle_type: "",
     vehicle_color: "",
     vehicle_year: "",
     design_style: ""
+  });
+  const [rear, setRear] = useState({
+    rear_window_graphics: "",
+    rear_window_perforated: false,
+    rear_chevron: false,
+  });
+  const [mockups, setMockups] = useState({
+    side: null,
+    front: null,
+    rear: null,
+    "3d": null,
   });
 
   useEffect(() => {
@@ -47,12 +111,25 @@ export default function MyDesign() {
           address: p.address || "",
           logo_url: p.logo_url || "",
           mockup_url: p.mockup_url || "",
+          front_mockup_url: p.front_mockup_url || "",
+          rear_mockup_url: p.rear_mockup_url || "",
+          three_d_mockup_url: p.three_d_mockup_url || "",
           vehicle_type: p.vehicle_type || "",
           vehicle_color: p.vehicle_color || "",
           vehicle_year: p.vehicle_year || "",
           design_style: p.design_style || ""
         });
-        setGeneratedMockup(p.mockup_url || null);
+        setRear({
+          rear_window_graphics: p.rear_window_graphics || "",
+          rear_window_perforated: p.rear_window_perforated || false,
+          rear_chevron: p.rear_chevron || false,
+        });
+        setMockups({
+          side: p.mockup_url || null,
+          front: p.front_mockup_url || null,
+          rear: p.rear_mockup_url || null,
+          "3d": p.three_d_mockup_url || null,
+        });
       }
     } catch (e) {
       console.error(e);
@@ -82,28 +159,18 @@ export default function MyDesign() {
       toast({ title: "Company Name Required", description: "Please enter your company name.", variant: "destructive" });
       return;
     }
+    const view = activeView;
     setGenerating(true);
     try {
-      // Generate vehicle wrap mockup using AI
-      const vehicleType = form.vehicle_type || "commercial van";
-      const vehicleColor = form.vehicle_color || "white";
-      const vehicleYear = form.vehicle_year || "";
-      const logoInstruction = form.logo_url ?
-      ` IMPORTANT: You must incorporate the uploaded company logo as the central branding element on the vehicle side. Use the logo's exact design, colors, and text. Place the logo prominently and scale it to be clearly visible. The logo is the primary graphic on the wrap.` :
-      "";
-      const designStyle = form.design_style?.trim();
-      const styleInstruction = designStyle ?
-      ` The client requests the following design style: ${designStyle}. Incorporate this style direction into the wrap design, colors, layout, and overall aesthetic.` :
-      "";
-      const prompt = `Professional vehicle wrap design mockup for a ${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}. The vehicle features the company name "${form.company_name}" prominently displayed on the side. ${form.phone ? `Phone number: ${form.phone}.` : ""} ${form.address ? `Address: ${form.address}.` : ""} Modern, clean automotive vinyl wrap design with bold typography and professional branding. Photorealistic 3D render of a ${vehicleColor} ${vehicleType} parked in a clean studio environment, side view showing the full wrap design. High quality, sharp details, professional commercial vehicle graphics.${logoInstruction}${styleInstruction}`;
-
+      const prompt = buildPrompt(view, form, rear);
       const result = await base44.integrations.Core.GenerateImage({
         prompt,
         ...(form.logo_url ? { existing_image_urls: [form.logo_url] } : {})
       });
 
       const mockupUrl = result.url;
-      const data = { ...form, mockup_url: mockupUrl };
+      const mockupField = mockupFieldMap[view];
+      const data = { ...form, ...rear, [mockupField]: mockupUrl };
 
       if (profile) {
         const updated = await base44.entities.CompanyProfile.update(profile.id, data);
@@ -112,13 +179,23 @@ export default function MyDesign() {
         const created = await base44.entities.CompanyProfile.create(data);
         setProfile(created);
       }
-      setForm((f) => ({ ...f, mockup_url: mockupUrl }));
-      setGeneratedMockup(mockupUrl);
+      setForm((f) => ({ ...f, [mockupField]: mockupUrl }));
+      const updatedMockups = { ...mockups, [view]: mockupUrl };
+      setMockups(updatedMockups);
+
+      const generatedViews = Object.entries(updatedMockups).filter(([, url]) => url);
+      const mockupLinks = generatedViews.map(([v, url]) => `<a href="${url}" target="_blank">${viewLabels[v]}</a>`).join("<br>");
+      const rearConfig = [
+        `<strong>One-Way Vision Film:</strong> ${rear.rear_window_perforated ? "Yes" : "No"}`,
+        `<strong>Rear Window Text:</strong> ${rear.rear_window_graphics || "—"}`,
+        `<strong>Rear Chevron Stripes:</strong> ${rear.rear_chevron ? "Yes" : "No"}`,
+      ].join("<br>");
+
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
-          subject: `New Design Mockup Request - ${form.company_name}`,
-          body: `A member has generated a new vehicle wrap mockup.<br><br>
+          subject: `New Design Mockup - ${viewLabels[view]} - ${form.company_name}`,
+          body: `A member has generated a vehicle wrap mockup.<br><br>
             <strong>Company Name:</strong> ${form.company_name}<br>
             <strong>Member Email:</strong> ${user?.email || "—"}<br>
             <strong>Phone:</strong> ${form.phone || "—"}<br>
@@ -127,10 +204,13 @@ export default function MyDesign() {
             <strong>Vehicle Color:</strong> ${form.vehicle_color || "—"}<br>
             <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
             <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
-            <a href="${mockupUrl}" target="_blank">View Generated Mockup</a>`
+            <strong>Rear View Configuration:</strong><br>
+            ${rearConfig}<br><br>
+            <strong>Generated Mockups:</strong><br>
+            ${mockupLinks}`
         });
       } catch (_) {}
-      toast({ title: "Mockup Generated", description: "Your vehicle wrap mockup has been created." });
+      toast({ title: "Mockup Generated", description: `${viewLabels[view]} mockup has been created.` });
     } catch (e) {
       console.error(e);
       toast({ title: "Generation Failed", description: "An error occurred while generating the mockup.", variant: "destructive" });
@@ -150,19 +230,16 @@ export default function MyDesign() {
             <button
               onClick={() => navigateToLogin()}
               className="px-6 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
-              
               Login
             </button>
             <a
               href="/register"
               className="px-6 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] transition-colors">
-              
               Sign Up
             </a>
           </div>
         </div>
       </div>);
-
   }
 
   if (loading) {
@@ -170,8 +247,10 @@ export default function MyDesign() {
       <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
         <Loader2 className="w-8 h-8 text-[#F39C12] animate-spin" />
       </div>);
-
   }
+
+  const activeMockup = mockups[activeView];
+  const hasAnyMockup = Object.values(mockups).some(Boolean);
 
   return (
     <div className="min-h-screen bg-black pt-24 lg:pt-48 pb-16">
@@ -193,7 +272,6 @@ export default function MyDesign() {
               rel="noopener noreferrer"
               aria-label="Facebook"
               className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
-              
               <Facebook className="w-4 h-4" />
             </a>
             <a
@@ -202,7 +280,6 @@ export default function MyDesign() {
               rel="noopener noreferrer"
               aria-label="Google Maps"
               className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-[#F39C12] hover:text-black hover:border-[#F39C12] transition-colors">
-              
               <GoogleIcon className="w-4 h-4" />
             </a>
           </div>
@@ -211,10 +288,10 @@ export default function MyDesign() {
         <div className="text-center mb-10">
           <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white mb-3">
             Create Your Vehicle Wrap Mockup
-            </h1>
-            <p className="text-white/60 max-w-2xl mx-auto">
-             Enter your company details and our AI will generate a custom vehicle wrap mockup for you.
-            </p>
+          </h1>
+          <p className="text-white/60 max-w-2xl mx-auto">
+            Enter your company details and our AI will generate a custom vehicle wrap mockup for you.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -227,7 +304,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, company_name: e.target.value })}
                 placeholder="e.g. ABC Trading"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Phone Number</Label>
@@ -236,7 +312,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder="e.g. 09-123-4567"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Address</Label>
@@ -245,7 +320,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
                 placeholder="e.g. Auckland, New Zealand"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div className="border-t border-white/10 pt-5">
               <h3 className="text-white font-semibold mb-3 text-sm">Vehicle Details</h3>
@@ -257,7 +331,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, vehicle_type: e.target.value })}
                 placeholder="e.g. Van, Sedan, Truck, SUV"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Vehicle Color</Label>
@@ -266,7 +339,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, vehicle_color: e.target.value })}
                 placeholder="e.g. White, Black, Silver"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Vehicle Year</Label>
@@ -275,7 +347,6 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, vehicle_year: e.target.value })}
                 placeholder="e.g. 2023"
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30" />
-              
             </div>
             <div>
               <Label className="text-white mb-1.5 block">Company Logo</Label>
@@ -284,7 +355,6 @@ export default function MyDesign() {
                 <div className="w-20 h-20 rounded-lg overflow-hidden border border-white/10 bg-white/5">
                     <Image src={form.logo_url} alt="Logo" className="w-full h-full object-contain" fittingType="fit" />
                   </div> :
-
                 <div className="w-20 h-20 rounded-lg border border-dashed border-white/20 flex items-center justify-center">
                     <ImageIcon className="w-6 h-6 text-white/30" />
                   </div>
@@ -305,22 +375,25 @@ export default function MyDesign() {
                 onChange={(e) => setForm({ ...form, design_style: e.target.value })}
                 placeholder="e.g. Clean and modern style, black and orange colour, geometric patterns, retro vibe, minimal text-focused, etc."
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]" />
-              
             </div>
+
+            {/* Rear View Design Controls (shown when rear view is active) */}
+            {activeView === "rear" && (
+              <RearDesignControls rear={rear} setRear={setRear} />
+            )}
+
             <Button
               type="submit"
               disabled={generating}
               className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50">
-              
               {generating ?
               <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   Generating...
-                  </> :
-
-                  <>
+                </> :
+              <>
                   <Car className="w-4 h-4 mr-2" />
-                  Generate Mockup
+                  Generate {viewLabels[activeView]}
                 </>
               }
             </Button>
@@ -328,39 +401,61 @@ export default function MyDesign() {
 
           {/* Mockup Preview */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-[#F39C12]" />
-               Generated Mockup
-            </h3>
-            {generating ?
-            <div className="flex-1 flex flex-col items-center justify-center min-h-[300px]">
-                <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
-                <p className="text-white/60 text-sm">AI is generating your vehicle wrap mockup...</p>
-              </div> :
-            generatedMockup ?
-            <div className="flex-1">
-                <div className="rounded-xl overflow-hidden border border-white/10">
-                  <Image src={generatedMockup} alt="Vehicle wrap mockup" className="w-full" fittingType="fit" />
-                </div>
-                <a
-                href={generatedMockup}
-                download
-                className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline">
-                
-                  <Upload className="w-4 h-4" />
-                  Download Image
-                </a>
-              </div> :
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-white font-semibold flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-[#F39C12]" />
+                {viewLabels[activeView]}
+              </h3>
+              {hasAnyMockup && (
+                <button
+                  type="button"
+                  onClick={() => setSummaryOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-medium hover:bg-white/20 transition-colors">
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  Summary
+                </button>
+              )}
+            </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center min-h-[300px] text-center">
-                <Car className="w-16 h-16 text-white/20 mb-3" />
-                <p className="text-white/40">Enter your company details and click "Generate Mockup"</p>
-                <p className="text-white/40">to see your custom vehicle wrap mockup here.</p>
-              </div>
-            }
+            {/* View Selector */}
+            <ViewSelector activeView={activeView} onChange={setActiveView} />
+
+            <div className="mt-4 flex-1">
+              {generating ?
+              <div className="flex flex-col items-center justify-center min-h-[300px]">
+                  <Loader2 className="w-10 h-10 text-[#F39C12] animate-spin mb-3" />
+                  <p className="text-white/60 text-sm">AI is generating your {viewLabels[activeView].toLowerCase()}...</p>
+                </div> :
+              activeMockup ?
+              <div>
+                  <div className="rounded-xl overflow-hidden border border-white/10">
+                    <Image src={activeMockup} alt={`${viewLabels[activeView]} mockup`} className="w-full" fittingType="fit" />
+                  </div>
+                  <a
+                  href={activeMockup}
+                  download
+                  className="mt-4 inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline">
+                    <Upload className="w-4 h-4" />
+                    Download Image
+                  </a>
+                </div> :
+              <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
+                  <Car className="w-16 h-16 text-white/20 mb-3" />
+                  <p className="text-white/40">Select a view and click "Generate {viewLabels[activeView]}"</p>
+                  <p className="text-white/40">to see your custom vehicle wrap mockup here.</p>
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>
-    </div>);
 
+      <DesignSummary
+        open={summaryOpen}
+        onClose={() => setSummaryOpen(false)}
+        form={form}
+        rear={rear}
+        mockups={mockups}
+      />
+    </div>);
 }
