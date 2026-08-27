@@ -30,7 +30,7 @@ export default function CategoryPortfolio({ category }) {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 text-center">
           <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Our Work</span>
           <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-4 inline-block px-8 py-3 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm">
-            {category}
+            {category === "Building Sign" ? "Shop Signage" : category === "Vehicle Graphic" ? "Vehicle Graphics" : category}
           </h1>
           <div className="mt-5">
             <Link
