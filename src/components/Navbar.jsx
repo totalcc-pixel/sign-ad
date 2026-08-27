@@ -60,7 +60,7 @@ export default function Navbar() {
         </button>
        </div>
 
-        <div className="hidden md:flex items-center justify-end gap-3">
+        <div className="hidden md:flex items-center justify-end gap-3 -mt-4 lg:-mt-20">
           <a
             href="https://www.facebook.com/signad04nz/"
             target="_blank"
