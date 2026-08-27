@@ -7,8 +7,8 @@ import { useAuth } from "@/lib/AuthContext";
 
 const links = [
 { label: "Home", path: "/" },
-{ label: "Vehicle Graphic", path: "/portfolio/vehicle-graphics" },
-{ label: "Building Sign", path: "/portfolio/building-signs" },
+{ label: "Vehicle Graphics", path: "/portfolio/vehicle-graphics" },
+{ label: "Building Signage", path: "/portfolio/building-signs" },
 { label: "Services", path: "/#services" },
 { label: "About Car Wrap", path: "/quote" }];
 
@@ -28,9 +28,9 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="relative">
             <Image src="https://media.base44.com/images/public/6a67d1169c557b33993d409b/ca4db7a8d_sign.gif"
-          alt="AD Vehicle Graphics logo"
-          className="relative h-[96px] w-[96px] lg:h-[264px] lg:w-[264px] rounded-md"
-          fittingType="fit" />
+            alt="AD Vehicle Graphics logo"
+            className="relative h-[96px] w-[96px] lg:h-[264px] lg:w-[264px] rounded-md"
+            fittingType="fit" />
           </div>
         </Link>
 
@@ -81,8 +81,8 @@ export default function Navbar() {
                   {user.email}
                 </span>
                 <button
-                onClick={() => logout()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
+                  onClick={() => logout()}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
                 
                   <LogOut className="w-4 h-4" />
                   Logout
@@ -121,7 +121,7 @@ export default function Navbar() {
             </div> :
 
         <div className="mt-1 space-y-2">
-          <button onClick={() => { setOpen(false); navigateToLogin(); }} className="block w-full px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
+          <button onClick={() => {setOpen(false);navigateToLogin();}} className="block w-full px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
             Login
           </button>
           <Link to="/register" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-[#F39C12] text-black font-semibold text-center text-sm">
