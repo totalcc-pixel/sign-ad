@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud, Paperclip, X } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
@@ -13,6 +12,7 @@ import GoogleIcon from "@/components/GoogleIcon";
 import RearDesignControls from "@/components/design/RearDesignControls";
 import DesignSummary from "@/components/design/DesignSummary";
 import ShareLeadCapture from "@/components/ShareLeadCapture";
+import MockupLightbox from "@/components/design/MockupLightbox";
 
 const VIEWS = ["left", "right", "front", "rear"];
 
@@ -567,7 +567,7 @@ export default function MyDesign() {
                     <div
                       key={v}
                       className="relative group cursor-pointer rounded-lg overflow-hidden border border-white/10"
-                      onClick={() => setZoomImage({ url: mockups[v], title: viewLabels[v] })}
+                      onClick={() => setZoomImage({ key: v })}
                     >
                       <Image src={mockups[v]} alt={viewLabels[v]} className="w-full aspect-[4/3] object-cover" fittingType="fill" />
                       <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">{viewLabels[v]}</div>
@@ -623,26 +623,13 @@ export default function MyDesign() {
         )}
       </div>
 
-      {/* Zoom Modal */}
-      <Dialog open={!!zoomImage} onOpenChange={(v) => !v && setZoomImage(null)}>
-        <DialogContent className="max-w-5xl bg-[#121623] border-white/10">
-          <DialogTitle className="text-white">{zoomImage?.title}</DialogTitle>
-          {zoomImage && (
-            <div className="space-y-3">
-              <Image src={zoomImage.url} alt={zoomImage.title} className="w-full rounded-lg" fittingType="fit" />
-              <a
-                href={zoomImage.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#F39C12] text-sm font-medium hover:underline"
-              >
-                <Download className="w-4 h-4" />
-                Download Image
-              </a>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      {/* Lightbox with navigation */}
+      <MockupLightbox
+        views={VIEWS.filter((v) => mockups[v]).map((v) => ({ key: v, label: viewLabels[v], url: mockups[v] }))}
+        currentKey={zoomImage?.key}
+        onClose={() => setZoomImage(null)}
+        onNavigate={(key) => setZoomImage({ key })}
+      />
 
       <DesignSummary
         open={summaryOpen}
