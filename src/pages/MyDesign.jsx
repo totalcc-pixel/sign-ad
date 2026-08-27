@@ -37,6 +37,8 @@ function buildPrompt(view, form, rear) {
   const logoInstruction = form.logo_url ? ` IMPORTANT: Incorporate the uploaded company logo as the central branding element on the vehicle. Use the logo's exact design, colors, and text.` : "";
   const styleInstruction = form.design_style?.trim() ? ` Design style: ${form.design_style}.` : "";
 
+  const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Negative prompt constraint: no graphics on bumpers, no decals on license plates, clean factory bumpers, standard untouched number plates.`;
+
   let viewPrompt = "";
   switch (view) {
     case "right":
@@ -58,7 +60,7 @@ function buildPrompt(view, form, rear) {
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
-  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}`;
+  return `${baseInfo}${logoInstruction}${styleInstruction}${viewPrompt}${exclusionRules}`;
 }
 
 export default function MyDesign() {
