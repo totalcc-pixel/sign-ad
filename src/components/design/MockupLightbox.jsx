@@ -1,6 +1,5 @@
 import React from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Image } from "@/components/ui/image";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 
 export default function MockupLightbox({ views, currentKey, onClose, onNavigate }) {
@@ -28,12 +27,11 @@ export default function MockupLightbox({ views, currentKey, onClose, onNavigate 
         <DialogTitle className="text-white px-6 pt-5 pb-2">{current?.label}</DialogTitle>
         {current && (
           <div className="relative px-6 pb-6">
-            <div className="flex items-center justify-center">
-              <Image
+            <div className="flex items-center justify-center bg-black/30 rounded-lg">
+              <img
                 src={current.url}
                 alt={current.label}
-                className="w-full max-h-[70vh] rounded-lg"
-                fittingType="fit"
+                className="w-full max-h-[70vh] object-contain rounded-lg"
               />
             </div>
 
