@@ -48,6 +48,8 @@ function buildPrompt(view, form, rear) {
     wrapCoverageInstruction = ` WRAP COVERAGE: Simple signage / spot decals — keep the vehicle body completely clean in its original factory paint color. Apply ONLY clean cut-vinyl logos and text: company logo on each front door, a small logo on the bonnet/hood, and phone number / website text on the rear tailgate only. Do NOT wrap any panels or apply full-panel graphics. Minimal, professional spot decals only.`;
   }
 
+  const brandingRule = ` BRANDING RULE: The primary brand is "Signad" / "Signad Vehicle Graphics". Never display template or placeholder names like "WrapPro", "WrapPro Visuals", or similar. Default contact details: Phone 027-4320-180 / 021-0296-4174, Auckland, New Zealand. When no custom company name is provided, use "Signad Vehicle Graphics" as the company name.`;
+
   const exclusionRules = ` CRITICAL EXCLUSION RULES: Keep both the front and rear bumpers completely clean and blank (factory original paint or unpainted plastic). Do not apply any decals, graphics, text, or wrap patterns to the bumpers. Keep all license plates/number plates completely standard, blank, or clean factory style. Never place logos, wrap designs, graphics, or promotional text over or inside the license plate areas. Do NOT add any road sign, traffic sign, warning sign, directional sign, or signboard-style graphics on or near the rear bumper. NEVER add any red and white chevron hazard tape, safety striped tape, or diagonal striped band across the tailgate or rear bumper area. Do NOT add any reflective safety stripes or hazard warning bands. Negative prompt constraint: no graphics on bumpers, no decals on license plates, no road signs on rear bumper, no traffic signs, no signboard graphics on bumper, no red and white chevron tape, no safety stripes, no hazard warning bands, clean factory bumpers, standard untouched number plates.`;
 
   const symmetryRule = (view === "left" || view === "right") ? ` SYMMETRY & BRANDING CONSISTENCY: This side view must share the exact same branding layout, color palette, graphic proportions, and design structure as the opposite side view. Logos, contact details, typography, and wrap patterns must match in relative position, scale, and visual balance on both driver and passenger sides. All text, phone numbers, website URLs, and company logos must be properly oriented and horizontally legible — do NOT mirror or invert readable text.` : "";
@@ -74,7 +76,7 @@ function buildPrompt(view, form, rear) {
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
-  return `${baseInfo}${logoInstruction}${styleInstruction}${wrapCoverageInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
+  return `${baseInfo}${brandingRule}${logoInstruction}${styleInstruction}${wrapCoverageInstruction}${viewPrompt}${symmetryRule}${exclusionRules}`;
 }
 
 export default function MyDesign() {
