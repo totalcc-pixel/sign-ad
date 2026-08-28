@@ -23,6 +23,7 @@ import SeoDashboard from '@/pages/SeoDashboard';
 import DesignDirector from '@/pages/DesignDirector';
 import DesignProjects from '@/pages/DesignProjects';
 import DesignProjectPrint from '@/pages/DesignProjectPrint';
+import StyleAdvisor from '@/pages/StyleAdvisor';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -74,6 +75,7 @@ const AuthenticatedApp = () => {
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/my-design" element={<MyDesign />} />
           <Route path="/design-director" element={<DesignDirector />} />
+          <Route path="/style-advisor" element={<StyleAdvisor />} />
           <Route path="/design-projects" element={<DesignProjects />} />
           <Route path="/design-project/print" element={<DesignProjectPrint />} />
           <Route path="/admin" element={<AdminPortfolio />} />
