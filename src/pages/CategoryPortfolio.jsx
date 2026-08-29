@@ -25,11 +25,11 @@ export default function CategoryPortfolio({ category }) {
   const currentProjects = projects.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
-    <div className="pt-24">
-      <section className="bg-black py-20">
+    <div className="pt-32 lg:pt-56">
+      <section className="bg-black py-16">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 text-center">
           <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Our Work</span>
-          <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-4 inline-block px-8 py-3 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-4">
             {category === "Building Sign" ? "Shop Signage" : category === "Vehicle Graphic" ? "Vehicle Graphics" : category}
           </h1>
           <div className="mt-5">
