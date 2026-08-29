@@ -174,7 +174,7 @@ export default function AdminPortfolio() {
   };
 
   return (
-    <div className="pt-48 pb-20 min-h-screen bg-zinc-50">
+    <div className="pt-32 lg:pt-56 pb-20 min-h-screen bg-zinc-50">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>

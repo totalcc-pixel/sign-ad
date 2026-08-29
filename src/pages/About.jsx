@@ -5,7 +5,7 @@ import { Image } from "@/components/ui/image";
 
 export default function About() {
   return (
-    <div className="bg-black min-h-screen pt-28 lg:pt-44 pb-16">
+    <div className="bg-black min-h-screen pt-32 lg:pt-56 pb-16">
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-5 lg:px-8 text-center">
         <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">About Us</span>

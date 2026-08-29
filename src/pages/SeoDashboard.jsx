@@ -46,7 +46,7 @@ export default function SeoDashboard() {
   })) || [];
 
   return (
-    <div className="min-h-screen bg-black pt-24 lg:pt-48 pb-16">
+    <div className="min-h-screen bg-black pt-32 lg:pt-56 pb-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">

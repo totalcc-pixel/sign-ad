@@ -117,7 +117,7 @@ export default function DesignDirector() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] flex flex-col bg-black text-white">
+    <div className="min-h-[calc(100vh-80px)] flex flex-col bg-black text-white pt-32 lg:pt-56">
       {/* Header */}
       <div className="border-b border-white/10 px-4 py-4 bg-gradient-to-r from-[#1a1a1a] to-black">
         <div className="max-w-3xl mx-auto flex items-center justify-between">

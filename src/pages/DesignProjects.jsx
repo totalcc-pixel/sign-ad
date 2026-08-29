@@ -64,7 +64,7 @@ export default function DesignProjects() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-black text-white py-8 px-4">
+    <div className="min-h-[calc(100vh-80px)] bg-black text-white pt-32 lg:pt-56 pb-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>

@@ -317,7 +317,7 @@ export default function MyDesign() {
   const hasAnyMockup = Object.values(mockups).some(Boolean);
 
   return (
-    <div className="min-h-screen bg-black pt-24 lg:pt-48 pb-16">
+    <div className="min-h-screen bg-black pt-32 lg:pt-56 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         {/* My Design symbol + Social links */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">

@@ -20,7 +20,7 @@ const categories = [
 
 export default function Portfolio() {
   return (
-    <div className="pt-24">
+    <div className="pt-32 lg:pt-56">
       <section className="bg-black py-20">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 text-center">
           <span className="text-[#F39C12] text-sm font-semibold tracking-[0.2em] uppercase">Our Work</span>

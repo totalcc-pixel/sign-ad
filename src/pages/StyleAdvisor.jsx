@@ -114,7 +114,7 @@ export default function StyleAdvisor() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-28 lg:pt-44 pb-24">
+    <div className="min-h-screen bg-black text-white pt-32 lg:pt-56 pb-24">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex items-center gap-3 mb-6">
           <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#F39C12]/15 border border-[#F39C12]/40">
