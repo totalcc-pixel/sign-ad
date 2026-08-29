@@ -286,7 +286,7 @@ export default function MyDesign() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
+      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-32 lg:pt-80">
         <div className="text-center">
           <Car className="w-16 h-16 text-[#F39C12] mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-white mb-2">Members Only</h2>
@@ -309,7 +309,7 @@ export default function MyDesign() {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-24 lg:pt-48">
+      <div className="min-h-[60vh] flex items-center justify-center bg-black pt-32 lg:pt-80">
         <Loader2 className="w-8 h-8 text-[#F39C12] animate-spin" />
       </div>);
   }
@@ -317,7 +317,7 @@ export default function MyDesign() {
   const hasAnyMockup = Object.values(mockups).some(Boolean);
 
   return (
-    <div className="min-h-screen bg-black pt-32 lg:pt-56 pb-16">
+    <div className="min-h-screen bg-black pt-32 lg:pt-80 pb-16">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         {/* My Design symbol + Social links */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
