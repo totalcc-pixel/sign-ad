@@ -24,6 +24,9 @@ import DesignDirector from '@/pages/DesignDirector';
 import DesignProjects from '@/pages/DesignProjects';
 import DesignProjectPrint from '@/pages/DesignProjectPrint';
 import StyleAdvisor from '@/pages/StyleAdvisor';
+import TermsOfUse from '@/pages/TermsOfUse';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import Account from '@/pages/Account';
 // Add page imports here
 
 const LoginRedirect = () => {
@@ -72,6 +75,8 @@ const AuthenticatedApp = () => {
         <Route path="/quote" element={<Quote />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/terms" element={<TermsOfUse />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<LoginRedirect />} />}>
           <Route path="/my-design" element={<MyDesign />} />
           <Route path="/design-director" element={<DesignDirector />} />
@@ -80,6 +85,7 @@ const AuthenticatedApp = () => {
           <Route path="/design-project/print" element={<DesignProjectPrint />} />
           <Route path="/admin" element={<AdminPortfolio />} />
           <Route path="/admin/seo" element={<SeoDashboard />} />
+          <Route path="/account" element={<Account />} />
         </Route>
       </Route>
       <Route path="/register" element={<Register />} />

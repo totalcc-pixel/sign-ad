@@ -87,6 +87,9 @@ export default function Navbar() {
                   {user.email}
                 </span>
 
+                <Link to="/account" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-all">
+                  Account
+                </Link>
                 <button
                 onClick={() => logout()}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#F39C12] text-black font-semibold text-sm hover:bg-[#ffb84d] hover:shadow-[0_0_16px_rgba(243,156,18,0.5)] transition-all">
@@ -132,6 +135,9 @@ export default function Navbar() {
           </Link>
           <Link to="/my-design" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
             My Design
+          </Link>
+          <Link to="/account" onClick={() => setOpen(false)} className="block px-5 py-2.5 rounded-md bg-white/10 border border-white/20 text-white font-semibold text-center text-sm">
+            My Account
           </Link>
         </div>
         }
