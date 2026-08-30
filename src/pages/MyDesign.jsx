@@ -9,7 +9,7 @@ import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palett
 
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
-import RearDesignControls from "@/components/design/RearDesignControls";
+
 import DesignSummary from "@/components/design/DesignSummary";
 import ShareLeadCapture from "@/components/ShareLeadCapture";
 import MockupLightbox from "@/components/design/MockupLightbox";
@@ -30,7 +30,7 @@ const mockupFieldMap = {
   rear: "rear_mockup_url",
 };
 
-function buildPrompt(view, form, rear) {
+function buildPrompt(view, form) {
   const vehicleType = form.vehicle_type || "commercial van";
   const vehicleColor = form.vehicle_color || "white";
   const vehicleYear = form.vehicle_year || "";
@@ -68,15 +68,10 @@ function buildPrompt(view, form, rear) {
       break;
     case "rear":
       viewPrompt = ` Photorealistic 3D render, STRICTLY REAR VIEW ONLY — camera positioned directly behind the vehicle, head-on straight rear angle. Show ONLY the exact rear end: rear window, tailgate/boot door, rear bumper, taillights, and rear license plate area. Do NOT show any side panels, side doors, front, or any other angle. The entire image must be the complete rear of the vehicle filling the frame, centered and symmetrical. Display company name "${form.company_name}" and phone number on the tailgate.`;
-      if (rear.rear_window_perforated) {
-        viewPrompt += ` Apply one-way vision perforated vinyl film on the rear window${rear.rear_window_graphics ? ` with text: "${rear.rear_window_graphics}"` : ""}.`;
-      }
-      if (rear.rear_chevron) {
-        viewPrompt += ` Add red and white rear chevron safety reflective stripes on the lower rear for commercial fleet visibility.`;
-      }
       viewPrompt += ` Do NOT add any red and white chevron hazard tape or safety striped band across the tailgate or rear bumper.`;
       viewPrompt += ` High quality, sharp details, professional commercial vehicle graphics.`;
       break;
+
     default:
       viewPrompt = ` Photorealistic 3D render, LEFT SIDE VIEW showing the full left side panel wrap design. High quality, sharp details, professional commercial vehicle graphics.`;
   }
@@ -112,11 +107,7 @@ export default function MyDesign() {
     design_style: "",
     wrap_type: "Full Wrap"
   });
-  const [rear, setRear] = useState({
-    rear_window_graphics: "",
-    rear_window_perforated: false,
-    rear_chevron: false,
-  });
+
   const [mockups, setMockups] = useState({
     left: null,
     right: null,
@@ -151,11 +142,7 @@ export default function MyDesign() {
           design_style: p.design_style || "",
           wrap_type: p.wrap_type || "Full Wrap"
         });
-        setRear({
-          rear_window_graphics: p.rear_window_graphics || "",
-          rear_window_perforated: p.rear_window_perforated || false,
-          rear_chevron: p.rear_chevron || false,
-        });
+
         setMockups({
           left: p.mockup_url || null,
           right: p.right_mockup_url || null,
@@ -213,7 +200,7 @@ export default function MyDesign() {
       const newMockups = { ...mockups };
 
       await Promise.all(VIEWS.map(async (view) => {
-        const prompt = buildPrompt(view, form, rear);
+        const prompt = buildPrompt(view, form);
         const refImages = [form.logo_url, form.reference_file_url].filter(Boolean);
         const result = await base44.integrations.Core.GenerateImage({
           prompt,
@@ -225,7 +212,6 @@ export default function MyDesign() {
 
       const data = {
         ...form,
-        ...rear,
         mockup_url: newMockups.left,
         right_mockup_url: newMockups.right,
         front_mockup_url: newMockups.front,
@@ -250,12 +236,6 @@ export default function MyDesign() {
 
       const generatedViews = Object.entries(newMockups).filter(([, url]) => url);
       const mockupLinks = generatedViews.map(([v, url]) => `<a href="${url}" target="_blank">${viewLabels[v]}</a>`).join("<br>");
-      const rearConfig = [
-        `<strong>One-Way Vision Film:</strong> ${rear.rear_window_perforated ? "Yes" : "No"}`,
-        `<strong>Rear Window Text:</strong> ${rear.rear_window_graphics || "—"}`,
-        `<strong>Rear Chevron Stripes:</strong> ${rear.rear_chevron ? "Yes" : "No"}`,
-      ].join("<br>");
-
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
@@ -270,8 +250,6 @@ export default function MyDesign() {
             <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
             <strong>Wrap Type:</strong> ${form.wrap_type || "Full Wrap"}<br>
             <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
-            <strong>Rear View Configuration:</strong><br>
-            ${rearConfig}<br><br>
             <strong>Generated Mockups:</strong><br>
             ${mockupLinks}`
         });
@@ -497,9 +475,6 @@ export default function MyDesign() {
                 className="bg-black/40 border-white/10 text-white placeholder:text-white/30 min-h-[100px]" />
             </div>
 
-            {/* Rear View Design Controls */}
-            <RearDesignControls rear={rear} setRear={setRear} />
-
             <Button
               type="submit"
               disabled={generating}
@@ -632,7 +607,6 @@ export default function MyDesign() {
         open={summaryOpen}
         onClose={() => setSummaryOpen(false)}
         form={form}
-        rear={rear}
         mockups={mockups}
       />
     </div>);
