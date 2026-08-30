@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -618,6 +619,28 @@ export default function MyDesign() {
         {hasAnyMockup && !generating && (
           <div className="lg:col-span-2">
             <ShareLeadCapture mockups={mockups} form={form} />
+          </div>
+        )}
+
+        {/* Request Quote from Signad CTA */}
+        {hasAnyMockup && !generating && (
+          <div className="lg:col-span-2 mt-2">
+            <div className="relative overflow-hidden rounded-2xl border-2 border-[#F39C12]/40 bg-gradient-to-r from-[#F39C12]/15 via-[#F39C12]/5 to-transparent p-6 sm:p-8 text-center shadow-[0_0_30px_rgba(243,156,18,0.15)]">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#F39C12] to-transparent opacity-60" />
+              <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white mb-2">
+                이 디자인으로 <span className="text-[#F39C12]">사인에드</span>에게 견적 요청하기
+              </h3>
+              <p className="text-white/60 mb-5 max-w-xl mx-auto text-sm sm:text-base">
+                완성된 4방면 디자인을 바탕으로 전문가에게 견적을 받아보세요. 빠른 상담과 맞춤형 시공 견적을 제공해 드립니다.
+              </p>
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#F39C12] text-black font-bold text-base hover:bg-[#ffb84d] hover:shadow-[0_0_24px_rgba(243,156,18,0.5)] transition-all duration-300"
+              >
+                <Car className="w-5 h-5" />
+                견적 요청하기
+              </Link>
+            </div>
           </div>
         )}
       </div>
