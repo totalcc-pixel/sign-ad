@@ -122,9 +122,9 @@ export default function DesignDirector() {
       <div className="border-b border-white/10 px-4 py-4 bg-gradient-to-r from-[#1a1a1a] to-black">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#F39C12]">Vehicle Graphics Design Director</h1>
+            <h1 className="text-xl font-bold text-[#F39C12]">차량 그래픽 디자인 디렉터</h1>
             <p className="text-sm text-white/60 mt-0.5">
-              Prepare professional design rules before your vehicle wrap mockup.
+              차량 랩 목업 전 전문적인 디자인 규칙을 준비하세요.
             </p>
           </div>
           <Link
@@ -132,7 +132,7 @@ export default function DesignDirector() {
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm font-medium hover:bg-[#F39C12]/20 hover:border-[#F39C12]/40 transition-all flex-shrink-0"
           >
             <FolderOpen className="w-4 h-4" />
-            <span className="hidden sm:inline">My Projects</span>
+            <span className="hidden sm:inline">내 프로젝트</span>
           </Link>
         </div>
       </div>
@@ -199,7 +199,7 @@ export default function DesignDirector() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
-            placeholder="Describe your business, vehicle, or ask a design question…"
+            placeholder="비즈니스, 차량에 대해 설명하거나 디자인 질문을 해보세요…"
             className="flex-1 resize-none bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#F39C12]/50 focus:bg-white/15 transition-all"
           />
           <button

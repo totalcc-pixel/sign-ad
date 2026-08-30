@@ -46,10 +46,10 @@ function MessageBubble({ message }) {
 }
 
 const SUGGESTIONS = [
-  "I have a delivery van — what styles work?",
-  "Show me building sign examples",
-  "I want a bold full wrap for my ute",
-  "What's the difference between full and partial wraps?",
+  "배달 밴이 있는데 — 어떤 스타일이 어울릴까요?",
+  "건물 간판 예시를 보여주세요",
+  "제 유티에 볼드한 풀 랩을 원합니다",
+  "풀 랩과 부분 랩의 차이점은 무엇인가요?",
 ];
 
 export default function StyleAdvisor() {
@@ -121,8 +121,8 @@ export default function StyleAdvisor() {
             <Compass className="w-6 h-6 text-[#F39C12]" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold">Style Advisor</h1>
-            <p className="text-white/50 text-sm">Explore our portfolio and find your perfect wrap style</p>
+            <h1 className="text-2xl font-heading font-bold">스타일 어드바이저</h1>
+            <p className="text-white/50 text-sm">포트폴리오를 탐색하고 완벽한 랩 스타일을 찾아보세요</p>
           </div>
         </div>
 
@@ -133,8 +133,7 @@ export default function StyleAdvisor() {
                 <div className="flex justify-start">
                   <div className="max-w-[85%] rounded-2xl rounded-bl-sm px-4 py-3 bg-white/10 text-white border border-white/10">
                     <p className="text-sm">
-                      Kia ora! I'm your Style Advisor. I'll help you explore our portfolio and find a style that fits
-                      your vehicle or signage. What are you looking to wrap?
+                      안녕하세요! 저는 스타일 어드바이저입니다. 포트폴리오를 탐색하고 차량이나 간판에 맞는 스타일을 찾을 수 있도록 도와드릴게요. 어떤 것을 랩핑하고 싶으신가요?
                     </p>
                   </div>
                 </div>
@@ -160,7 +159,7 @@ export default function StyleAdvisor() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") sendMessage(); }}
-              placeholder="Ask about styles, or describe your vehicle..."
+              placeholder="스타일에 대해 물어보거나 차량을 설명해주세요..."
               className="flex-1 bg-black/50 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#F39C12]/50 focus:ring-1 focus:ring-[#F39C12]/30"
             />
             <button
@@ -173,11 +172,11 @@ export default function StyleAdvisor() {
         </div>
 
         <div className="mt-4 flex items-center justify-center gap-4 text-sm">
-          <Link to="/portfolio" className="text-[#F39C12] hover:underline">Browse Portfolio</Link>
+          <Link to="/portfolio" className="text-[#F39C12] hover:underline">포트폴리오 둘러보기</Link>
           <span className="text-white/20">|</span>
-          <Link to="/my-design" className="text-[#F39C12] hover:underline">Create a Mockup</Link>
+          <Link to="/my-design" className="text-[#F39C12] hover:underline">목업 만들기</Link>
           <span className="text-white/20">|</span>
-          <Link to="/quote" className="text-[#F39C12] hover:underline">Get a Quote</Link>
+          <Link to="/quote" className="text-[#F39C12] hover:underline">견적 받기</Link>
         </div>
       </div>
     </div>
