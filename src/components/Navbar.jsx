@@ -10,8 +10,7 @@ const links = [
 { label: "Vehicle Graphics", path: "/portfolio/vehicle-graphics" },
 { label: "Shop Signage", path: "/portfolio/building-signs" },
 { label: "Services", path: "/#services" },
-{ label: "About Car Wrap", path: "/quote" },
-{ label: "Style Advisor", path: "/style-advisor" }];
+{ label: "About Car Wrap", path: "/quote" }];
 
 
 export default function Navbar() {
