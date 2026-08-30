@@ -7,6 +7,20 @@
         "admin",
         "user"
       ]
+    },
+    "phone": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "marketing_consent": {
+      "type": "boolean",
+      "default": false
+    },
+    "upload_permission_confirmed": {
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [
