@@ -29,21 +29,21 @@ export default function ShareLeadCapture({ mockups, form }) {
       try {
         await base44.integrations.Core.SendEmail({
           to: user?.email || "",
-          subject: `[Signad] 견적 요청이 접수되었습니다`,
-          body: `<p>안녕하세요,</p>
-            <p>고객님의 견적 요청이 정상적으로 접수되었습니다.</p>
-            <p><strong>업체명:</strong> ${company}<br>
-            <strong>차량:</strong> ${vehicle}<br>
-            <strong>랩 종류:</strong> ${wrapType}</p>
-            <p>저희 팀이 검토 후 12~24시간 이내에 연락드리겠습니다.</p>
-            <p>감사합니다.<br>Signad Vehicle Graphics</p>`,
+          subject: `[Signad] Quote Request Received`,
+          body: `<p>Hi,</p>
+            <p>Your quote request has been successfully received.</p>
+            <p><strong>Company:</strong> ${company}<br>
+            <strong>Vehicle:</strong> ${vehicle}<br>
+            <strong>Wrap Type:</strong> ${wrapType}</p>
+            <p>Our team will review and get back to you within 12–24 hours.</p>
+            <p>Thank you.<br>Signad Vehicle Graphics</p>`,
         });
       } catch (_) {}
 
-      alert("견적 요청이 접수되었습니다! 이메일을 확인해주세요. 메인페이지로 이동합니다.");
+      alert("Your quote request has been received! Please check your email. Redirecting to the home page...");
       navigate("/");
     } catch (e) {
-      alert("견적 요청 중 오류가 발생했습니다. 다시 시도해주세요.");
+      alert("An error occurred while submitting your quote request. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -54,12 +54,12 @@ export default function ShareLeadCapture({ mockups, form }) {
       <div className="text-center">
         <h4 className="text-white font-bold text-lg flex items-center justify-center gap-2 mb-2">
           <CheckCircle2 className="w-5 h-5 text-[#F39C12]" />
-          4면 디자인이 완성되었습니다!
+          Your 4-View Design is Complete!
         </h4>
-        <h4 className="text-white font-bold text-xl mb-2">이 디자인으로 사인에드에게 견적 요청하기</h4>
+        <h4 className="text-white font-bold text-xl mb-2">Request a Quote from Signad for This Design</h4>
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#F39C12]/10 border border-[#F39C12]/30 mb-5">
           <Clock className="w-4 h-4 text-[#F39C12]" />
-          <span className="text-white/80 text-sm font-medium">견적 소요 시간: 12시간 ~ 24시간</span>
+          <span className="text-white/80 text-sm font-medium">Estimated Quote Time: 12–24 hours</span>
         </div>
         <div>
           <button
@@ -67,7 +67,7 @@ export default function ShareLeadCapture({ mockups, form }) {
             disabled={submitting}
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#F39C12] text-black font-bold text-base hover:bg-[#ffb84d] hover:shadow-[0_0_24px_rgba(243,156,18,0.5)] transition-all duration-300 disabled:opacity-50"
           >
-            {submitting ? <><Loader2 className="w-5 h-5 animate-spin" /> 전송 중...</> : <><Car className="w-5 h-5" /> 견적 요청하기</>}
+            {submitting ? <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</> : <><Car className="w-5 h-5" /> Request Quote</>}
           </button>
         </div>
       </div>
