@@ -611,15 +611,13 @@ export default function MyDesign() {
                 <p className="text-white/50 text-xs text-center mt-2">Generating {progress} of 4 views...</p>
               </div>
             )}
+
+            {/* Share & Lead Capture — shown after mockups are generated */}
+            {hasAnyMockup && !generating && (
+              <ShareLeadCapture mockups={mockups} form={form} />
+            )}
           </div>
         </div>
-
-        {/* Share & Lead Capture — shown after mockups are generated */}
-        {hasAnyMockup && !generating && (
-          <div className="lg:col-span-2">
-            <ShareLeadCapture mockups={mockups} form={form} />
-          </div>
-        )}
       </div>
 
       {/* Lightbox with navigation */}
