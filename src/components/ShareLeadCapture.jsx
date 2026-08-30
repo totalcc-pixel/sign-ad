@@ -3,13 +3,11 @@ import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Share2, FileText, Loader2, MessageCircle, Mail, CheckCircle2 } from "lucide-react";
+import { Share2, Loader2, MessageCircle, Mail, CheckCircle2, Clock, FileText } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function ShareLeadCapture({ mockups, form }) {
   const { toast } = useToast();
-  const [quoteOpen, setQuoteOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [lead, setLead] = useState({ name: "", phone: "", email: "", location: "" });
@@ -61,23 +59,21 @@ export default function ShareLeadCapture({ mockups, form }) {
     }
   };
 
-  const closeModal = () => {
-    setQuoteOpen(false);
-    setTimeout(() => {
-      setDone(false);
-      setLead({ name: "", phone: "", email: "", location: "" });
-    }, 300);
+  const resetForm = () => {
+    setDone(false);
+    setLead({ name: "", phone: "", email: "", location: "" });
   };
 
   return (
     <div className="mt-5 bg-gradient-to-r from-[#F39C12]/15 to-transparent border border-[#F39C12]/30 rounded-xl p-5">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Share buttons */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         <div>
           <h4 className="text-white font-bold text-lg flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-[#F39C12]" />
             Your 4-View Mockup is Ready!
           </h4>
-          <p className="text-white/50 text-sm mt-1">Share it or get an official quote with this design.</p>
+          <p className="text-white/50 text-sm mt-1">Share it or request an official quote with this design below.</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <a
@@ -102,44 +98,45 @@ export default function ShareLeadCapture({ mockups, form }) {
           >
             <Mail className="w-4 h-4" /> Email
           </a>
-          <button
-            onClick={() => setQuoteOpen(true)}
-            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg bg-[#F39C12] text-black text-sm font-bold hover:bg-[#ffb84d] transition-colors"
-          >
-            <FileText className="w-4 h-4" /> Get Official Quote
-          </button>
         </div>
       </div>
 
-      <Dialog open={quoteOpen} onOpenChange={(v) => !v && closeModal()}>
-        <DialogContent className="max-w-md bg-[#121623] border-white/10">
-          <DialogTitle className="text-white text-lg">
-            {done ? "Request Received!" : "Get Your Official Quote"}
-          </DialogTitle>
-          {done ? (
-            <div className="text-center py-6">
-              <CheckCircle2 className="w-12 h-12 text-[#F39C12] mx-auto mb-3" />
-              <p className="text-white/70">
-                Thanks, {lead.name.split(" ")[0]}! Our team will contact you shortly with your quote and the 10% first-project discount.
-              </p>
-              <Button onClick={closeModal} className="mt-5 w-full bg-[#F39C12] text-black hover:bg-[#ffb84d]">
-                Close
-              </Button>
+      {/* Inline Quote Request Form */}
+      <div className="border-t border-white/10 pt-6">
+        {done ? (
+          <div className="text-center py-8">
+            <CheckCircle2 className="w-12 h-12 text-[#F39C12] mx-auto mb-3" />
+            <h4 className="text-white font-bold text-lg mb-2">견적 요청이 완료되었습니다!</h4>
+            <p className="text-white/70 max-w-md mx-auto">
+              감사합니다, {lead.name.split(" ")[0]}님! 저희 팀이 12~24시간 이내에 연락드리며, 첫 거래 시 10% 할인이 적용됩니다.
+            </p>
+            <Button onClick={resetForm} className="mt-5 bg-[#F39C12] text-black hover:bg-[#ffb84d]">
+              새 견적 요청하기
+            </Button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <FileText className="w-5 h-5 text-[#F39C12]" />
+              <h4 className="text-white font-bold text-lg">이 디자인으로 사인에드에게 견적 요청하기</h4>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#F39C12]/10 border border-[#F39C12]/30 mb-2">
+              <Clock className="w-4 h-4 text-[#F39C12]" />
+              <span className="text-white/80 text-sm font-medium">견적 소요 시간: 12시간 ~ 24시간</span>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label className="text-white mb-1.5 block">Name *</Label>
+                <Label className="text-white mb-1.5 block">이름 *</Label>
                 <Input
                   required
                   value={lead.name}
                   onChange={(e) => setLead({ ...lead, name: e.target.value })}
-                  placeholder="Your full name"
+                  placeholder="홍길동"
                   className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
                 />
               </div>
               <div>
-                <Label className="text-white mb-1.5 block">Phone Number *</Label>
+                <Label className="text-white mb-1.5 block">연락처 *</Label>
                 <Input
                   required
                   value={lead.phone}
@@ -149,7 +146,7 @@ export default function ShareLeadCapture({ mockups, form }) {
                 />
               </div>
               <div>
-                <Label className="text-white mb-1.5 block">Email *</Label>
+                <Label className="text-white mb-1.5 block">이메일 *</Label>
                 <Input
                   required
                   type="email"
@@ -160,29 +157,29 @@ export default function ShareLeadCapture({ mockups, form }) {
                 />
               </div>
               <div>
-                <Label className="text-white mb-1.5 block">Suburb / Location</Label>
+                <Label className="text-white mb-1.5 block">지역 / suburb</Label>
                 <Input
                   value={lead.location}
                   onChange={(e) => setLead({ ...lead, location: e.target.value })}
-                  placeholder="e.g. Albany, Auckland"
+                  placeholder="예: Albany, Auckland"
                   className="bg-black/40 border-white/10 text-white placeholder:text-white/30"
                 />
               </div>
-              <Button
-                type="submit"
-                disabled={submitting}
-                className="w-full bg-[#F39C12] text-black font-bold hover:bg-[#ffb84d] disabled:opacity-50"
-              >
-                {submitting ? (
-                  <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Sending...</>
-                ) : (
-                  "Request My Quote"
-                )}
-              </Button>
-            </form>
-          )}
-        </DialogContent>
-      </Dialog>
+            </div>
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="w-full bg-[#F39C12] text-black font-bold hover:bg-[#ffb84d] disabled:opacity-50"
+            >
+              {submitting ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> 전송 중...</>
+              ) : (
+                "견적 요청하기"
+              )}
+            </Button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
