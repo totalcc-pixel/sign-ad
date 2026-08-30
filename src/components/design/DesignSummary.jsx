@@ -12,7 +12,7 @@ const viewLabels = {
   rear: "Rear View",
 };
 
-export default function DesignSummary({ open, onClose, form, rear, mockups }) {
+export default function DesignSummary({ open, onClose, form, mockups }) {
   const [exporting, setExporting] = useState(false);
   const generatedViews = Object.entries(mockups).filter(([, url]) => url);
 
@@ -36,16 +36,6 @@ export default function DesignSummary({ open, onClose, form, rear, mockups }) {
       doc.text(`Year: ${form.vehicle_year || "—"}`, 20, y); y += 7;
       doc.text(`Wrap Coverage: ${form.wrap_type || "Full Wrap"}`, 20, y); y += 7;
       if (form.design_style) { doc.text(`Style: ${form.design_style}`, 20, y); y += 7; }
-
-      y += 4;
-      doc.setFontSize(14);
-      doc.setTextColor(20, 20, 20);
-      doc.text("Rear View Configuration", 20, y); y += 8;
-      doc.setFontSize(10);
-      doc.setTextColor(80, 80, 80);
-      doc.text(`One-Way Vision Film: ${rear.rear_window_perforated ? "Yes" : "No"}`, 20, y); y += 7;
-      doc.text(`Rear Window Text: ${rear.rear_window_graphics || "—"}`, 20, y); y += 7;
-      doc.text(`Rear Chevron Stripes: ${rear.rear_chevron ? "Yes" : "No"}`, 20, y); y += 10;
 
       doc.setFontSize(14);
       doc.setTextColor(20, 20, 20);
@@ -84,13 +74,6 @@ export default function DesignSummary({ open, onClose, form, rear, mockups }) {
           <div className="bg-black/30 rounded-xl p-4 space-y-2 text-sm">
             <h4 className="text-white font-semibold">Wrap Coverage</h4>
             <div className="flex justify-between"><span className="text-white/50">Package:</span><span className="text-[#F39C12] font-medium">{form.wrap_type || "Full Wrap"}</span></div>
-          </div>
-
-          <div className="bg-black/30 rounded-xl p-4 space-y-2 text-sm">
-            <h4 className="text-white font-semibold">Rear View Configuration</h4>
-            <div className="flex justify-between"><span className="text-white/50">One-Way Vision Film:</span><span className="text-white">{rear.rear_window_perforated ? "Yes" : "No"}</span></div>
-            <div className="flex justify-between"><span className="text-white/50">Rear Window Text:</span><span className="text-white">{rear.rear_window_graphics || "—"}</span></div>
-            <div className="flex justify-between"><span className="text-white/50">Rear Chevron Stripes:</span><span className="text-white">{rear.rear_chevron ? "Yes" : "No"}</span></div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
