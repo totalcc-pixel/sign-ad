@@ -56,7 +56,7 @@ export default function ShareLeadCapture({ mockups, form }) {
           <CheckCircle2 className="w-5 h-5 text-[#F39C12]" />
           Your 2-View Design is Complete!
         </h4>
-        <h4 className="text-white font-bold text-xl mb-2">Request a Quote from Signad for This Design</h4>
+        <h4 className="text-white font-bold text-xl mb-2">This is a rough draft. We will update the design and get back to you with a quote soon.</h4>
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#F39C12]/10 border border-[#F39C12]/30 mb-5">
           <Clock className="w-4 h-4 text-[#F39C12]" />
           <span className="text-white/80 text-sm font-medium">Estimated Quote Time: 12–24 hours</span>
