@@ -16,6 +16,30 @@ import MockupLightbox from "@/components/design/MockupLightbox";
 
 const VIEWS = ["left", "rear"];
 
+const VEHICLE_TEMPLATES = {
+  hiace: {
+    keywords: ["hiace", "hi-ace", "toyota hiace", "toyota van"],
+    url: "https://media.base44.com/images/public/6a67d1169c557b33993d409b/90e68bfc6_hiace.png",
+    name: "Toyota Hiace 2012",
+  },
+  caravan: {
+    keywords: ["caravan", "japanese van", "nissan caravan", "van"],
+    url: "https://media.base44.com/images/public/6a67d1169c557b33993d409b/d1f45cf63_caravan.png",
+    name: "Japanese Van",
+  },
+};
+
+function matchVehicleTemplate(vehicleType) {
+  if (!vehicleType) return null;
+  const input = vehicleType.toLowerCase();
+  for (const tpl of Object.values(VEHICLE_TEMPLATES)) {
+    if (tpl.keywords.some((kw) => input.includes(kw))) {
+      return tpl;
+    }
+  }
+  return null;
+}
+
 const viewLabels = {
   left: "Left Side",
   right: "Right Side",
@@ -218,9 +242,18 @@ export default function MyDesign() {
   const generateBlueprint = async () => {
     setGeneratingBlueprint(true);
     try {
+      const vehicleTemplate = matchVehicleTemplate(form.vehicle_type);
+      const blueprintRefImages = vehicleTemplate ? [vehicleTemplate.url] : [];
+
       const [frontResult, sideResult] = await Promise.all([
-        base44.integrations.Core.GenerateImage({ prompt: buildBlueprintPrompt("front", form) }),
-        base44.integrations.Core.GenerateImage({ prompt: buildBlueprintPrompt("side", form) }),
+        base44.integrations.Core.GenerateImage({
+          prompt: buildBlueprintPrompt("front", form),
+          ...(blueprintRefImages.length > 0 ? { existing_image_urls: blueprintRefImages } : {}),
+        }),
+        base44.integrations.Core.GenerateImage({
+          prompt: buildBlueprintPrompt("side", form),
+          ...(blueprintRefImages.length > 0 ? { existing_image_urls: blueprintRefImages } : {}),
+        }),
       ]);
 
       const newBlueprint = { front: frontResult.url, side: sideResult.url };
@@ -269,9 +302,15 @@ export default function MyDesign() {
       }
       const newMockups = { ...mockups };
 
+      const vehicleTemplate = matchVehicleTemplate(form.vehicle_type);
+
       await Promise.all(VIEWS.map(async (view) => {
-        const prompt = buildPrompt(view, form);
+        let prompt = buildPrompt(view, form);
         const refImages = [form.logo_url, form.reference_file_url, activeBlueprint.front, activeBlueprint.side].filter(Boolean);
+        if (vehicleTemplate) {
+          refImages.unshift(vehicleTemplate.url);
+          prompt = `CRITICAL VEHICLE SHAPE LOCK: The attached blueprint/specification image shows the EXACT vehicle shape and proportions that MUST be preserved. Use this vehicle template as the base — do NOT change the vehicle make, model, body shape, or proportions. Apply ONLY the wrap design and branding graphics on top of this exact vehicle shape. ${vehicleTemplate.name} — keep its exact body style, door layout, window shapes, and proportions. ${prompt}`;
+        }
         const result = await base44.integrations.Core.GenerateImage({
           prompt,
           ...(refImages.length > 0 ? { existing_image_urls: refImages } : {})
