@@ -13,9 +13,8 @@ import GoogleIcon from "@/components/GoogleIcon";
 import DesignSummary from "@/components/design/DesignSummary";
 import ShareLeadCapture from "@/components/ShareLeadCapture";
 import MockupLightbox from "@/components/design/MockupLightbox";
-import BlueprintViewer from "@/components/design/BlueprintViewer";
 
-const VIEWS = ["left", "right", "front", "rear"];
+const VIEWS = ["left", "rear"];
 
 const viewLabels = {
   left: "Left Side",
@@ -304,8 +303,8 @@ export default function MyDesign() {
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
-          subject: `New Design Mockup - All 4 Views - ${form.company_name}`,
-          body: `A member has generated all 4 vehicle wrap mockup views.<br><br>
+          subject: `New Design Mockup - Side & Rear Views - ${form.company_name}`,
+          body: `A member has generated side and rear vehicle wrap mockup views.<br><br>
             <strong>Company Name:</strong> ${form.company_name}<br>
             <strong>Member Email:</strong> ${user?.email || "—"}<br>
             <strong>Phone:</strong> ${form.phone || "—"}<br>
@@ -397,7 +396,7 @@ export default function MyDesign() {
             Create Your Vehicle Wrap Mockup
           </h1>
           <p className="text-white/60 max-w-2xl mx-auto">
-            Enter your company details and our AI will generate all 4 vehicle wrap views at once.
+            Enter your company details and our AI will generate side and rear vehicle wrap views.
           </p>
         </div>
 
@@ -552,12 +551,12 @@ export default function MyDesign() {
               ) : generating ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  디자인 생성 중... ({progress}/4)
+                  디자인 생성 중... ({progress}/2)
                 </>
               ) : blueprint.front && blueprint.side ? (
                 <>
                   <Car className="w-4 h-4 mr-2" />
-                  🚗 디자인 작업 시작 (전체 4뷰)
+                  🚗 디자인 작업 시작 (전체 2뷰)
                 </>
               ) : (
                 <>
@@ -568,19 +567,12 @@ export default function MyDesign() {
             </Button>
           </form>
 
-          {/* Blueprint Viewer — shown once blueprint is created */}
-          {(blueprint.front || blueprint.side || generatingBlueprint) && (
-            <div className="lg:col-span-2">
-              <BlueprintViewer blueprint={blueprint} generating={generatingBlueprint} />
-            </div>
-          )}
-
           {/* Mockup Preview — 2x2 Grid */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-white font-semibold flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-[#F39C12]" />
-                All 4 Views
+                Side &amp; Rear Views
               </h3>
               {hasAnyMockup && !generating && (
                 <div className="flex items-center gap-2">
@@ -653,7 +645,7 @@ export default function MyDesign() {
               <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
                 <Car className="w-16 h-16 text-white/20 mb-3" />
                 <p className="text-white/40">Enter your details and click</p>
-                <p className="text-white/40">"Generate All 4 Views" to see your mockups here.</p>
+                <p className="text-white/40">"프리디자인 시작" to see your mockups here.</p>
               </div>
             )}
 
@@ -663,10 +655,10 @@ export default function MyDesign() {
                 <div className="w-full bg-black/40 rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-[#F39C12] h-full rounded-full transition-all duration-500"
-                    style={{ width: `${(progress / 4) * 100}%` }}
+                    style={{ width: `${(progress / 2) * 100}%` }}
                   />
                 </div>
-                <p className="text-white/50 text-xs text-center mt-2">Generating {progress} of 4 views...</p>
+                <p className="text-white/50 text-xs text-center mt-2">Generating {progress} of 2 views...</p>
               </div>
             )}
 
