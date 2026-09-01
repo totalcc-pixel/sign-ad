@@ -95,6 +95,7 @@ export default function MyDesign() {
   const [generatingBlueprint, setGeneratingBlueprint] = useState(false);
   const [designCount, setDesignCount] = useState(0);
   const FREE_DESIGN_LIMIT = 2;
+  const isAdmin = user?.email === "totalcc@gmail.com";
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
@@ -263,7 +264,7 @@ export default function MyDesign() {
     setGenerating(true);
     setProgress(0);
     try {
-      if (designCount >= FREE_DESIGN_LIMIT) {
+      if (!isAdmin && designCount >= FREE_DESIGN_LIMIT) {
         return;
       }
       const newMockups = { ...mockups };
@@ -279,7 +280,7 @@ export default function MyDesign() {
         setProgress((p) => p + 1);
       }));
 
-      const newCount = designCount + 1;
+      const newCount = isAdmin ? designCount : designCount + 1;
       const data = {
         ...form,
         blueprint_front_url: activeBlueprint.front,
@@ -551,38 +552,38 @@ export default function MyDesign() {
 
             <Button
               type="submit"
-              disabled={generating || generatingBlueprint || designCount >= FREE_DESIGN_LIMIT}
+              disabled={generating || generatingBlueprint || (!isAdmin && designCount >= FREE_DESIGN_LIMIT)}
               className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50">
-              {designCount >= FREE_DESIGN_LIMIT ? (
+              {!isAdmin && designCount >= FREE_DESIGN_LIMIT ? (
                 <>
                   <CheckCircle className="w-4 h-4 mr-2" />
-                  무료 디자인 횟수 완료 ({designCount}/{FREE_DESIGN_LIMIT})
+                  Free Design Limit Reached ({designCount}/{FREE_DESIGN_LIMIT})
                 </>
               ) : generatingBlueprint ? (
                 <>
                   <Ruler className="w-4 h-4 mr-2 animate-spin" />
-                  블루프린트 생성 중...
+                  Generating Blueprint...
                 </>
               ) : generating ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  디자인 생성 중... ({progress}/2)
+                  Generating Design... ({progress}/2)
                 </>
               ) : blueprint.front && blueprint.side ? (
                 <>
                   <Car className="w-4 h-4 mr-2" />
-                  🚗 디자인 작업 시작 (전체 2뷰)
+                  🚗 Start Design (2-View)
                 </>
               ) : (
                 <>
                   <Ruler className="w-4 h-4 mr-2" />
-                  📐 프리디자인 시작 ({designCount}/{FREE_DESIGN_LIMIT})
+                  📐 Start Pre-Design ({designCount}/{FREE_DESIGN_LIMIT})
                 </>
               )}
             </Button>
-            {designCount >= FREE_DESIGN_LIMIT && (
+            {!isAdmin && designCount >= FREE_DESIGN_LIMIT && (
               <p className="text-center text-white/50 text-sm mt-2">
-                무료 디자인 횟수({FREE_DESIGN_LIMIT}회)를 모두 사용하셨습니다. 추가 디자인은 견적 요청 후 진행됩니다.
+                You have used all {FREE_DESIGN_LIMIT} free design attempts. Please request a quote for additional designs.
               </p>
             )}
           </form>
@@ -665,7 +666,7 @@ export default function MyDesign() {
               <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
                 <Car className="w-16 h-16 text-white/20 mb-3" />
                 <p className="text-white/40">Enter your details and click</p>
-                <p className="text-white/40">"프리디자인 시작" to see your mockups here.</p>
+                <p className="text-white/40">"Start Pre-Design" to see your mockups here.</p>
               </div>
             )}
 
