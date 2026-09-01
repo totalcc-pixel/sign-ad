@@ -17,6 +17,12 @@
     "reference_file_url": {
       "type": "string"
     },
+    "blueprint_front_url": {
+      "type": "string"
+    },
+    "blueprint_side_url": {
+      "type": "string"
+    },
     "mockup_url": {
       "type": "string"
     },

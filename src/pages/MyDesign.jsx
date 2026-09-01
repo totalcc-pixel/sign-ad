@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud, Paperclip, X } from "lucide-react";
+import { Image as ImageIcon, Loader2, Car, Upload, CheckCircle, Facebook, Palette, LayoutGrid, ZoomIn, Download, Check, DownloadCloud, Paperclip, X, Ruler } from "lucide-react";
 
 import { Image } from "@/components/ui/image";
 import GoogleIcon from "@/components/GoogleIcon";
@@ -13,6 +13,7 @@ import GoogleIcon from "@/components/GoogleIcon";
 import DesignSummary from "@/components/design/DesignSummary";
 import ShareLeadCapture from "@/components/ShareLeadCapture";
 import MockupLightbox from "@/components/design/MockupLightbox";
+import BlueprintViewer from "@/components/design/BlueprintViewer";
 
 const VIEWS = ["left", "right", "front", "rear"];
 
@@ -91,6 +92,8 @@ export default function MyDesign() {
   const [uploadingReference, setUploadingReference] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [zoomImage, setZoomImage] = useState(null);
+  const [blueprint, setBlueprint] = useState({ front: null, side: null });
+  const [generatingBlueprint, setGeneratingBlueprint] = useState(false);
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
@@ -149,6 +152,11 @@ export default function MyDesign() {
           front: p.front_mockup_url || null,
           rear: p.rear_mockup_url || null,
         });
+
+        setBlueprint({
+          front: p.blueprint_front_url || null,
+          side: p.blueprint_side_url || null,
+        });
       }
     } catch (e) {
       console.error(e);
@@ -189,11 +197,66 @@ export default function MyDesign() {
     setForm((f) => ({ ...f, reference_file_url: "" }));
   };
 
+  const buildBlueprintPrompt = (view, form) => {
+    const vehicleType = form.vehicle_type || "commercial van";
+    const vehicleColor = form.vehicle_color || "white";
+    const vehicleYear = form.vehicle_year || "";
+    const vehicleSpec = `${vehicleYear ? `${vehicleYear} ` : ""}${vehicleColor} ${vehicleType}`;
+
+    const baseRule = `Create a precise technical blueprint / engineering line drawing of a ${vehicleSpec}. This is a VEHICLE BLUEPRINT — a clean, accurate, to-scale technical illustration showing the exact vehicle body shape, proportions, and dimensions. Style: white background, thin black technical lines, no color fill, no graphics, no branding, no text overlays. Show accurate vehicle outline with precise body panels, doors, windows, wheels, headlights, and bumpers.`;
+
+    if (view === "front") {
+      return `${baseRule} STRICTLY FRONT VIEW ONLY — camera positioned directly in front of the vehicle, head-on straight angle. Show ONLY the exact front fascia: front grille, headlights, front bumper, hood/bonnet, and front windscreen. The entire image must be the front of the vehicle filling the frame, centered and symmetrical. Technical blueprint style, precise proportions, no side panels visible.`;
+    }
+    return `${baseRule} STRICTLY SIDE VIEW ONLY — exact profile of the vehicle. Show the complete left side: full body outline, side doors, windows, wheel arches, side mirrors. The entire image must be the side profile of the vehicle filling the frame. Technical blueprint style, precise proportions, no front or rear angle visible.`;
+  };
+
+  const generateBlueprint = async () => {
+    setGeneratingBlueprint(true);
+    try {
+      const [frontResult, sideResult] = await Promise.all([
+        base44.integrations.Core.GenerateImage({ prompt: buildBlueprintPrompt("front", form) }),
+        base44.integrations.Core.GenerateImage({ prompt: buildBlueprintPrompt("side", form) }),
+      ]);
+
+      const newBlueprint = { front: frontResult.url, side: sideResult.url };
+      setBlueprint(newBlueprint);
+
+      const data = {
+        ...form,
+        blueprint_front_url: newBlueprint.front,
+        blueprint_side_url: newBlueprint.side,
+      };
+
+      if (profile) {
+        const updated = await base44.entities.CompanyProfile.update(profile.id, data);
+        setProfile(updated);
+      } else {
+        const created = await base44.entities.CompanyProfile.create(data);
+        setProfile(created);
+      }
+
+      return newBlueprint;
+    } catch (e) {
+      console.error(e);
+      return null;
+    } finally {
+      setGeneratingBlueprint(false);
+    }
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.company_name.trim()) {
       return;
     }
+
+    let activeBlueprint = blueprint;
+    if (!blueprint.front || !blueprint.side) {
+      activeBlueprint = await generateBlueprint();
+      if (!activeBlueprint) return;
+    }
+
     setGenerating(true);
     setProgress(0);
     try {
@@ -201,7 +264,7 @@ export default function MyDesign() {
 
       await Promise.all(VIEWS.map(async (view) => {
         const prompt = buildPrompt(view, form);
-        const refImages = [form.logo_url, form.reference_file_url].filter(Boolean);
+        const refImages = [form.logo_url, form.reference_file_url, activeBlueprint.front, activeBlueprint.side].filter(Boolean);
         const result = await base44.integrations.Core.GenerateImage({
           prompt,
           ...(refImages.length > 0 ? { existing_image_urls: refImages } : {})
@@ -212,6 +275,8 @@ export default function MyDesign() {
 
       const data = {
         ...form,
+        blueprint_front_url: activeBlueprint.front,
+        blueprint_side_url: activeBlueprint.side,
         mockup_url: newMockups.left,
         right_mockup_url: newMockups.right,
         front_mockup_url: newMockups.front,
@@ -477,20 +542,38 @@ export default function MyDesign() {
 
             <Button
               type="submit"
-              disabled={generating}
+              disabled={generating || generatingBlueprint}
               className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50">
-              {generating ?
-              <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating... ({progress}/4)
-                </> :
-              <>
-                  <Car className="w-4 h-4 mr-2" />
-                  🚗 Generate All 4 Views (Front, Rear, Left &amp; Right)
+              {generatingBlueprint ? (
+                <>
+                  <Ruler className="w-4 h-4 mr-2 animate-spin" />
+                  블루프린트 생성 중...
                 </>
-              }
+              ) : generating ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  디자인 생성 중... ({progress}/4)
+                </>
+              ) : blueprint.front && blueprint.side ? (
+                <>
+                  <Car className="w-4 h-4 mr-2" />
+                  🚗 디자인 작업 시작 (전체 4뷰)
+                </>
+              ) : (
+                <>
+                  <Ruler className="w-4 h-4 mr-2" />
+                  📐 프리디자인 시작
+                </>
+              )}
             </Button>
           </form>
+
+          {/* Blueprint Viewer — shown once blueprint is created */}
+          {(blueprint.front || blueprint.side || generatingBlueprint) && (
+            <div className="lg:col-span-2">
+              <BlueprintViewer blueprint={blueprint} generating={generatingBlueprint} />
+            </div>
+          )}
 
           {/* Mockup Preview — 2x2 Grid */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
