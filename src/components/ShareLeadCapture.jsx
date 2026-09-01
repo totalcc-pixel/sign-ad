@@ -54,7 +54,7 @@ export default function ShareLeadCapture({ mockups, form }) {
       <div className="text-center">
         <h4 className="text-white font-bold text-lg flex items-center justify-center gap-2 mb-2">
           <CheckCircle2 className="w-5 h-5 text-[#F39C12]" />
-          Your 4-View Design is Complete!
+          Your 2-View Design is Complete!
         </h4>
         <h4 className="text-white font-bold text-xl mb-2">Request a Quote from Signad for This Design</h4>
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#F39C12]/10 border border-[#F39C12]/30 mb-5">

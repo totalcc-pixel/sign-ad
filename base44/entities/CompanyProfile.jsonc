@@ -70,6 +70,10 @@
     "description": {
       "type": "string",
       "maxLength": 1000
+    },
+    "design_count": {
+      "type": "number",
+      "default": 0
     }
   },
   "required": [

@@ -93,6 +93,8 @@ export default function MyDesign() {
   const [zoomImage, setZoomImage] = useState(null);
   const [blueprint, setBlueprint] = useState({ front: null, side: null });
   const [generatingBlueprint, setGeneratingBlueprint] = useState(false);
+  const [designCount, setDesignCount] = useState(0);
+  const FREE_DESIGN_LIMIT = 2;
   const [form, setForm] = useState({
     company_name: "",
     phone: "",
@@ -156,6 +158,8 @@ export default function MyDesign() {
           front: p.blueprint_front_url || null,
           side: p.blueprint_side_url || null,
         });
+
+        setDesignCount(p.design_count || 0);
       }
     } catch (e) {
       console.error(e);
@@ -259,6 +263,9 @@ export default function MyDesign() {
     setGenerating(true);
     setProgress(0);
     try {
+      if (designCount >= FREE_DESIGN_LIMIT) {
+        return;
+      }
       const newMockups = { ...mockups };
 
       await Promise.all(VIEWS.map(async (view) => {
@@ -272,6 +279,7 @@ export default function MyDesign() {
         setProgress((p) => p + 1);
       }));
 
+      const newCount = designCount + 1;
       const data = {
         ...form,
         blueprint_front_url: activeBlueprint.front,
@@ -280,6 +288,7 @@ export default function MyDesign() {
         right_mockup_url: newMockups.right,
         front_mockup_url: newMockups.front,
         rear_mockup_url: newMockups.rear,
+        design_count: newCount,
       };
 
       if (profile) {
@@ -297,6 +306,7 @@ export default function MyDesign() {
         rear_mockup_url: newMockups.rear,
       }));
       setMockups(newMockups);
+      setDesignCount(newCount);
 
       const generatedViews = Object.entries(newMockups).filter(([, url]) => url);
       const mockupLinks = generatedViews.map(([v, url]) => `<a href="${url}" target="_blank">${viewLabels[v]}</a>`).join("<br>");
@@ -541,9 +551,14 @@ export default function MyDesign() {
 
             <Button
               type="submit"
-              disabled={generating || generatingBlueprint}
+              disabled={generating || generatingBlueprint || designCount >= FREE_DESIGN_LIMIT}
               className="w-full bg-[#F39C12] text-black font-semibold hover:bg-[#ffb84d] disabled:opacity-50">
-              {generatingBlueprint ? (
+              {designCount >= FREE_DESIGN_LIMIT ? (
+                <>
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  무료 디자인 횟수 완료 ({designCount}/{FREE_DESIGN_LIMIT})
+                </>
+              ) : generatingBlueprint ? (
                 <>
                   <Ruler className="w-4 h-4 mr-2 animate-spin" />
                   블루프린트 생성 중...
@@ -561,10 +576,15 @@ export default function MyDesign() {
               ) : (
                 <>
                   <Ruler className="w-4 h-4 mr-2" />
-                  📐 프리디자인 시작
+                  📐 프리디자인 시작 ({designCount}/{FREE_DESIGN_LIMIT})
                 </>
               )}
             </Button>
+            {designCount >= FREE_DESIGN_LIMIT && (
+              <p className="text-center text-white/50 text-sm mt-2">
+                무료 디자인 횟수({FREE_DESIGN_LIMIT}회)를 모두 사용하셨습니다. 추가 디자인은 견적 요청 후 진행됩니다.
+              </p>
+            )}
           </form>
 
           {/* Mockup Preview — 2x2 Grid */}
