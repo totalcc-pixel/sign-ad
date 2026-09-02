@@ -350,6 +350,7 @@ export default function MyDesign() {
 
       const generatedViews = Object.entries(newMockups).filter(([, url]) => url);
       const mockupLinks = generatedViews.map(([v, url]) => `<a href="${url}" target="_blank">${viewLabels[v]}</a>`).join("<br>");
+      const mockupLinksHtml = mockupLinks;
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
@@ -365,9 +366,28 @@ export default function MyDesign() {
             <strong>Wrap Type:</strong> ${form.wrap_type || "Full Wrap"}<br>
             <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
             <strong>Generated Mockups:</strong><br>
-            ${mockupLinks}`
+            ${mockupLinksHtml}`
         });
       } catch (_) {}
+      if (user?.email) {
+        try {
+          await base44.integrations.Core.SendEmail({
+            to: user.email,
+            subject: `Your 2-View Design Mockup - ${form.company_name}`,
+            body: `<p>Hi,</p>
+              <p>Your vehicle wrap design mockup has been generated.</p>
+              <p><strong>Company Name:</strong> ${form.company_name}<br>
+              <strong>Vehicle Type:</strong> ${form.vehicle_type || "—"}<br>
+              <strong>Vehicle Color:</strong> ${form.vehicle_color || "—"}<br>
+              <strong>Vehicle Year:</strong> ${form.vehicle_year || "—"}<br>
+              <strong>Wrap Type:</strong> ${form.wrap_type || "Full Wrap"}</p>
+              <p><strong>Generated Mockups:</strong><br>
+              ${mockupLinksHtml}</p>
+              <p>This is a rough draft. We will update the design and get back to you with a quote soon.</p>
+              <p>Signad Vehicle Graphics</p>`
+          });
+        } catch (_) {}
+      }
     } catch (e) {
       console.error(e);
     } finally {
