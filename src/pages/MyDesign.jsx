@@ -13,6 +13,7 @@ import GoogleIcon from "@/components/GoogleIcon";
 import DesignSummary from "@/components/design/DesignSummary";
 import ShareLeadCapture from "@/components/ShareLeadCapture";
 import MockupLightbox from "@/components/design/MockupLightbox";
+import { useToast } from "@/components/ui/use-toast";
 
 const VIEWS = ["left", "rear"];
 
@@ -106,6 +107,7 @@ function buildPrompt(view, form) {
 
 export default function MyDesign() {
   const { user, isAuthenticated, logout, navigateToLogin } = useAuth();
+  const { toast } = useToast();
 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -367,6 +369,10 @@ export default function MyDesign() {
             <strong>Design Style:</strong> ${form.design_style || "—"}<br><br>
             <strong>Generated Mockups:</strong><br>
             ${mockupLinksHtml}`
+        });
+        toast({
+          title: "Admin Notified",
+          description: "The design mockup has been sent to the admin.",
         });
       } catch (_) {}
       if (user?.email) {
