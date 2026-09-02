@@ -354,7 +354,7 @@ export default function MyDesign() {
       try {
         await base44.integrations.Core.SendEmail({
           to: "totalcc@gmail.com",
-          subject: `New Design Mockup - Side & Rear Views - ${form.company_name}`,
+          subject: `New Design Mockup - Side & Rear Views - ${form.company_name} (${user?.email || "no email"})`,
           body: `A member has generated side and rear vehicle wrap mockup views.<br><br>
             <strong>Company Name:</strong> ${form.company_name}<br>
             <strong>Member Email:</strong> ${user?.email || "—"}<br>
